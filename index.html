@@ -1,0 +1,1827 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Bilbao en Dos Noches</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bilbao">
+
+<style>
+/* ============ TOKENS — light is the base set ============ */
+:root{
+  --paper:#F2F0E9;
+  --card:#FBFAF6;
+  --card-2:#EDEBE2;
+  --ink:#10191B;
+  --ink-2:#4A5658;
+  --ink-3:#78827F;
+  --enamel:#0E4B4F;
+  --enamel-soft:#DFEAE8;
+  --sea:#2E6F72;
+  --txakoli:#8F7126;
+  --txakoli-soft:#F0E7CD;
+  --oxide:#A03D26;
+  --oxide-soft:#F6E2DB;
+  --line:#DAD7CC;
+  --line-2:#C3BFB2;
+  --head-bg:#0E4B4F;
+  --head-fg:#F2F0E9;
+  --c-pintxo:#B08A28;
+  --c-cena:#A03D26;
+  --c-copa:#2E6F72;
+  --c-ver:#3C6E8F;
+  --c-park:#7A8280;
+  --map-bg:#E7E5DC;
+  --map-grid:#D3D0C4;
+  --shadow:0 1px 2px rgba(16,25,27,.06), 0 8px 24px -16px rgba(16,25,27,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A1214;
+    --card:#111C1E;
+    --card-2:#162325;
+    --ink:#E9EDEA;
+    --ink-2:#9DADAC;
+    --ink-3:#6C7D7C;
+    --enamel:#6FC3C0;
+    --enamel-soft:#14302F;
+    --sea:#8FD3CF;
+    --txakoli:#D8B85E;
+    --txakoli-soft:#2A2413;
+    --oxide:#E08163;
+    --oxide-soft:#33190F;
+    --line:#202E2E;
+    --line-2:#33443F;
+    --head-bg:#0D3436;
+    --head-fg:#DCE9E6;
+    --c-pintxo:#D8B85E;
+    --c-cena:#E08163;
+    --c-copa:#6FC3C0;
+    --c-ver:#79AFD4;
+    --c-park:#8A9694;
+    --map-bg:#0F1B1D;
+    --map-grid:#1E2C2D;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A1214;
+  --card:#111C1E;
+  --card-2:#162325;
+  --ink:#E9EDEA;
+  --ink-2:#9DADAC;
+  --ink-3:#6C7D7C;
+  --enamel:#6FC3C0;
+  --enamel-soft:#14302F;
+  --sea:#8FD3CF;
+  --txakoli:#D8B85E;
+  --txakoli-soft:#2A2413;
+  --oxide:#E08163;
+  --oxide-soft:#33190F;
+  --line:#202E2E;
+  --line-2:#33443F;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+/* ============ BASE ============ */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Charter","Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif;
+  font-size:16px;
+  line-height:1.5;
+  padding-bottom:calc(72px + env(safe-area-inset-bottom));
+  overflow-x:hidden;
+}
+.sig{font-family:"Avenir Next Condensed","Avenir Next","Futura","Helvetica Neue",Helvetica,sans-serif;}
+.mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums;}
+a{color:var(--sea)}
+h1,h2,h3{text-wrap:balance;margin:0}
+:focus-visible{outline:2px solid var(--enamel);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ============ HEADER ============ */
+header{
+  position:sticky;top:0;z-index:40;
+  background:var(--head-bg);
+  color:var(--head-fg);
+  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
+  border-bottom:3px solid var(--txakoli);
+}
+.hbar{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.wordmark{
+  font-size:20px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  line-height:1;
+}
+.wordmark span{opacity:.62;font-weight:400}
+.hdates{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+
+/* ============ TABS (bottom) ============ */
+nav{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:grid;grid-template-columns:repeat(7,1fr);
+  background:var(--card);
+  border-top:1px solid var(--line-2);
+  padding-bottom:env(safe-area-inset-bottom);
+  box-shadow:0 -6px 20px -14px rgba(0,0,0,.5);
+}
+nav button{
+  appearance:none;border:0;background:none;cursor:pointer;
+  padding:9px 1px 10px;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  color:var(--ink-3);
+  font-family:"Avenir Next Condensed","Avenir Next","Futura","Helvetica Neue",sans-serif;
+  font-size:9.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:600;
+  border-top:2px solid transparent;margin-top:-1px;
+  transition:color .15s;
+}
+nav button svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+nav button[aria-selected="true"]{color:var(--enamel);border-top-color:var(--enamel)}
+
+/* ============ LAYOUT ============ */
+main{max-width:680px;margin:0 auto;padding:0 14px}
+section[role="tabpanel"]{display:none;padding:16px 0 28px}
+section[role="tabpanel"].on{display:block;animation:fade .22s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.eyebrow{
+  font-family:"Avenir Next Condensed","Avenir Next","Futura","Helvetica Neue",sans-serif;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--txakoli);
+  display:flex;align-items:center;gap:9px;margin:26px 0 10px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+.eyebrow:first-child{margin-top:4px}
+
+h2.big{
+  font-family:"Avenir Next Condensed","Avenir Next","Futura","Helvetica Neue",sans-serif;
+  font-size:27px;font-weight:600;letter-spacing:-.01em;line-height:1.1;margin:0 0 6px;
+}
+.lede{color:var(--ink-2);font-size:15px;margin:0 0 4px}
+
+/* ============ CARD ============ */
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:9px;
+  padding:13px 14px;margin-bottom:9px;box-shadow:var(--shadow);
+}
+.card h3{
+  font-family:"Avenir Next Condensed","Avenir Next","Futura","Helvetica Neue",sans-serif;
+  font-size:19px;font-weight:600;line-height:1.15;letter-spacing:.005em;
+}
+.where{
+  font-size:12px;color:var(--ink-3);margin:3px 0 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+.why{margin:8px 0 0;font-size:14.5px;line-height:1.48;color:var(--ink-2)}
+.order{
+  margin:9px 0 0;padding:7px 10px;border-left:2.5px solid var(--txakoli);
+  background:var(--txakoli-soft);border-radius:0 5px 5px 0;
+  font-size:13.5px;line-height:1.42;
+}
+.order > b:first-child{
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  letter-spacing:.09em;text-transform:uppercase;font-size:10.5px;
+  color:var(--txakoli);display:block;margin-bottom:1px;font-weight:600;
+}
+.cardhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+
+/* ============ CHIPS ============ */
+.chip{
+  display:inline-flex;align-items:center;gap:4px;flex-shrink:0;
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  padding:3px 7px;border-radius:4px;white-space:nowrap;
+}
+.chip.open{background:var(--enamel-soft);color:var(--enamel)}
+.chip.shut{background:var(--oxide-soft);color:var(--oxide)}
+.chip.ask{background:var(--card-2);color:var(--ink-3);border:1px solid var(--line)}
+.chip.star{background:var(--txakoli-soft);color:var(--txakoli)}
+
+/* ============ ACTIONS ============ */
+.acts{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.act{
+  display:inline-flex;align-items:center;gap:5px;text-decoration:none;
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:12.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  padding:6px 11px;border-radius:6px;border:1px solid var(--line-2);
+  color:var(--ink-2);background:var(--card-2);
+}
+.act.call{background:var(--enamel);color:var(--card);border-color:var(--enamel)}
+.act svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+/* ============ TIMELINE ============ */
+.rail{list-style:none;margin:0;padding:0 0 0 62px;position:relative}
+.rail::before{content:"";position:absolute;left:53px;top:8px;bottom:14px;width:1px;background:var(--line-2)}
+.rail li{position:relative;margin-bottom:19px}
+.rail li::before{
+  content:"";position:absolute;left:-13px;top:6px;width:9px;height:9px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--enamel);
+}
+.rail time{
+  position:absolute;left:-62px;top:3px;width:42px;text-align:right;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums;
+  font-size:12px;color:var(--enamel);font-weight:600;
+}
+.rail h4{
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:17px;font-weight:600;margin:0 0 2px;line-height:1.2;
+}
+.rail p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.45}
+
+/* ============ CALLOUTS ============ */
+.alert{
+  border:1px solid var(--oxide);background:var(--oxide-soft);
+  border-radius:9px;padding:13px 14px;margin:0 0 14px;
+}
+.alert.gold{border-color:var(--txakoli);background:var(--txakoli-soft)}
+.alert.teal{border-color:var(--enamel);background:var(--enamel-soft)}
+.alert h3{
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:15px;font-weight:600;letter-spacing:.02em;margin-bottom:5px;
+}
+.alert.gold h3{color:var(--txakoli)}
+.alert.teal h3{color:var(--enamel)}
+.alert:not(.gold):not(.teal) h3{color:var(--oxide)}
+.alert p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.alert p + p{margin-top:7px}
+
+/* ============ FILTER ============ */
+.filter{
+  display:flex;align-items:center;gap:9px;margin:0 0 14px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 12px;
+}
+.filter label{
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink-2);cursor:pointer;flex:1;
+}
+.sw{position:relative;width:42px;height:24px;flex-shrink:0}
+.sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:2}
+.sw i{
+  position:absolute;inset:0;border-radius:12px;background:var(--line-2);transition:background .18s;
+}
+.sw i::after{
+  content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;
+  background:var(--card);transition:transform .18s;box-shadow:0 1px 3px rgba(0,0,0,.3);
+}
+.sw input:checked + i{background:var(--enamel)}
+.sw input:checked + i::after{transform:translateX(18px)}
+.hide{display:none!important}
+
+/* ============ TABLE ============ */
+.twrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--card);margin-bottom:10px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:340px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
+th{
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
+  background:var(--card-2);
+}
+tr:last-child td{border-bottom:0}
+td.mono{font-size:12.5px;color:var(--ink-2)}
+
+/* ============ MISC ============ */
+.note{font-size:12.5px;color:var(--ink-3);line-height:1.45;margin:10px 0 0}
+.legend{
+  display:flex;flex-wrap:wrap;gap:10px 16px;font-size:12px;color:var(--ink-3);
+  padding:11px 13px;background:var(--card-2);border-radius:8px;border:1px solid var(--line);margin-bottom:16px;
+}
+.legend span{display:flex;align-items:center;gap:6px}
+.zone{
+  background:var(--card-2);border:1px solid var(--line);border-radius:9px;
+  padding:12px 14px;margin-bottom:9px;
+}
+.zone h3{
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:18px;font-weight:600;margin-bottom:2px;
+}
+.zone .tag{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:11px;color:var(--enamel);letter-spacing:.03em;
+}
+.zone p{margin:7px 0 0;font-size:14px;color:var(--ink-2);line-height:1.45}
+/* ============ MAPA ============ */
+.mapswitch{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+.mapswitch button{
+  appearance:none;cursor:pointer;padding:9px 3px;border-radius:7px;
+  border:1px solid var(--line-2);background:var(--card);color:var(--ink-2);
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+}
+.mapswitch button[aria-pressed="true"]{background:var(--enamel);border-color:var(--enamel);color:var(--card)}
+.mapbox{
+  position:relative;border:1px solid var(--line-2);border-radius:9px;overflow:hidden;
+  background:var(--map-bg);margin-bottom:10px;
+}
+.mapbox svg{display:block;width:100%;height:auto}
+
+/* --- capa de teselas (mapa real) --- */
+.tilepane{
+  position:relative;overflow:hidden;touch-action:pan-y;
+  height:62vw;min-height:250px;max-height:420px;cursor:grab;
+}
+.tilepane.drag{cursor:grabbing}
+.tilewrap{position:absolute;left:0;top:0;will-change:transform}
+.tilewrap img{
+  position:absolute;width:256px;height:256px;display:block;
+  -webkit-user-drag:none;user-select:none;
+}
+:root[data-theme="dark"] .tilewrap{filter:invert(1) hue-rotate(180deg) brightness(.88) contrast(.92)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .tilewrap{filter:invert(1) hue-rotate(180deg) brightness(.88) contrast(.92)}
+}
+.mklayer{position:absolute;inset:0;pointer-events:none}
+.mklayer svg.leaders{position:absolute;inset:0;width:100%;height:100%}
+.mk{
+  position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:700;
+  color:#fff;border:2px solid rgba(255,255,255,.9);
+  box-shadow:0 1px 4px rgba(0,0,0,.45);
+}
+.mk.lit{outline:3px solid var(--ink);outline-offset:1px;z-index:5}
+.mapzoom{position:absolute;right:8px;bottom:8px;display:flex;flex-direction:column;gap:4px;z-index:6}
+.mapzoom button{
+  appearance:none;width:32px;height:32px;border-radius:7px;cursor:pointer;
+  border:1px solid var(--line-2);background:var(--card);color:var(--ink);
+  font-size:17px;font-weight:700;line-height:1;padding:0;
+}
+.attrib{
+  position:absolute;left:0;bottom:0;z-index:6;
+  background:color-mix(in srgb, var(--card) 82%, transparent);
+  font-size:9.5px;padding:2px 6px;border-radius:0 6px 0 0;color:var(--ink-3);
+}
+.attrib a{color:var(--ink-3)}
+
+/* respaldo: si el visor bloquea las teselas, esquema a escala */
+.mapbox.flat .tilepane,
+.mapbox.flat .mapzoom #zin,
+.mapbox.flat .mapzoom #zout,
+.mapbox.flat .attrib{display:none}
+.mapbox:not(.flat) #mapfallback{display:none}
+
+/* pantalla completa */
+.mapbox.full{
+  position:fixed;inset:0;z-index:300;margin:0;border:0;border-radius:0;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  background:var(--paper);
+}
+.mapbox.full .tilepane{height:100%;max-height:none;min-height:0}
+.mapbox.full #mapfallback{
+  height:100%;display:flex;align-items:center;justify-content:center;padding:12px;
+}
+.mapbox.full .mapzoom{bottom:calc(12px + env(safe-area-inset-bottom))}
+.mapbox.full #zfull{background:var(--enamel);color:var(--card);border-color:var(--enamel)}
+body.noscroll{overflow:hidden}
+body.noscroll nav{display:none}
+.mp-dot{cursor:pointer}
+.mp-dot circle.hit{fill:transparent}
+.mp-num{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:11px;font-weight:700;fill:var(--map-bg);pointer-events:none;
+}
+.mp-dot circle.pin{stroke:var(--map-bg);stroke-width:1.5}
+.mp-dot.lit circle.pin{stroke:var(--ink);stroke-width:3}
+.mp-leader{stroke:var(--ink-3);stroke-width:.8;opacity:.5}
+.mp-anchor{
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  fill:var(--ink-3);pointer-events:none;
+  stroke:var(--map-bg);stroke-width:3;paint-order:stroke fill;
+}
+.mp-route{fill:none;stroke:var(--enamel);stroke-width:2.5;stroke-dasharray:6 4;opacity:.8}
+.mp-grid{stroke:var(--map-grid);stroke-width:1}
+.mp-scale{stroke:var(--ink-3);stroke-width:1.5}
+.mp-scaletxt{font-family:ui-monospace,Menlo,monospace;font-size:11px;fill:var(--ink-3)}
+.maplist{list-style:none;margin:0;padding:0}
+.maplist li{
+  display:flex;align-items:flex-start;gap:9px;padding:8px 10px;
+  border:1px solid var(--line);border-radius:7px;background:var(--card);margin-bottom:5px;
+  cursor:pointer;
+}
+.maplist li.lit{border-color:var(--enamel);background:var(--enamel-soft)}
+.maplist .num{
+  flex-shrink:0;width:19px;height:19px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:ui-monospace,Menlo,monospace;font-size:9.5px;font-weight:700;color:var(--card);
+  margin-top:1px;
+}
+.maplist .txt{flex:1;min-width:0}
+.maplist .nm{
+  display:block;
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:15px;font-weight:600;line-height:1.2;
+}
+.maplist .sub{display:block;font-size:12px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;margin-top:1px}
+.maplist a.pin-map{
+  flex-shrink:0;text-decoration:none;color:var(--sea);font-size:11px;
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  letter-spacing:.05em;text-transform:uppercase;font-weight:600;padding-top:3px;
+}
+.catkey{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px}
+.catkey button{
+  appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px;
+  border:1px solid var(--line-2);background:var(--card);border-radius:20px;padding:4px 10px;
+  font-family:"Avenir Next Condensed","Avenir Next",sans-serif;
+  font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);
+}
+.catkey button[aria-pressed="false"]{opacity:.4}
+.catkey i{width:9px;height:9px;border-radius:50%;display:block}
+footer{padding:22px 0 6px;border-top:1px solid var(--line);margin-top:26px;font-size:12.5px;color:var(--ink-3);line-height:1.5}
+</style>
+<meta name="description" content="Guia de bolsillo para dos tardes-noches en Bilbao desde Avellaneda y una manana en Santona: pintxos, cena vasca, cervezas, aparcamiento, mapa y reservas.">
+<meta name="theme-color" content="#0E4B4F">
+</head>
+<body>
+<header>
+  <div class="hbar">
+    <div class="wordmark sig">Bilbao</div>
+    <div class="hdates mono">Lun 17 – Mar 18 ago</div>
+  </div>
+</header>
+
+<main>
+
+<!-- ==================== PLAN ==================== -->
+<section role="tabpanel" id="p-plan" class="on">
+
+  <div class="alert">
+    <h3>Lo primero de todo: llama esta tarde</h3>
+    <p>Mañana es <b>martes</b>. La comida fuerte del viaje —los dos restaurantes con estrella de la ruta de vuelta de Santoña— abre martes, pero se llena. Llama <b>hoy antes de las 21:00</b>. Teléfonos en la pestaña <b>Ruta</b>.</p>
+  </div>
+
+  <div class="alert teal">
+    <h3>Vuestra base: Avellaneda, Sopuerta</h3>
+    <p>Estáis en pleno <b>Enkarterri</b>, a <b>28 km y media hora de Bilbao</b>. Dos consecuencias buenas y una a resolver:</p>
+    <p><b>Bien:</b> Santoña os queda a 50 minutos, no a una hora larga. Y Castro Urdiales y Zierbena están a 25 minutos, así que la ruta de mañana os pilla de paso por casa.</p>
+    <p><b>A resolver:</b> entráis y salís de Bilbao en coche las dos noches. No hay tren desde Sopuerta y el de Balmaseda no da horarios de noche. Lo tenéis en la pestaña <b>Coche</b>.</p>
+  </div>
+
+  <h2 class="big">Hoy · lunes 17</h2>
+  <p class="lede">El lunes es el día flojo de Bilbao: muchas barras del Casco Viejo libran. Noche informal, que la fuerte es mañana comiendo.</p>
+
+  <ul class="rail">
+    <li>
+      <time>17:00</time>
+      <h4>Salir de Avellaneda</h4>
+      <p>Por el corredor del Kadagua (BI-636) o por Muskiz y la A-8. Media hora larga. Contad con llegar sobre las 17:40.</p>
+    </li>
+    <li>
+      <time>17:45</time>
+      <h4>Aparcar y subir a Artxanda</h4>
+      <p>Funicular desde plaza del Funicular. En verano hasta las 22:00 (lun–jue). Mirador, foto de la ría entera, y bajáis. 40 minutos bien invertidos y os sitúa la ciudad de un vistazo.</p>
+    </li>
+    <li>
+      <time>18:45</time>
+      <h4>Guggenheim — sí, abre lunes</h4>
+      <p>En julio y agosto abre <b>todos los lunes, 10:00–20:00</b>. El resto del año cierra. Si no entráis, el paseo exterior por Abandoibarra con Puppy y la Mamá de Bourgeois es gratis y merece.</p>
+    </li>
+    <li>
+      <time>20:00</time>
+      <h4>Pintxos por el Ensanche, no por el Casco</h4>
+      <p>Calle Diputación y Ledesma. Menos turista, barras muy sólidas y —clave hoy— más probabilidad de abrir en lunes que Plaza Nueva. Cenad de pintxos: mañana os espera un menú largo.</p>
+    </li>
+    <li>
+      <time>22:00</time>
+      <h4>Una última y carretera</h4>
+      <p>Si os apetece sentaros a cenar de verdad, Rimbombín abre lunes. Si no, una cerveza en Marzana y vuelta. A las 23:30 estáis en Avellaneda.</p>
+    </li>
+  </ul>
+
+  <h2 class="big" style="margin-top:30px">Mañana · martes 18</h2>
+  <p class="lede">Santoña por la mañana, <b>la comida grande</b> en la ruta de vuelta, y Bilbao de pintxos por la tarde-noche.</p>
+
+  <ul class="rail">
+    <li>
+      <time>09:30</time>
+      <h4>Avellaneda → Santoña</h4>
+      <p>Unos 55 km, unos 50 minutos, por Castro Urdiales y la A-8. Menos de lo que tardaríais desde Bilbao: aprovechadlo para salir sin prisas.</p>
+    </li>
+    <li>
+      <time>10:20</time>
+      <h4>Santoña</h4>
+      <p>Conservera de anchoa (la mayoría hacen visita y venta), el Fuerte de San Martín y la playa de Berria si os apetece pisar arena. El Faro del Caballo son ~680 escalones de bajada y otros tantos de subida: con calor de agosto y reserva a las 14:00, no da tiempo.</p>
+    </li>
+    <li>
+      <time>13:45</time>
+      <h4>La comida grande</h4>
+      <p>Aquí es donde gastáis. Pico Velasco (95–115 € por persona) o Solana, los dos con estrella y los dos abiertos en martes. Reservad para las 14:00 y no pongáis nada después: un menú largo son tres horas.</p>
+    </li>
+    <li>
+      <time>17:30</time>
+      <h4>Puente Bizkaia de camino</h4>
+      <p>Os pilla justo en la vuelta. Patrimonio de la Humanidad. La barquilla cuesta céntimos y cruza en minuto y medio; la pasarela alta son 11 € y cierra a las 20:00.</p>
+    </li>
+    <li>
+      <time>19:30</time>
+      <h4>Casco Viejo, ahora sí</h4>
+      <p>Martes ya abre casi todo. Plaza Nueva, Santa María, Jardines. Este es el txikiteo de verdad, y después de la comilona lo agradeceréis: un pintxo aquí, otro allá, sin sentaros.</p>
+    </li>
+    <li>
+      <time>22:30</time>
+      <h4>Vuelta a Avellaneda</h4>
+      <p>Media hora. Si el conductor de hoy fue uno, mañana le toca al otro.</p>
+    </li>
+  </ul>
+
+  <div class="eyebrow">Qué hay abierto estos dos días</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Museo Guggenheim</h3><span class="chip open">Abre lunes</span></div>
+    <p class="where">Abandoibarra Etorb. 2 · 10:00–20:00</p>
+    <p class="why">Abre todos los días en julio y agosto, festivos incluidos. Cartel de exposiciones del verano: <b>David Hockney, una visión más amplia</b>, <b>El espejo invertido</b> (fondos de la Fundación La Caixa y el MACBA) y una selección de la colección propia. Comprad la entrada online: en agosto hay cola.</p>
+    <div class="acts">
+      <a class="act" href="https://www.guggenheim-bilbao.eus/" target="_blank" rel="noopener">Entradas</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Museo+Guggenheim+Bilbao" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Azkuna Zentroa</h3><span class="chip open">Abierto</span></div>
+    <p class="where">Arriquibar Plaza 4 · Indautxu</p>
+    <p class="why">La antigua Alhóndiga reconvertida por Philippe Starck. Este agosto la sala de exposiciones tiene a <b>Ana Laura Aláez</b> con <i>Todos los conciertos, todas las noches, todo vacío</i>, su primera monográfica de este tamaño en su ciudad. Entrada al edificio libre: aunque no veáis la expo, el vestíbulo de las 43 columnas es una parada de 10 minutos que vale la pena.</p>
+    <div class="acts">
+      <a class="act" href="https://www.azkunazentroa.eus/" target="_blank" rel="noopener">Programa</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Azkuna+Zentroa+Bilbao" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Funicular de Artxanda</h3><span class="chip open">Abierto</span></div>
+    <p class="where">Plaza del Funicular · Horario de verano</p>
+    <p class="why">Lun–jue 7:15–22:00 · Vie, sáb y vísperas 7:15–23:00 · Dom 8:15–22:00. Tres minutos de subida y el mejor mirador de la ciudad. Arriba hay bares con terraza para tomar algo antes de bajar.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Funicular+de+Artxanda+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Mercado de la Ribera</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Erribera Kalea 20 · Casco Viejo</p>
+    <p class="why">El mercado cubierto más grande de Europa, a orillas de la ría. La planta de puestos gastronómicos es un buen plan informal. Cerrado domingos; los lunes por la tarde suele ir flojo, mejor mañana martes.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Mercado+de+la+Ribera+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="alert" style="margin-top:14px">
+    <h3>No vayáis: Museo de Bellas Artes</h3>
+    <p>Sigue cerrado por la ampliación de Norman Foster. El nuevo atrio se enseñó en junio, pero <b>la reapertura completa es el 5 de octubre de 2026</b>. En agosto no hay visita.</p>
+  </div>
+
+  <div class="alert gold">
+    <h3>Os libráis de la Aste Nagusia por cuatro días</h3>
+    <p>La Semana Grande de Bilbao 2026 va del <b>22 al 30 de agosto</b>. Buena y mala noticia: no pilláis fuegos artificiales ni txosnas, pero tampoco masificación, precios de fiesta ni problemas de hotel. La ciudad estará en modo normal.</p>
+    <p>El Athletic tampoco juega en casa: su primer partido en San Mamés es el 22 contra el Sevilla.</p>
+  </div>
+
+</section>
+
+<!-- ==================== PINTXOS ==================== -->
+<section role="tabpanel" id="p-pintxos">
+  <h2 class="big">Pintxos</h2>
+  <p class="lede">Ordenados por zona, para hacerlos andando. Regla local: una cosa y un txikito por barra, y a la siguiente. Nunca dos rondas en el mismo sitio.</p>
+
+  <div class="filter">
+    <label for="f1">Ocultar lo que cierra los lunes</label>
+    <span class="sw"><input type="checkbox" id="f1"><i></i></span>
+  </div>
+
+  <div class="legend">
+    <span><span class="chip open">Abre lun</span> confirmado</span>
+    <span><span class="chip shut">Cierra lun</span> confirmado</span>
+    <span><span class="chip ask">Confirmar</span> llama o pásate</span>
+  </div>
+
+  <div class="eyebrow">Plaza Nueva · el clásico</div>
+
+  <div class="card" data-mon="shut">
+    <div class="cardhead"><h3>Gure Toki</h3><span class="chip shut">Cierra lun</span></div>
+    <p class="where">Plaza Nueva · mar–sáb 11:00–23:00 · dom 11:00–16:00</p>
+    <p class="why">Para muchos, la mejor barra de la plaza. Tradición y cocina creativa en el mismo mostrador, sin postureo. Mañana martes, primera parada.</p>
+    <div class="order"><b>Pide</b>Morcilla con txipirón. Bacalao al pil-pil. Y mira la pizarra de pintxos calientes: eso es lo bueno.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Gure+Toki+Plaza+Nueva+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Sorginzulo</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Plaza Nueva 12</p>
+    <p class="why">Barra pequeña y siempre llena. El "rincón de la bruja". De los que sostienen la plaza desde hace décadas.</p>
+    <div class="order"><b>Pide</b>Croquetas de jamón. Brocheta de rape y langostinos. Los calamares fritos son el fetiche, pero suelen hacerlos en fin de semana.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Sorginzulo+Plaza+Nueva+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Víctor Montes</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Plaza Nueva 8</p>
+    <p class="why">El más señorial de la plaza: madera, botellería impresionante y una barra de pintxo tradicional muy bien ejecutada. Tiene restaurante arriba si os apetece sentaros.</p>
+    <div class="order"><b>Pide</b>Pintxo tradicional y un rioja de la casa. Aquí el vino es el argumento.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Victor+Montes+Plaza+Nueva+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="eyebrow">Calle Santa María · el nervio de la noche</div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Gatz</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Santa María 10</p>
+    <p class="why">Premiadísimo en los concursos de pintxos de la ciudad. Pequeño, ruidoso, exactamente lo que buscáis.</p>
+    <div class="order"><b>Pide</b>La tortilla de morcilla. Es su firma.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Bar+Gatz+Santa+Maria+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Irrintzi</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Santa María 8</p>
+    <p class="why">El contrapunto moderno de la calle. Pintxo de autor, colorido, algo más atrevido. Buen sitio para romper con la barra clásica.</p>
+    <div class="order"><b>Pide</b>Lo que más raro os parezca de la vitrina. Aquí funciona.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Irrintzi+Santa+Maria+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Santa María</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Santa María 18</p>
+    <p class="why">Luz baja, ambiente de copa más que de pote. Buen sitio para la tercera parada, cuando ya no queréis más pan.</p>
+    <div class="order"><b>Pide</b>Foie con manzana caramelizada.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Bar+Santa+Maria+Bilbao+Casco+Viejo" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="eyebrow">Calle Jardines</div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Berton</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Jardines 11</p>
+    <p class="why">Casa seria de pintxo y vino, con una carta de vinos por copas por encima de la media del Casco. De los pocos donde el maridaje se toma en serio.</p>
+    <div class="order"><b>Pide</b>Ibéricos y un txakoli bien frío. Pedid consejo de vino, saben.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Berton+Jardines+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Berton Sasibil</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Jardines 8</p>
+    <p class="why">Hermano del anterior, tres portales más allá, mismo listón. Si uno está a reventar, cruzáis a este.</p>
+    <div class="order"><b>Pide</b>Pintxo caliente del día y otra copa.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Berton+Sasibil+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="eyebrow">Somera, Perro y alrededores · el txikiteo bruto</div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Xukela</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Calle del Perro 2</p>
+    <p class="why">Bar de barrio con carácter, paredes forradas, ambiente de gente de Bilbao y no de guía. Uno de los sitios con más personalidad del Casco.</p>
+    <div class="order"><b>Pide</b>Tabla de quesos o de ibéricos. Aquí se pica largo.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Xukela+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Artajo</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Calle Somera</p>
+    <p class="why">Somera es la calle más gamberra del Casco Viejo, la del txikiteo de verdad. Este es de los que aguantan el tipo con cocina.</p>
+    <div class="order"><b>Pide</b>Taco de rabo de toro.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Artajo+Somera+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Losada</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Carnicería Vieja</p>
+    <p class="why">Sin pretensiones, calle escondida. Van por lo que van.</p>
+    <div class="order"><b>Pide</b>Croquetas. Solo croquetas.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Losada+Carniceria+Vieja+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Río-Oja</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Calle del Perro 4</p>
+    <p class="why">Institución de las cazuelitas: nada de pintxo fino, aquí se come de puchero en barra. Bacalao, callos, caracoles, patatas con costilla. Es el Bilbao de antes, sin filtro. Confirmad que no estén de vacaciones de agosto.</p>
+    <div class="order"><b>Pide</b>Dos o tres cazuelitas para compartir y pan. Los caracoles son el emblema.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Rio+Oja+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="eyebrow">Ensanche · Diputación y Ledesma</div>
+
+  <div class="alert teal">
+    <h3>Esta es vuestra zona para esta noche</h3>
+    <p>Diputación y Ledesma están a cinco minutos andando entre sí, tienen menos turismo que Plaza Nueva y más papeletas de estar abiertas un lunes. Empezad aquí hoy y dejad el Casco Viejo para mañana.</p>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>El Globo</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Diputación 8</p>
+    <p class="why">Probablemente el pintxo más famoso de Bilbao sale de esta barra. Sitio estrecho, siempre lleno, servicio rapidísimo.</p>
+    <div class="order"><b>Pide</b>Txangurro gratinado. Es el motivo de venir. Y el de foie con cebolla caramelizada.</div>
+    <div class="acts">
+      <a class="act" href="https://www.barelglobo.es/" target="_blank" rel="noopener">Web</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Bar+El+Globo+Diputacion+Bilbao" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>La Viña del Ensanche</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Diputación 10 · pared con pared con El Globo</p>
+    <p class="why">Misma familia desde 1927, tres generaciones. Cortan el ibérico a cuchillo delante de vosotros y tienen una bodega enorme. Es de los sitios donde se nota el oficio.</p>
+    <div class="order"><b>Pide</b>Jamón ibérico cortado a cuchillo. Sin discusión. Y una copa de su bodega.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=La+Vina+del+Ensanche+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>El Puertito</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Calle Ledesma</p>
+    <p class="why">Ostrería. No hay pintxos, no busquéis: se viene a comer ostras de distintas procedencias con un blanco. Parada corta y muy buena para dos.</p>
+    <div class="order"><b>Pide</b>Media docena variada para compartir y una copa de blanco. Nada más.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=El+Puertito+Ledesma+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Taberna Magnum</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Calle Ledesma</p>
+    <p class="why">Vinoteca con buena selección por copas y pintxo correcto. Ledesma entera es terraza en agosto: si hace buena tarde, este tramo es el mejor sitio de Bilbao para sentarse fuera.</p>
+    <div class="order"><b>Pide</b>Una copa fuera y lo que tengan de temporada.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Taberna+Magnum+Ledesma+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <p class="note">Precio orientativo: pintxo 2,50–4,50 € y txikito o zurito 1,50–2,50 €. Dos personas haciendo cuatro barras: 45–70 €. En la barra se pide y se paga al final, no hace falta guardar tickets: aquí se fía de palabra.</p>
+</section>
+
+<!-- ==================== CENAR ==================== -->
+<section role="tabpanel" id="p-cenar">
+  <h2 class="big">Cenar en Bilbao</h2>
+  <p class="lede">Cocina vasca de mantel. Reservad: en agosto y con la mitad de la ciudad de vacaciones, los que abren se llenan.</p>
+
+  <div class="alert teal">
+    <h3>Para esta noche, lunes</h3>
+    <p>Rimbombín es el único de esta lista que consta abierto en lunes. Casa Rufo es la otra apuesta segura del barrio (Hurtado de Amézaga), a un minuto andando. Asador Guetaria cierra los lunes: dejadlo para mañana.</p>
+  </div>
+
+  <div class="card" data-mon="open">
+    <div class="cardhead"><h3>Rimbombín</h3><span class="chip open">Abre lun</span></div>
+    <p class="where">Hurtado de Amézaga 48 · lun 08:00–23:00 · mar–sáb 11:00–01:00</p>
+    <p class="why">Casa de 1931. Marisquería y cocina vasca de producto, sin florituras y con la mano muy hecha. Es de esos sitios que llevan tantos años que ya no necesitan demostrar nada. Tienen barra de pintxos si preferís algo informal antes de sentaros.</p>
+    <div class="order"><b>Pide</b>Marisco de la vitrina, y si está, merluza o rape. Preguntad por la sugerencia del día: aquí el pescado manda sobre la carta.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34944213160"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>944 21 31 60</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Rimbombin+Bilbao" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Casa Rufo</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Hurtado de Amézaga 5</p>
+    <p class="why">Entras por lo que parece un ultramarinos —estanterías de conservas, quesos, vinos— y detrás está el comedor. Es de los sitios más queridos de Bilbao y por eso mismo no se entra sin reserva. La brasa es lo suyo.</p>
+    <div class="order"><b>Pide</b>Chuletón. Es la casa. Pimientos de piquillo y un tinto que os recomienden ellos de la estantería de la entrada.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34944432172"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>944 43 21 72</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Casa+Rufo+Bilbao" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card" data-mon="shut">
+    <div class="cardhead"><h3>Asador Guetaria</h3><span class="chip shut">Cierra lun</span></div>
+    <p class="where">Colón de Larreátegui 12 · mar–dom · cocina 13:30–15:30 y 21:00–22:15</p>
+    <p class="why">Asador familiar en pleno centro, de los de toda la vida: brasa de carbón, producto y punto. Ojo con el horario de cocina, que cierra pronto: si vais mañana, entrad antes de las 22:00.</p>
+    <div class="order"><b>Pide</b>Rodaballo o besugo a la parrilla si están, y si no, chuleta. De primero, cogote o unos pimientos.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34944243923"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>944 24 39 23</a>
+      <a class="act" href="tel:+34944232527">944 23 25 27</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Asador+Guetaria+Bilbao" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Víctor Montes · comedor</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Plaza Nueva 8 · planta alta</p>
+    <p class="why">Cenar asomado a la Plaza Nueva, con la barra de pintxos abajo. Clásico de bacalao y cocina vizcaína de siempre. Si mañana os apetece cenar en el Casco sin salir de la plaza, es la opción con más solera.</p>
+    <div class="order"><b>Pide</b>Bacalao al pil-pil o a la vizcaína. Es el plato que define esta ciudad.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Victor+Montes+restaurante+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="alert gold">
+    <h3>Si buscáis alta cocina</h3>
+    <p>Bilbao tiene estrella Michelin en <b>Nerua</b> (dentro del Guggenheim), <b>Etxanobe Atelier</b>, <b>Mina</b> y <b>Zortziko</b>. El problema es doble: casi todos cierran domingo y lunes —y varios también martes— y en agosto muchos hacen vacaciones. Si os tienta, llamad hoy mismo para preguntar; no contéis con ello.</p>
+    <p>Mi opinión: con solo dos noches, la estrella gastádsela mañana en la comida de la ruta, que ya la tenéis medio resuelta, y en Bilbao id a barra y brasa. Es más Bilbao.</p>
+  </div>
+
+  <p class="note">Cenar en Bilbao empieza tarde: a las 21:00 los comedores están vacíos, a las 22:00 llenos. Si reserváis a las 21:00 tendréis sitio sin problema y cenaréis tranquilos.</p>
+</section>
+
+<!-- ==================== COPAS ==================== -->
+<section role="tabpanel" id="p-copas">
+  <h2 class="big">Cervezas y copas</h2>
+  <p class="lede">Bilbao tiene una escena cervecera artesana muy buena y poco conocida fuera. Y cuatro zonas de ocio con carácter muy distinto.</p>
+
+  <div class="eyebrow">Las zonas · elegid ambiente</div>
+
+  <div class="zone">
+    <h3>Muelle Marzana / Bilbao La Vieja</h3>
+    <p class="tag mono">Bohemio · cócteles · directos</p>
+    <p>Al otro lado de la ría desde el Casco Viejo, cruzando el puente. Barrio recuperado a base de bares modernos, música en directo y coctelería. <b>Es la mejor apuesta un lunes de agosto</b>, que es cuando el resto de la ciudad baja la persiana. Buscad <b>Muelle Dartxin</b> (vermut y cócteles) y <b>Badulake</b>.</p>
+  </div>
+
+  <div class="zone">
+    <h3>Licenciado Poza · "Pozas"</h3>
+    <p class="tag mono">Bullicio · precios majos · muy local</p>
+    <p>En Indautxu, junto a San Mamés. Calle larguísima llena de bares, ambiente futbolero y de cuadrilla, cero turismo. Precios más baratos que en el Casco. Aquí no vais a cenar bien, vais a beber bien y barato con gente de Bilbao.</p>
+  </div>
+
+  <div class="zone">
+    <h3>Ledesma</h3>
+    <p class="tag mono">Terrazas · arranque de noche</p>
+    <p>Peatonal, en el Ensanche. Concentración de terrazas: en agosto, a las 20:00, es el mejor sitio de Bilbao para sentarse fuera con una cerveza y un pintxo antes de decidir qué hacéis. Ambiente mixto y tranquilo, ideal para pareja.</p>
+  </div>
+
+  <div class="zone">
+    <h3>Casco Viejo · Somera y Barrenkale</h3>
+    <p class="tag mono">Txikiteo · ruidoso · clásico</p>
+    <p>El txikiteo de siempre: bares pequeños, potes cortos y de pie. Somera es la calle más animada y también la más cañera. Mañana martes es cuando lo veréis en su versión buena.</p>
+  </div>
+
+  <div class="eyebrow">Cerveza artesana · lo mejor de la ciudad</div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Basquery</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Ibáñez de Bilbao 8</p>
+    <p class="why">Fábrica y bar a la vez: hornean el pan, tuestan el café y fermentan la cerveza en el mismo local. Podéis ver los tanques desde la mesa. Golden Ale, Brown Ale e IPA propias. De los sitios más originales de Bilbao y funciona a cualquier hora.</p>
+    <div class="order"><b>Pide</b>Tabla de sus propias cervezas para probar las tres. Y pan, que también es suyo.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Basquery+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>The Craft Tabeerna</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Calle del Perro · Casco Viejo</p>
+    <p class="why">El taproom de <b>Laugar Brewery</b>, una de las cerveceras vascas más respetadas. Diez grifos rotando y una nevera larga de latas. Está en pleno Casco Viejo, así que encaja perfecto entre pintxo y pintxo mañana.</p>
+    <div class="order"><b>Pide</b>Lo que tengan de Laugar en grifo. Si dudáis, que os den a probar.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=The+Craft+Tabeerna+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Penguin Bar</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Junto al Mercado de la Ribera</p>
+    <p class="why">Dieciséis grifos, la mayor selección de tirador de la ciudad, y además coctelería. Es el hermano mayor del Bihotz. Si solo entráis en un sitio de cerveza, que sea este.</p>
+    <div class="order"><b>Pide</b>Un tercio de algo local y, si os apetece cambiar de tercio, aquí también hacen cócteles.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Penguin+Bar+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Bihotz Café</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Bilbao La Vieja</p>
+    <p class="why">Seis grifos, buena selección de lata nacional e internacional, café de especialidad y bocadillos. Más tranquilo y de día. Buen sitio para una primera cerveza sin ruido.</p>
+    <div class="order"><b>Pide</b>Grifo del día y un bocata si venís con hambre de media tarde.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Bihotz+Cafe+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card" data-mon="ask">
+    <div class="cardhead"><h3>Singular</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Cerca del Palacio de Ibaigane · Indautxu</p>
+    <p class="why">Ocho grifos artesanos, muchas botellas y latas, luz baja y ambiente recogido. El más "de pareja" de los cinco: se puede hablar.</p>
+    <div class="order"><b>Pide</b>Que os aconsejen según lo que os guste. Aquí saben de lo que hablan.</div>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Singular+cerveza+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <p class="note">Vocabulario para no cantar: un <b>zurito</b> es el corto de cerveza (lo normal aquí, se pide de dos en dos), una <b>caña</b> es el tercio corto y un <b>txikito</b> es el vaso pequeño de vino. Si os apetece algo muy local, pedid un <b>txakoli</b> —blanco vasco, ácido y con aguja— o un <b>kalimotxo</b> si la noche se alarga.</p>
+</section>
+
+<!-- ==================== COCHE ==================== -->
+<section role="tabpanel" id="p-coche">
+  <h2 class="big">Aparcar</h2>
+
+  <div class="alert">
+    <h3>El tema de las copas, hablando claro</h3>
+    <p>Dormís en Avellaneda: son 28 km de vuelta las dos noches. <b>Desde Sopuerta no hay tren</b>, y el de Balmaseda ni os pilla cerca ni da horarios de noche. Bizkaibus tampoco os sirve para volver tarde entre semana.</p>
+    <p>Así que hay tres salidas honestas, y la primera es la que va a pasar:</p>
+    <p><b>1. Conductor designado, alternando.</b> Hoy bebe uno, mañana el otro. El límite en España es 0,25 mg/l en aire espirado —en la práctica, una caña y parar—. Es lo más simple y lo que hace todo el mundo aquí.</p>
+    <p><b>2. Park &amp; ride en Ansio (BEC), Barakaldo.</b> Os pilla justo de camino por la A-8. Dejáis el coche, Metro línea 2 y en 15 minutos estáis en Casco Viejo. No resuelve la vuelta a casa, pero os quita el tráfico y el aparcamiento de Bilbao de encima, y el conductor solo conduce carretera abierta.</p>
+    <p><b>3. Taxi desde Bilbao.</b> La única forma de que bebáis los dos. Son ~30 km, así que no es barato: contad con una cifra de tres dígitos entre ida y vuelta. Si lo hacéis, que sea mañana martes, que es la noche buena del Casco Viejo.</p>
+  </div>
+
+  <div class="alert teal">
+    <h3>Buena noticia: en agosto aparcáis gratis en la calle</h3>
+    <p>El Ayuntamiento suspende la OTA <b>todas las tardes de agosto</b> y los <b>sábados de julio y agosto</b>, además de festivos. Como llegáis por la tarde los dos días, <b>no tenéis que pagar zona azul</b>.</p>
+    <p>Solo se cobra de lunes a viernes por la mañana, de 09:00 a unas 13:30–14:00. Y si aparcáis en zona azul en esa franja, el máximo son 3 horas.</p>
+  </div>
+
+  <div class="alert">
+    <h3>Lo que sí tenéis que respetar</h3>
+    <p>La <b>zona verde es de residentes</b> y esa no se suspende. Si la línea del bordillo es verde y no tenéis distintivo, no aparquéis ahí ni en agosto. La azul es la de rotación.</p>
+  </div>
+
+  <div class="eyebrow">Parkings cubiertos · si preferís no dar vueltas</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Pío Baroja</h3><span class="chip star">Casco Viejo</span></div>
+    <p class="where">Plaza Pío Baroja</p>
+    <p class="why">El más recomendado para el Casco Viejo. Salís prácticamente a la Plaza Nueva. Si vais a hacer la ruta de pintxos y cenar allí, este es vuestro sitio.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Parking+Pio+Baroja+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Arenal · Casco Viejo</h3><span class="chip star">Casco Viejo</span></div>
+    <p class="where">El Arenal, junto al Teatro Arriaga</p>
+    <p class="why">La otra opción para el Casco, al pie del Arriaga y del puente. Cómodo y muy céntrico. Suele poder reservarse online más barato que en taquilla.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Parking+Arenal+Casco+Viejo+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Plaza Euskadi</h3><span class="chip star">Guggenheim</span></div>
+    <p class="where">Plaza Euskadi · Abandoibarra</p>
+    <p class="why">Debajo de la plaza, entre la Torre Iberdrola y el Guggenheim. El natural si empezáis por el museo y Abandoibarra.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Parking+Plaza+Euskadi+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Intermodal</h3><span class="chip star">San Mamés</span></div>
+    <p class="where">San Mamés / Termibus</p>
+    <p class="why">Grande, fácil de entrar y salir sin meterse en el centro. Enlaza con metro y tranvía en el mismo edificio: dejáis el coche y en 6 minutos estáis en el Casco Viejo. Buena opción si os alojáis fuera o queréis olvidaros del coche toda la tarde.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Parking+Intermodal+San+Mames+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Azkuna Zentroa</h3><span class="chip star">Indautxu</span></div>
+    <p class="where">Arriquibar Plaza · bajo la Alhóndiga</p>
+    <p class="why">En pleno Indautxu, a un paseo de Pozas y de Ledesma. Si el plan de la noche es Ensanche y cervezas, dejadlo aquí.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Parking+Azkuna+Zentroa+Bilbao" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="eyebrow">Park &amp; ride · el que os conviene</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Ansio · BEC</h3><span class="chip star">De camino</span></div>
+    <p class="where">Barakaldo · Metro línea 2</p>
+    <p class="why">El disuasorio que os pilla en la ruta desde Enkarterri, sin meteros en Bilbao. Dejáis el coche, Metro línea 2 y en un cuarto de hora estáis en Casco Viejo. Tarifa bonificada si usáis el transporte público y sacáis el coche antes del cierre de la estación; si no, se paga por minutos.</p>
+    <p class="note">Los otros disuasorios del metro son Leioa, Etxebarri e Ibarbengoa, pero os quedan a desmano viniendo del oeste.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Aparcamiento+disuasorio+Ansio+BEC+Barakaldo" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <p class="lede" style="font-size:14.5px">El metro de Bilbao es sencillísimo: dos líneas y todo pasa por el centro. Con la tarjeta Barik sale más barato, pero para dos viajes sueltos no compensa sacarla.</p>
+
+  <div class="twrap">
+    <table>
+      <thead><tr><th>Situación</th><th>Qué hacer</th></tr></thead>
+      <tbody>
+        <tr><td>Llegáis a partir de las 14:00</td><td class="mono">Calle, zona azul, gratis</td></tr>
+        <tr><td>Llegáis por la mañana entre semana</td><td class="mono">Parking cubierto o ticket 3 h máx.</td></tr>
+        <tr><td>Bebéis los dos</td><td class="mono">Taxi, no hay otra</td></tr>
+        <tr><td>Bebe uno solo</td><td class="mono">Ansio + metro, o calle</td></tr>
+        <tr><td>Volvéis de Santoña por la tarde</td><td class="mono">Calle, gratis</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="eyebrow">Cómo se sale de Avellaneda</div>
+  <div class="card">
+    <h3>Las dos rutas a Bilbao</h3>
+    <p class="why"><b>Por el Kadagua (BI-636).</b> Avellaneda → Otxaran → Zalla → corredor del Kadagua → Bilbao. Es la más directa y entra por el sur de la ciudad.</p>
+    <p class="why"><b>Por Muskiz y la A-8.</b> BI-2701 hasta Muskiz, y ahí cogéis la autopista. Un poco más larga, pero es la que os deja en Ansio y la que usaréis mañana para volver de Santoña.</p>
+    <p class="note">De noche, cualquiera de las dos en media hora larga. Son carreteras de valle, con curvas pero sin tráfico a esas horas.</p>
+  </div>
+
+  <p class="note">Un aviso práctico: el Casco Viejo es peatonal casi por completo. No intentéis entrar con el coche a buscar el hotel o el restaurante; se aparca en el perímetro y se entra andando.</p>
+</section>
+
+<!-- ==================== RUTA ==================== -->
+<section role="tabpanel" id="p-ruta">
+  <h2 class="big">Santoña y la comida de vuelta</h2>
+  <p class="lede">Martes 18. Todos están en la ruta de regreso a Bilbao. Primero las dos estrellas de Cantabria, junto a Santoña; después la cocina vasca de parrilla, ya en Bizkaia. Llamad hoy.</p>
+
+  <div class="alert">
+    <h3>Llamad esta tarde, no mañana</h3>
+    <p>Las dos estrellas Michelin de la lista tienen comedor pequeño. En agosto, con reserva del mismo día, es fácil quedarse fuera. <b>Mejor hora para llamar: entre las 17:00 y las 19:00</b>, que es cuando ya han cerrado la comida y aún no están con la cena.</p>
+  </div>
+
+  <div class="eyebrow">Cantabria · la más cerca de Santoña</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Pico Velasco</h3><span class="chip star">★ Michelin 2026</span></div>
+    <p class="where">Barrio Angustina · Carasa (Voto), Cantabria · ~20 min de Santoña</p>
+    <p class="why">Nueva estrella Michelin de 2026 y probablemente la mejor jugada del día: está <b>dentro del Parque Natural de las Marismas de Santoña</b>, es decir, prácticamente donde ya vais a estar. Casona cántabra del siglo XVII convertida en hotel boutique, con Nacho Solana e Inés Aguirreburualde al frente. Cocina de producto de temporada y cercanía, moderna pero con base tradicional.</p>
+    <div class="order"><b>Los menús y lo que cuestan</b><b>Albiar</b> ("amanecer"), <b>95 €</b> por persona, IVA incluido: infusión de setas, cremoso de foie y manzana, croqueta Solana, alubias marinas, lonja del Cantábrico, costilla ibérica.<br><b>Sincio</b> (antojo, en cántabro), <b>115 €</b>: lo anterior más temple de mejillón, bogavante con azafrán y setas, y cítricos de la casa con miel.<br>La bodega va aparte. Para dos, contad <b>250–320 €</b> con vino.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34842841111"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>842 84 11 11</a>
+      <a class="act" href="https://picovelasco.com/reservar_restaurante/" target="_blank" rel="noopener">Reservar web</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Pico+Velasco+Carasa+Cantabria" target="_blank" rel="noopener">Mapa</a>
+    </div>
+    <p class="note">Atienden reservas de martes a domingo, 10:00–21:00. Mañana martes abren.</p>
+  </div>
+
+  <div class="eyebrow">Cantabria · la apuesta más segura</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Solana</h3><span class="chip star">★ Michelin</span></div>
+    <p class="where">La Bien Aparecida 11 · Ampuero, Cantabria · ~25 min de Santoña</p>
+    <p class="why">La casa madre de Nacho Solana, con estrella consolidada, frente al Santuario de la Bien Aparecida y con vistas al valle. Cocina cántabra de raíz llevada a otro nivel. Si Pico Velasco es la novedad, este es el clásico que no falla. Cierra los lunes, así que mañana martes está en su sitio.</p>
+    <div class="order"><b>Los menús</b>Dos degustaciones, <b>Breñas</b> (el corto) y <b>Sotombo</b> (el largo, 19 pases). Rondan los <b>90–115 €</b> por persona, pero las fuentes que he mirado no coinciden en el precio: <b>preguntadlo al reservar</b>, no os fiéis de lo que ponga por ahí.</div>
+    <div class="order"><b>Truco</b>Tienen <b>bar-taberna</b> además del gastronómico (mar–sáb 10:00–21:45). Si al final preferís no gastar aquí, se come muy bien en la taberna sin reserva y sin ceremonia.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34942676718"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>942 67 67 18</a>
+      <a class="act" href="https://restaurantesolana.com/" target="_blank" rel="noopener">Web</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Restaurante+Solana+Ampuero" target="_blank" rel="noopener">Mapa</a>
+    </div>
+    <p class="note">Gastronómico: martes a sábado, 13:30–15:00. Pedid mesa a las 14:00.</p>
+  </div>
+
+  <div class="eyebrow">Cantabria · marinera y sin ceremonia</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Mesón Marinero</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Correría 23 · Castro Urdiales, Cantabria · ~40 min de Santoña</p>
+    <p class="why">Casa de referencia en Castro, en el casco viejo junto al puerto. Pescado y marisco fresco, raciones para compartir y una barra de pintxos muy buena. Es la opción de mantel corto: se come muy bien sin menú degustación ni protocolo, y Castro Urdiales merece el paseo por el puerto antes o después.</p>
+    <div class="order"><b>Pide</b>Marisco del día y rabas. Y preguntad qué ha entrado en lonja esa mañana.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34942860005"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>942 86 00 05</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Meson+Marinero+Castro+Urdiales" target="_blank" rel="noopener">Mapa</a>
+    </div>
+    <p class="note">Solo aceptan reservas por teléfono, no online. Se llena en agosto: llamad hoy.</p>
+  </div>
+
+  <div class="eyebrow">Cocina vasca · ya en Bizkaia</div>
+
+  <div class="alert teal">
+    <h3>Si lo que queréis es comer vasco, esta es la parte</h3>
+    <p>Santoña, Ampuero y Castro son <b>Cantabria</b>: se come de maravilla, pero es cocina cántabra. El País Vasco empieza pasado Ontón, a media hora de Castro. A partir de ahí ya es <b>parrilla vasca, txakoli y pescado entero al carbón</b>, y os queda todo de camino a Bilbao.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>La Kofradia</h3><span class="chip star">Guía Repsol</span></div>
+    <p class="where">Puerto Txiki 8 · Zierbena, Bizkaia · ~55 min de Santoña</p>
+    <p class="why">Ocupa la antigua cofradía de pescadores del puerto, y el pescado que sirven lo captura <b>su propio barco</b>. No hay intermediario: lo que entra por la mañana es lo que coméis. Comedor amplio y terraza cerrada mirando al Abra. Es la definición de restaurante de puerto vasco.</p>
+    <div class="order"><b>Pide</b>Pescado entero a la parrilla para dos, según lo que hayan traído. Preguntad qué hay: aquí la carta importa menos que la captura del día.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34629307079"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>629 30 70 79</a>
+      <a class="act" href="https://lakofradia.com/" target="_blank" rel="noopener">Web</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=La+Kofradia+Zierbena" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Itxas Bide</h3><span class="chip star">Guía Repsol</span></div>
+    <p class="where">Muelle de Ereaga 42 · Puerto Viejo de Algorta, Getxo · ~1 h de Santoña</p>
+    <p class="why">Cuatro décadas en el Puerto Viejo de Algorta, asomado a la bahía del Abra. Casa de comidas sencilla, sin pretensiones, con las mejores vistas de la ría y pescado hecho al momento. Es de las paradas que justifican el desvío por sí solas: coméis y luego bajáis a pasear el Puerto Viejo, que es un rincón precioso.</p>
+    <div class="order"><b>Pide</b>Chipirones en su tinta, que es su plato de referencia. Y pescado fresco a la plancha o parrilla.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34944910589"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>944 91 05 89</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Itxas+Bide+Algorta+Getxo" target="_blank" rel="noopener">Mapa</a>
+    </div>
+    <p class="note">No tienen reserva online: solo teléfono. Y os deja a 10 minutos del Puente Bizkaia.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Gloria</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">El Puerto 25 · Zierbena, Bizkaia</p>
+    <p class="why">Otra de las veteranas del puerto de Zierbena, muy conocida por sus mariscadas. Si La Kofradia está llena —pasa a menudo en agosto—, esta es la de al lado y no desmerece.</p>
+    <div class="order"><b>Pide</b>Pulpo a la brasa, almejas a la marinera, y besugo o rodaballo a la parrilla.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34946365013"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>946 36 50 13</a>
+      <a class="act" href="tel:+34946366355">946 36 63 55</a>
+      <a class="act" href="https://www.restaurantegloria.biz/" target="_blank" rel="noopener">Web</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Restaurante+Gloria+Zierbena" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>El Puerto</h3><span class="chip ask">Confirmar</span></div>
+    <p class="where">Puerto de Zierbena, Bizkaia</p>
+    <p class="why">La tercera del muelle. Arroces, carne y pescado a la parrilla. La ventaja de Zierbena es justo esta: si una no tiene mesa, tenéis dos más a treinta metros.</p>
+    <div class="order"><b>Pide</b>Arroz si venís con hambre de cuchara, o pescado a la parrilla como en las otras.</div>
+    <div class="acts">
+      <a class="act call" href="tel:+34946355348"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>946 35 53 48</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=El+Puerto+restaurante+Zierbena" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="alert gold">
+    <h3>El plato que tenéis que pedir sí o sí en Bizkaia</h3>
+    <p><b>Pescado entero a la parrilla para dos</b> —besugo, rodaballo o cogote de merluza—, con su refrito de ajo y vinagre por encima, unos pimientos y una botella de txakoli frío. No hay plato que resuma mejor la costa vasca, y en Zierbena o Algorta lo hacen como en pocos sitios.</p>
+  </div>
+
+  <div class="eyebrow">Mi recomendación</div>
+  <div class="alert gold">
+    <h3>Pico Velasco, menú Albiar. Ahí es donde gastáis.</h3>
+    <p>Habéis dicho que preferís tirar la casa por la ventana en una sola comida, y esta es la comida. Pico Velasco os cuadra la logística perfecta: está <b>dentro de las marismas de Santoña</b>, así que coméis sin haber conducido nada después de la mañana, y os deja la tarde entera libre. Es además la novedad del año en Cantabria.</p>
+    <p>Iría con el <b>Albiar (95 €)</b> antes que con el Sincio: es el menú que define la casa, y en una comida de mediodía con tarde por delante, veinte pases se hacen largos. Los 40 € de diferencia por pareja los ponéis en una botella mejor.</p>
+    <p>Si no hay mesa, <b>Solana</b> está a 10 minutos más y es una apuesta igual de buena con más rodaje.</p>
+  </div>
+
+  <div class="alert teal">
+    <h3>Y si preferís que la comida grande sea vasca</h3>
+    <p>Es una decisión legítima y os la planteo, porque la estrella es cántabra: <b>La Kofradia</b> en Zierbena o <b>Itxas Bide</b> en Algorta os dan pescado entero a la parrilla mirando al Abra por bastante menos, y eso <i>sí</i> es cocina vasca. No es alta cocina, es producto y brasa — que en Euskadi es exactamente lo que hay que venir a comer.</p>
+    <p>Mi opinión, ya que la pedís: id a la estrella mañana comiendo, y reservad el pescado a la parrilla para la próxima vez que vengáis. Con dos días, la estrella es la que no vais a poder repetir por vuestra cuenta.</p>
+  </div>
+
+  <div class="eyebrow">La mañana en Santoña</div>
+  <div class="card">
+    <h3>Qué hacer en dos horas y media</h3>
+    <p class="why"><b>Una conservera de anchoa.</b> Es el motivo por el que Santoña es Santoña. Varias hacen visita guiada corta con degustación y venta; llamad o pasad, pero id con tiempo. Comprad para llevar: la anchoa del Cantábrico en salazón bien hecha no tiene nada que ver con la del súper.</p>
+    <p class="why"><b>El Fuerte de San Martín</b>, junto al mar, y el paseo del puerto. Corto y bonito.</p>
+    <p class="why"><b>Playa de Berria</b> si queréis un baño rápido antes de comer. Es abierta y con oleaje.</p>
+    <p class="why"><b>El Faro del Caballo</b> es la foto que habréis visto: un faro blanco al pie de un acantilado con una escalera infinita. Son unos 680 escalones de bajada y los mismos de subida, sin sombra. En agosto y a mediodía, con reserva para comer a las 14:00, no da tiempo y acabaríais reventados. Dejadlo para otro viaje o hacedlo solo si salís de Bilbao a las 8:00.</p>
+  </div>
+
+  <div class="twrap">
+    <table>
+      <thead><tr><th>Tramo</th><th>Distancia</th><th>Tiempo</th></tr></thead>
+      <tbody>
+        <tr><td><b>Avellaneda → Santoña</b></td><td class="mono">~55 km</td><td class="mono">~50 min</td></tr>
+        <tr><td>Avellaneda → Bilbao</td><td class="mono">~28 km</td><td class="mono">~30 min</td></tr>
+        <tr><td>Avellaneda → Castro Urdiales</td><td class="mono">~22 km</td><td class="mono">~25 min</td></tr>
+        <tr><td>Avellaneda → Zierbena</td><td class="mono">~20 km</td><td class="mono">~25 min</td></tr>
+        <tr><td>Avellaneda → Ansio (metro)</td><td class="mono">~22 km</td><td class="mono">~22 min</td></tr>
+        <tr><td>Santoña → Pico Velasco</td><td class="mono">~18 km</td><td class="mono">~20 min</td></tr>
+        <tr><td>Santoña → Solana (Ampuero)</td><td class="mono">~22 km</td><td class="mono">~25 min</td></tr>
+        <tr><td>Santoña → Castro Urdiales</td><td class="mono">~38 km</td><td class="mono">~40 min</td></tr>
+        <tr><td>Santoña → Zierbena</td><td class="mono">~62 km</td><td class="mono">~55 min</td></tr>
+        <tr><td>Santoña → Algorta (Getxo)</td><td class="mono">~75 km</td><td class="mono">~1 h</td></tr>
+        <tr><td>Castro Urdiales → Bilbao</td><td class="mono">~35 km</td><td class="mono">~35 min</td></tr>
+        <tr><td>Zierbena → Puente Bizkaia</td><td class="mono">~8 km</td><td class="mono">~12 min</td></tr>
+        <tr><td>Zierbena → Bilbao</td><td class="mono">~22 km</td><td class="mono">~25 min</td></tr>
+        <tr><td>Algorta → Bilbao</td><td class="mono">~15 km</td><td class="mono">~25 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note">La A-8 tiene peaje en el tramo de Bizkaia (AP-8). Si queréis evitarlo, la N-634 va paralela por la costa: más lenta pero mucho más bonita, sobre todo entre Castro Urdiales y Ontón.</p>
+</section>
+
+<!-- ==================== MAPA ==================== -->
+<section role="tabpanel" id="p-mapa">
+  <h2 class="big">Mapa</h2>
+  <p class="lede">Todos los sitios de la guía, situados. Toca un punto o una fila para resaltarlo, y "Ir" para abrirlo en Google Maps con navegación.</p>
+
+  <div class="mapswitch">
+    <button type="button" data-map="bilbao" aria-pressed="true">Bilbao</button>
+    <button type="button" data-map="casco" aria-pressed="false">Casco Viejo</button>
+    <button type="button" data-map="ruta" aria-pressed="false">Ruta</button>
+  </div>
+
+  <div class="catkey" id="catkey"></div>
+  <div class="mapbox" id="mapbox">
+    <div class="tilepane" id="tilepane">
+      <div class="tilewrap" id="tilewrap"></div>
+      <div class="mklayer" id="mklayer"></div>
+    </div>
+    <div id="mapfallback"></div>
+    <div class="mapzoom">
+      <button type="button" id="zfull" title="Pantalla completa" aria-label="Pantalla completa">⤢</button>
+      <button type="button" id="zin" title="Acercar" aria-label="Acercar">+</button>
+      <button type="button" id="zout" title="Alejar" aria-label="Alejar">−</button>
+    </div>
+    <div class="attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></div>
+  </div>
+  <p class="note" id="mapnote" style="margin-top:0"></p>
+  <ul class="maplist" id="maplist"></ul>
+</section>
+
+<!-- ==================== INFO ==================== -->
+<section role="tabpanel" id="p-info">
+  <h2 class="big">Notas</h2>
+
+  <div class="alert gold">
+    <h3>Cómo leer los distintivos</h3>
+    <p><b>Abre lun / Cierra lun</b> — horario que he podido verificar en fuente pública hoy, 17 de agosto de 2026.</p>
+    <p><b>Confirmar</b> — sitio real y recomendado, pero no he podido verificar su horario de esta semana concreta. En agosto muchos bares vascos cierran una o dos semanas por vacaciones y no lo publican. Un vistazo a Google Maps antes de cruzar la ciudad os ahorra el disgusto.</p>
+  </div>
+
+  <div class="card">
+    <h3>El mapa funciona sin cobertura</h3>
+    <p class="why">Está dibujado dentro del propio archivo a partir de coordenadas, sin Google Maps ni ninguna librería externa. Eso significa que <b>se ve aunque os quedéis sin datos</b> en pleno Casco Viejo, que es justo donde suele pasar. A cambio no es un callejero: es un esquema de posiciones a escala, con su barra de distancia y su norte, para saber qué tenéis cerca de qué.</p>
+    <p class="why">Cuando necesitéis navegar de verdad, el botón <b>"Ir"</b> de cada fila abre ese sitio en Google Maps. Y si dos locales caen casi encima, el mapa los separa un poco y deja una rayita fina hasta su posición real, para no mentiros sobre dónde están.</p>
+  </div>
+
+  <div class="card">
+    <h3>Los teléfonos</h3>
+    <p class="why">Solo aparecen los números que he verificado en la web del propio local o en fuentes fiables. Donde no hay teléfono es porque no he podido confirmarlo: en esos casos he dejado el enlace a Maps, que os da el número actualizado y el horario del día.</p>
+  </div>
+
+  <div class="card">
+    <h3>Cuatro cosas que os harán quedar bien</h3>
+    <p class="why"><b>Se pide de uno en uno.</b> Un pintxo, un txikito, y a la siguiente barra. Pedir seis pintxos de golpe y sentarse a comerlos es de guiri.</p>
+    <p class="why"><b>Se paga al final y de palabra.</b> Nadie apunta nada. Vosotros decís lo que habéis tomado y ya está.</p>
+    <p class="why"><b>Los pintxos calientes son los buenos.</b> Lo de la barra está bien, pero lo que sale de la cocina y está en la pizarra es donde el bar se juega la reputación.</p>
+    <p class="why"><b>Aquí se cena tarde.</b> A las 21:00 estaréis solos. El sitio se llena a las 22:00.</p>
+  </div>
+
+  <div class="card">
+    <h3>Presupuesto orientativo para dos</h3>
+    <div class="twrap" style="margin:9px 0 0">
+      <table>
+        <tbody>
+          <tr><td>Ruta de 4 barras de pintxos</td><td class="mono">45–70 €</td></tr>
+          <tr><td>Cena en asador o casa tradicional</td><td class="mono">80–130 €</td></tr>
+          <tr><td><b>Pico Velasco, Albiar, con vino</b></td><td class="mono">250–290 €</td></tr>
+          <tr><td>Pico Velasco, Sincio, con vino</td><td class="mono">290–330 €</td></tr>
+          <tr><td>Comida marinera sin ceremonia</td><td class="mono">70–110 €</td></tr>
+          <tr><td>Parking cubierto, tarde entera</td><td class="mono">10–18 €</td></tr>
+          <tr><td>Parking en calle, tardes de agosto</td><td class="mono">0 €</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    Guía preparada el lunes 17 de agosto de 2026 para dos tardes-noches en Bilbao y una mañana en Santoña.
+    Horarios y cierres verificados ese día en webs oficiales y fuentes públicas; en agosto cambian sin aviso,
+    así que confirmad por teléfono lo que sea crítico.
+  </footer>
+</section>
+
+</main>
+
+<nav role="tablist" aria-label="Secciones">
+  <button role="tab" aria-selected="true" aria-controls="p-plan" data-t="p-plan">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Plan
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-mapa" data-t="p-mapa">
+    <svg viewBox="0 0 24 24"><path d="M9 3 3 5.6v15.2l6-2.6 6 2.6 6-2.6V3l-6 2.6z"/><path d="M9 3v15.2M15 5.6v15.2"/></svg>Mapa
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-pintxos" data-t="p-pintxos">
+    <svg viewBox="0 0 24 24"><path d="M12 21V9"/><circle cx="12" cy="6" r="3"/><path d="M7 12h10"/></svg>Pintxos
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-cenar" data-t="p-cenar">
+    <svg viewBox="0 0 24 24"><path d="M4 2v8a3 3 0 0 0 6 0V2M7 2v20M18 2c-1.7 1.5-2.5 3.5-2.5 6.5 0 2 .8 3.5 2.5 3.5s2.5-1.5 2.5-3.5c0-3-.8-5-2.5-6.5zM18 12v10"/></svg>Cenar
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-copas" data-t="p-copas">
+    <svg viewBox="0 0 24 24"><path d="M6 3h11l-1 12a3 3 0 0 1-3 3h-3a3 3 0 0 1-3-3z"/><path d="M17 6h2.5a2 2 0 0 1 0 4H17M9 18v3M14 21h-6"/></svg>Copas
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-coche" data-t="p-coche">
+    <svg viewBox="0 0 24 24"><path d="M5 17h14M5 17a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM23 17a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/><path d="M3 17v-4l2-5h14l2 5v4"/><path d="M6 13h12"/></svg>Coche
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-ruta" data-t="p-ruta">
+    <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>Ruta
+  </button>
+</nav>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('nav button'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('section[role="tabpanel"]'));
+
+  function show(id){
+    panels.forEach(function(p){ p.classList.toggle('on', p.id === id); });
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.dataset.t === id)); });
+    window.scrollTo({top:0, behavior:'instant'});
+    // El panel del mapa está oculto al cargar, así que mide 0x0 y no se puede
+    // dibujar hasta que se muestra. Redibujamos en cuanto tiene tamaño real.
+    if(id === 'p-mapa'){
+      requestAnimationFrame(function(){ requestAnimationFrame(drawMap); });
+    }
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ show(t.dataset.t); });
+  });
+
+  // "Notas" is reachable from the footer link inside Plan, and from long-press nowhere else,
+  // so surface it at the end of the last panel instead of stealing a tab slot.
+  var ruta = document.getElementById('p-ruta');
+  var link = document.createElement('p');
+  link.className = 'note';
+  link.style.textAlign = 'center';
+  link.style.marginTop = '22px';
+  link.innerHTML = '<a href="#" id="go-info" style="font-weight:600">Cómo he verificado esto, propinas de presupuesto y normas de barra →</a>';
+  ruta.appendChild(link);
+  document.getElementById('go-info').addEventListener('click', function(e){
+    e.preventDefault(); show('p-info');
+  });
+
+  // Same entry point from the Plan panel, where people land first.
+  var plan = document.getElementById('p-plan');
+  var link2 = link.cloneNode(true);
+  link2.querySelector('a').id = 'go-info-2';
+  plan.appendChild(link2);
+  document.getElementById('go-info-2').addEventListener('click', function(e){
+    e.preventDefault(); show('p-info');
+  });
+
+  // Monday filter
+  var f = document.getElementById('f1');
+  f.addEventListener('change', function(){
+    document.querySelectorAll('#p-pintxos .card[data-mon]').forEach(function(c){
+      c.classList.toggle('hide', f.checked && c.dataset.mon === 'shut');
+    });
+  });
+
+  /* ================= MAPA =================
+     Esquema de posiciones dibujado a partir de coordenadas reales
+     (proyección equirectangular corregida por la latitud media).
+     Sin tiles ni librerías externas: funciona sin conexión.
+  */
+  var CATS = {
+    pintxo:{label:'Pintxos',  color:'var(--c-pintxo)'},
+    cena:  {label:'Cenar',    color:'var(--c-cena)'},
+    copa:  {label:'Copas',    color:'var(--c-copa)'},
+    ver:   {label:'Ver',      color:'var(--c-ver)'},
+    park:  {label:'Aparcar',  color:'var(--c-park)'}
+  };
+
+  var MAPS = {
+    bilbao:{
+      note:'Casco Viejo y Ensanche están a 10 minutos andando el uno del otro, cruzando el puente del Arenal. Indautxu queda 15 minutos más al oeste.',
+      anchors:[
+        [43.2571,-2.9238,'Casco Viejo'],
+        [43.2632,-2.9300,'Abando'],
+        [43.2618,-2.9410,'Indautxu'],
+        [43.2685,-2.9345,'Abandoibarra'],
+        [43.2540,-2.9272,'Bilbao La Vieja']
+      ],
+      items:[
+        ['Gure Toki','Plaza Nueva','pintxo',43.2570,-2.9232],
+        ['Sorginzulo','Plaza Nueva 12','pintxo',43.2569,-2.9235],
+        ['Víctor Montes','Plaza Nueva 8','pintxo',43.2572,-2.9237],
+        ['Gatz','Santa María 10','pintxo',43.2562,-2.9238],
+        ['Irrintzi','Santa María 8','pintxo',43.2564,-2.9236],
+        ['Bar Santa María','Santa María 18','pintxo',43.2559,-2.9241],
+        ['Berton','Jardines 11','pintxo',43.2566,-2.9244],
+        ['Berton Sasibil','Jardines 8','pintxo',43.2568,-2.9242],
+        ['Xukela','Calle del Perro 2','pintxo',43.2564,-2.9247],
+        ['Artajo','Calle Somera','pintxo',43.2578,-2.9234],
+        ['Losada','Carnicería Vieja','pintxo',43.2566,-2.9250],
+        ['Río-Oja','Calle del Perro 4','pintxo',43.2562,-2.9248],
+        ['El Globo','Diputación 8','pintxo',43.2626,-2.9315],
+        ['La Viña del Ensanche','Diputación 10','pintxo',43.2628,-2.9317],
+        ['El Puertito','Calle Ledesma','pintxo',43.2619,-2.9296],
+        ['Taberna Magnum','Calle Ledesma','pintxo',43.2622,-2.9293],
+        ['Rimbombín','Hurtado de Amézaga 48','cena',43.2640,-2.9305],
+        ['Casa Rufo','Hurtado de Amézaga 5','cena',43.2604,-2.9271],
+        ['Asador Guetaria','Colón de Larreátegui 12','cena',43.2632,-2.9291],
+        ['Basquery','Ibáñez de Bilbao 8','copa',43.2606,-2.9258],
+        ['The Craft Tabeerna','Calle del Perro','copa',43.2561,-2.9245],
+        ['Penguin Bar','Junto al Mercado de la Ribera','copa',43.2549,-2.9252],
+        ['Bihotz Café','Bilbao La Vieja','copa',43.2538,-2.9268],
+        ['Singular','Alameda Mazarredo','copa',43.2655,-2.9335],
+        ['Muelle Marzana','Zona de copas','copa',43.2543,-2.9266],
+        ['Licenciado Poza','Zona de bares','copa',43.2622,-2.9420],
+        ['Museo Guggenheim','Abandoibarra 2','ver',43.2687,-2.9340],
+        ['Azkuna Zentroa','Arriquibar Plaza 4','ver',43.2612,-2.9382],
+        ['Funicular de Artxanda','Plaza del Funicular','ver',43.2637,-2.9231],
+        ['Mercado de la Ribera','Erribera 20','ver',43.2553,-2.9248],
+        ['Teatro Arriaga','El Arenal','ver',43.2583,-2.9235],
+        ['Parking Pío Baroja','Casco Viejo','park',43.2553,-2.9212],
+        ['Parking Arenal','Junto al Arriaga','park',43.2581,-2.9244],
+        ['Parking Plaza Euskadi','Guggenheim','park',43.2672,-2.9330],
+        ['Parking Intermodal','San Mamés','park',43.2645,-2.9490],
+        ['Parking Azkuna Zentroa','Indautxu','park',43.2610,-2.9386]
+      ]
+    },
+    casco:{
+      note:'Todo esto entra en un cuadrado de 400 metros: las Siete Calles. Se hace entero andando, sin prisa, en una noche.',
+      anchors:[
+        [43.2578,-2.9229,'Somera'],
+        [43.2572,-2.9240,'Plaza Nueva'],
+        [43.2561,-2.9239,'Santa María'],
+        [43.2551,-2.9252,'La Ribera'],
+        [43.2540,-2.9266,'Marzana']
+      ],
+      items:[
+        ['Gure Toki','Plaza Nueva','pintxo',43.2570,-2.9232],
+        ['Sorginzulo','Plaza Nueva 12','pintxo',43.2569,-2.9235],
+        ['Víctor Montes','Plaza Nueva 8','pintxo',43.2572,-2.9237],
+        ['Gatz','Santa María 10','pintxo',43.2562,-2.9238],
+        ['Irrintzi','Santa María 8','pintxo',43.2564,-2.9236],
+        ['Bar Santa María','Santa María 18','pintxo',43.2559,-2.9241],
+        ['Berton','Jardines 11','pintxo',43.2566,-2.9244],
+        ['Berton Sasibil','Jardines 8','pintxo',43.2568,-2.9242],
+        ['Xukela','Calle del Perro 2','pintxo',43.2564,-2.9247],
+        ['Artajo','Calle Somera','pintxo',43.2578,-2.9234],
+        ['Losada','Carnicería Vieja','pintxo',43.2566,-2.9250],
+        ['Río-Oja','Calle del Perro 4','pintxo',43.2562,-2.9248],
+        ['The Craft Tabeerna','Calle del Perro','copa',43.2561,-2.9245],
+        ['Penguin Bar','Junto al Mercado','copa',43.2549,-2.9252],
+        ['Bihotz Café','Bilbao La Vieja','copa',43.2538,-2.9268],
+        ['Muelle Marzana','Zona de copas','copa',43.2543,-2.9266],
+        ['Mercado de la Ribera','Erribera 20','ver',43.2553,-2.9248],
+        ['Teatro Arriaga','El Arenal','ver',43.2583,-2.9235],
+        ['Parking Pío Baroja','Plaza Pío Baroja','park',43.2553,-2.9212],
+        ['Parking Arenal','Junto al Arriaga','park',43.2581,-2.9244]
+      ]
+    },
+    ruta:{
+      note:'La línea marca la vuelta de Santoña por la A-8 y el regreso final a Avellaneda. Pico Velasco y Solana quedan un poco tierra adentro; el resto van pegados a la costa.',
+      anchors:[
+        [43.4250,-3.4750,'Cantabria'],
+        [43.3450,-2.9750,'Bizkaia'],
+        [43.2850,-3.1750,'Enkarterri']
+      ],
+      route:[[43.4425,-3.4570],[43.4110,-3.4110],[43.3830,-3.2160],[43.3495,-3.0870],[43.3232,-3.0170],[43.2630,-2.9350],[43.3040,-3.1560]],
+      items:[
+        ['Avellaneda','Vuestra base · Sopuerta','ver',43.3040,-3.1560],
+        ['Santoña','Punto de partida de la mañana','ver',43.4425,-3.4570],
+        ['Pico Velasco','Carasa · ★ Michelin','cena',43.3835,-3.4165],
+        ['Solana','Ampuero · ★ Michelin','cena',43.3435,-3.4225],
+        ['Mesón Marinero','Castro Urdiales','cena',43.3830,-3.2160],
+        ['La Kofradia','Zierbena · cocina vasca','cena',43.3495,-3.0872],
+        ['Gloria','Zierbena · cocina vasca','cena',43.3497,-3.0865],
+        ['El Puerto','Zierbena · cocina vasca','cena',43.3493,-3.0868],
+        ['Itxas Bide','Algorta · cocina vasca','cena',43.3428,-3.0180],
+        ['Puente Bizkaia','Portugalete – Getxo','ver',43.3232,-3.0170],
+        ['Laredo','De paso, playa larga','ver',43.4110,-3.4110],
+        ['Ansio · BEC','Park & ride, metro a Bilbao','park',43.2860,-2.9930],
+        ['Bilbao','Tarde y noche','ver',43.2630,-2.9350]
+      ]
+    }
+  };
+
+  var W = 700, PAD = 34;
+  var current = 'bilbao', offCats = {};
+  var zAdj = 0, panX = 0, panY = 0, tilesOk = null, full = false;
+  var tileHits = 0, tileMiss = 0, probeTimer = null;
+  var pane = document.getElementById('tilepane');
+  var tw = document.getElementById('tilewrap');
+  var mkl = document.getElementById('mklayer');
+  var box = document.getElementById('mapbox');
+
+  /* --- Web Mercator: coordenadas → píxeles de tesela --- */
+  function lon2px(lon, z){ return (lon+180)/360 * 256 * Math.pow(2,z); }
+  function lat2px(lat, z){
+    var s = Math.sin(lat*Math.PI/180);
+    if(s > 0.9999) s = 0.9999; if(s < -0.9999) s = -0.9999;
+    return (0.5 - Math.log((1+s)/(1-s))/(4*Math.PI)) * 256 * Math.pow(2,z);
+  }
+
+  function allPoints(m){
+    return m.items.map(function(i){ return [i[3], i[4]]; })
+      .concat(m.anchors.map(function(a){ return [a[0], a[1]]; }))
+      .concat(m.route || []);
+  }
+
+  function fitZoom(pts, w, h){
+    for(var z = 18; z >= 3; z--){
+      var xs = pts.map(function(p){ return lon2px(p[1], z); });
+      var ys = pts.map(function(p){ return lat2px(p[0], z); });
+      var dx = Math.max.apply(null,xs) - Math.min.apply(null,xs);
+      var dy = Math.max.apply(null,ys) - Math.min.apply(null,ys);
+      if(dx <= w - 70 && dy <= h - 70) return z;
+    }
+    return 3;
+  }
+
+  /* --- separa marcadores que se pisarían, conservando su punto real --- */
+  function spread(nodes, r){
+    var min = r*2 + 3;
+    for(var pass=0; pass<70; pass++){
+      var moved = false;
+      for(var a=0; a<nodes.length; a++){
+        for(var b=a+1; b<nodes.length; b++){
+          var dx = nodes[b].x-nodes[a].x, dy = nodes[b].y-nodes[a].y;
+          var d = Math.hypot(dx,dy);
+          if(d < min){
+            if(d < 0.01){ dx = Math.cos(a*2.4); dy = Math.sin(a*2.4); d = 1; }
+            var f = (min-d)/2/d;
+            nodes[a].x -= dx*f; nodes[a].y -= dy*f;
+            nodes[b].x += dx*f; nodes[b].y += dy*f;
+            moved = true;
+          }
+        }
+      }
+      if(!moved) break;
+    }
+  }
+
+  function renderTiles(){
+    var m = MAPS[current];
+    var w = pane.clientWidth, h = pane.clientHeight;
+    if(!w || !h) return;
+    var pts = allPoints(m);
+    var z = Math.max(3, Math.min(18, fitZoom(pts, w, h) + zAdj));
+    var xs = pts.map(function(p){ return lon2px(p[1], z); });
+    var ys = pts.map(function(p){ return lat2px(p[0], z); });
+    var cx = (Math.max.apply(null,xs)+Math.min.apply(null,xs))/2;
+    var cy = (Math.max.apply(null,ys)+Math.min.apply(null,ys))/2;
+    var originX = cx - w/2 - panX, originY = cy - h/2 - panY;
+
+    // teselas, con un margen para que el arrastre no deje hueco
+    var t0x = Math.floor((originX - 256)/256), t1x = Math.floor((originX + w + 256)/256);
+    var t0y = Math.floor((originY - 256)/256), t1y = Math.floor((originY + h + 256)/256);
+    var lim = Math.pow(2, z), html = '', n = 0;
+    for(var ty = t0y; ty <= t1y; ty++){
+      if(ty < 0 || ty >= lim) continue;
+      for(var tx = t0x; tx <= t1x; tx++){
+        var wrapped = ((tx % lim) + lim) % lim;
+        html += '<img alt="" loading="eager" src="https://tile.openstreetmap.org/'+z+'/'+wrapped+'/'+ty+'.png"'
+             +  ' style="left:'+(tx*256 - originX)+'px;top:'+(ty*256 - originY)+'px">';
+        n++;
+      }
+    }
+    tw.style.transform = 'translate3d(0,0,0)';
+    tw.innerHTML = html;
+
+    // ¿cargan las teselas? En el sandbox del artifact están bloqueadas, y sin
+    // conexión tampoco cargan. En ambos casos caemos al esquema a escala.
+    if(tilesOk === null && n){
+      Array.prototype.forEach.call(tw.querySelectorAll('img'), function(im){
+        if(im.complete){ if(im.naturalWidth > 0) tileHits++; else tileMiss++; return; }
+        im.addEventListener('load',  function(){ tileHits++; });
+        im.addEventListener('error', function(){ tileMiss++; });
+      });
+      if(!probeTimer){
+        probeTimer = setTimeout(function(){
+          probeTimer = null;
+          if(tilesOk !== null) return;
+          tilesOk = tileHits > 0;
+          if(!tilesOk) drawMap();
+        }, 2600);
+      }
+    }
+
+    // marcadores sobre el mapa
+    var items = m.items.filter(function(i){ return !offCats[i[2]]; });
+    var nodes = items.map(function(it){
+      var px = lon2px(it[4], z) - originX, py = lat2px(it[3], z) - originY;
+      return {n:m.items.indexOf(it)+1, cat:it[2], name:it[0], ax:px, ay:py, x:px, y:py};
+    });
+    spread(nodes, 13);
+
+    // Las teselas se invierten en modo noche pero esta capa no, así que
+    // todo lo dibujado lleva contorno oscuro + núcleo claro para leerse
+    // igual sobre mapa claro y sobre mapa oscuro.
+    var casing = '', core = '';
+    nodes.forEach(function(nd){
+      if(Math.hypot(nd.x-nd.ax, nd.y-nd.ay) > 13){
+        var seg = 'x1="'+nd.ax.toFixed(1)+'" y1="'+nd.ay.toFixed(1)+'" x2="'+nd.x.toFixed(1)+'" y2="'+nd.y.toFixed(1)+'"';
+        casing += '<line '+seg+' stroke="rgba(0,0,0,.55)" stroke-width="3.5" stroke-linecap="round"/>';
+        core   += '<line '+seg+' stroke="rgba(255,255,255,.9)" stroke-width="1.4"/>';
+      }
+    });
+    // Sin viewBox a propósito: así una unidad SVG es un píxel CSS y esta capa
+    // comparte sistema de coordenadas con los marcadores, que van en position
+    // absolute. Con viewBox, cualquier desajuste de medida deforma la ruta.
+    var mh = '<svg class="leaders">';
+    if(m.route){
+      var d = m.route.map(function(r,i){
+        return (i?'L':'M') + (lon2px(r[1],z)-originX).toFixed(1) + ' ' + (lat2px(r[0],z)-originY).toFixed(1);
+      }).join(' ');
+      mh += '<path d="'+d+'" fill="none" stroke="rgba(0,0,0,.5)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>'
+         +  '<path d="'+d+'" fill="none" stroke="#F2B441" stroke-width="3.5" stroke-dasharray="8 6" stroke-linecap="round"/>';
+    }
+    mh += casing + core + '</svg>';
+    nodes.forEach(function(nd){
+      mh += '<div class="mk" data-i="'+nd.n+'" role="button" tabindex="0" aria-label="'+esc(nd.name)+'"'
+         +  ' style="left:'+nd.x.toFixed(1)+'px;top:'+nd.y.toFixed(1)+'px;background:'+CATS[nd.cat].color+'">'+nd.n+'</div>';
+    });
+    mkl.style.transform = 'translate3d(0,0,0)';
+    mkl.innerHTML = mh;
+  }
+
+  function project(items, anchors, route){
+    var pts = items.map(function(i){ return [i[3], i[4]]; })
+      .concat(anchors.map(function(a){ return [a[0], a[1]]; }))
+      .concat(route || []);
+    var lats = pts.map(function(p){ return p[0]; }), lons = pts.map(function(p){ return p[1]; });
+    var latMin = Math.min.apply(null,lats), latMax = Math.max.apply(null,lats);
+    var lonMin = Math.min.apply(null,lons), lonMax = Math.max.apply(null,lons);
+    var k = Math.cos((latMin+latMax)/2 * Math.PI/180);
+    var spanX = (lonMax-lonMin)*k, spanY = (latMax-latMin);
+    if(spanX <= 0) spanX = 1e-6;
+    if(spanY <= 0) spanY = 1e-6;
+    var innerW = W - PAD*2;
+    var H = Math.round(innerW * (spanY/spanX)) + PAD*2;
+    // Keep the frame usable on a phone: never taller than it is wide.
+    var maxH = Math.round(W * 1.0);
+    if(H > maxH) H = maxH;
+    var innerH = H - PAD*2;
+    var sx = innerW/spanX, sy = innerH/spanY, s = Math.min(sx, sy);
+    var offX = PAD + (innerW - spanX*s)/2, offY = PAD + (innerH - spanY*s)/2;
+    return {
+      H:H, s:s,
+      x:function(lon){ return offX + (lon-lonMin)*k*s; },
+      y:function(lat){ return offY + (latMax-lat)*s; },
+      // metres per degree of latitude ≈ 111320
+      kmPerUnit: 1/(s) * 111.32
+    };
+  }
+
+  function esc(t){
+    return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function drawSchematic(){
+    var m = MAPS[current];
+    var items = m.items.filter(function(i){ return !offCats[i[2]]; });
+    var p = project(m.items, m.anchors, m.route);
+    var svg = '<svg viewBox="0 0 '+W+' '+p.H+'" role="img" aria-label="Mapa esquemático de posiciones">';
+
+    // grid
+    svg += '<rect width="'+W+'" height="'+p.H+'" fill="var(--map-bg)"/>';
+    for(var gx=PAD; gx<W-PAD+1; gx+=(W-PAD*2)/6){
+      svg += '<line class="mp-grid" x1="'+gx.toFixed(1)+'" y1="'+PAD+'" x2="'+gx.toFixed(1)+'" y2="'+(p.H-PAD)+'"/>';
+    }
+    for(var gy=PAD; gy<p.H-PAD+1; gy+=(p.H-PAD*2)/5){
+      svg += '<line class="mp-grid" x1="'+PAD+'" y1="'+gy.toFixed(1)+'" x2="'+(W-PAD)+'" y2="'+gy.toFixed(1)+'"/>';
+    }
+
+    // route line
+    if(m.route){
+      var d = m.route.map(function(r,ix){ return (ix?'L':'M')+p.x(r[1]).toFixed(1)+' '+p.y(r[0]).toFixed(1); }).join(' ');
+      svg += '<path class="mp-route" d="'+d+'"/>';
+    }
+
+    // district / region anchors
+    m.anchors.forEach(function(a){
+      svg += '<text class="mp-anchor" x="'+p.x(a[1]).toFixed(1)+'" y="'+p.y(a[0]).toFixed(1)+'" text-anchor="middle">'+esc(a[2])+'</text>';
+    });
+
+    // north arrow
+    svg += '<g transform="translate('+(W-PAD+6)+','+(PAD+2)+')">'
+        +  '<line class="mp-scale" x1="0" y1="14" x2="0" y2="0"/>'
+        +  '<path d="M-3 4 L0 -3 L3 4 Z" fill="var(--ink-3)"/>'
+        +  '<text class="mp-scaletxt" x="0" y="24" text-anchor="middle">N</text></g>';
+
+    // scale bar — pick a round distance that fits
+    var targetPx = (W-PAD*2)/4;
+    var rawKm = targetPx * p.kmPerUnit;
+    var steps = [0.1,0.2,0.5,1,2,5,10,20,50];
+    var km = steps.reduce(function(best,v){
+      return Math.abs(v-rawKm) < Math.abs(best-rawKm) ? v : best;
+    }, steps[0]);
+    var barPx = km / p.kmPerUnit;
+    var by = p.H - PAD + 16;
+    svg += '<g><line class="mp-scale" x1="'+PAD+'" y1="'+by+'" x2="'+(PAD+barPx).toFixed(1)+'" y2="'+by+'"/>'
+        +  '<line class="mp-scale" x1="'+PAD+'" y1="'+(by-4)+'" x2="'+PAD+'" y2="'+(by+4)+'"/>'
+        +  '<line class="mp-scale" x1="'+(PAD+barPx).toFixed(1)+'" y1="'+(by-4)+'" x2="'+(PAD+barPx).toFixed(1)+'" y2="'+(by+4)+'"/>'
+        +  '<text class="mp-scaletxt" x="'+(PAD+barPx+6).toFixed(1)+'" y="'+(by+3)+'">'+(km<1?(km*1000)+' m':km+' km')+'</text></g>';
+
+    // pins — nudge apart any that would overlap, and keep a leader line
+    // back to the true position so the map stays honest.
+    var R = 12, MIN = R*2 + 2;
+    var nodes = items.map(function(it){
+      return {n:m.items.indexOf(it)+1, cat:it[2], name:it[0],
+              ax:p.x(it[4]), ay:p.y(it[3]), x:p.x(it[4]), y:p.y(it[3])};
+    });
+    for(var pass=0; pass<80; pass++){
+      var moved = false;
+      for(var a=0; a<nodes.length; a++){
+        for(var b=a+1; b<nodes.length; b++){
+          var dx = nodes[b].x-nodes[a].x, dy = nodes[b].y-nodes[a].y;
+          var dist = Math.hypot(dx,dy);
+          if(dist < MIN){
+            if(dist < 0.01){ dx = Math.cos(a*2.4); dy = Math.sin(a*2.4); dist = 1; }
+            var push = (MIN-dist)/2/dist;
+            nodes[a].x -= dx*push; nodes[a].y -= dy*push;
+            nodes[b].x += dx*push; nodes[b].y += dy*push;
+            moved = true;
+          }
+        }
+      }
+      if(!moved) break;
+    }
+    nodes.forEach(function(nd){
+      nd.x = Math.max(R+2, Math.min(W-R-2, nd.x));
+      nd.y = Math.max(R+2, Math.min(p.H-R-2, nd.y));
+      var off = Math.hypot(nd.x-nd.ax, nd.y-nd.ay);
+      if(off > R){
+        svg += '<line class="mp-leader" x1="'+nd.ax.toFixed(1)+'" y1="'+nd.ay.toFixed(1)+'" x2="'+nd.x.toFixed(1)+'" y2="'+nd.y.toFixed(1)+'"/>';
+      }
+    });
+    nodes.forEach(function(nd){
+      svg += '<g class="mp-dot" data-i="'+nd.n+'" tabindex="0" role="button" aria-label="'+esc(nd.name)+'">'
+          +  '<circle class="pin" cx="'+nd.x.toFixed(1)+'" cy="'+nd.y.toFixed(1)+'" r="'+R+'" fill="'+CATS[nd.cat].color+'"/>'
+          +  '<text class="mp-num" x="'+nd.x.toFixed(1)+'" y="'+(nd.y+4).toFixed(1)+'" text-anchor="middle">'+nd.n+'</text>'
+          +  '<circle class="hit" cx="'+nd.x.toFixed(1)+'" cy="'+nd.y.toFixed(1)+'" r="'+(R+5)+'"/></g>';
+    });
+
+    svg += '</svg>';
+    document.getElementById('mapfallback').innerHTML = svg;
+  }
+
+  function drawMap(){
+    var m = MAPS[current];
+    if(tilesOk === false){
+      box.classList.add('flat');
+      drawSchematic();
+      document.getElementById('mapnote').textContent = m.note +
+        ' Este visor bloquea la cartografía externa, así que veis el esquema de posiciones a escala. En la copia subida a vuestro servidor sale el mapa real.';
+    } else {
+      box.classList.remove('flat');
+      renderTiles();
+      document.getElementById('mapnote').textContent = m.note +
+        ' Arrastrad para moveros, + y − para el zoom, ⤢ para pantalla completa.';
+    }
+
+    var html = '';
+    m.items.forEach(function(it, ix){
+      if(offCats[it[2]]) return;
+      var q = encodeURIComponent(it[0] + ' ' + it[1] + (current === 'ruta' ? '' : ' Bilbao'));
+      html += '<li data-i="'+(ix+1)+'" tabindex="0">'
+           +  '<span class="num" style="background:'+CATS[it[2]].color+'">'+(ix+1)+'</span>'
+           +  '<span class="txt"><span class="nm">'+esc(it[0])+'</span>'
+           +  '<span class="sub">'+esc(it[1])+'</span></span>'
+           +  '<a class="pin-map" href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Ir →</a></li>';
+    });
+    document.getElementById('maplist').innerHTML = html;
+    wireHighlight();
+  }
+
+  function wireHighlight(){
+    function lightUp(n){
+      document.querySelectorAll('#mapbox .mp-dot, #mapbox .mk, #maplist li').forEach(function(el){
+        el.classList.toggle('lit', el.dataset.i === n);
+      });
+      if(!full){
+        var row = document.querySelector('#maplist li[data-i="'+n+'"]');
+        if(row) row.scrollIntoView({block:'nearest'});
+      }
+    }
+    document.querySelectorAll('#mapbox .mp-dot, #mapbox .mk').forEach(function(g){
+      g.addEventListener('click', function(e){ e.stopPropagation(); lightUp(g.dataset.i); });
+      g.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); lightUp(g.dataset.i); }
+      });
+    });
+    document.querySelectorAll('#maplist li').forEach(function(li){
+      li.addEventListener('click', function(e){
+        if(e.target.closest('a')) return;
+        lightUp(li.dataset.i);
+      });
+    });
+  }
+
+  function drawKey(){
+    var html = '';
+    Object.keys(CATS).forEach(function(k){
+      html += '<button type="button" data-c="'+k+'" aria-pressed="'+(!offCats[k])+'">'
+           +  '<i style="background:'+CATS[k].color+'"></i>'+CATS[k].label+'</button>';
+    });
+    document.getElementById('catkey').innerHTML = html;
+    document.querySelectorAll('#catkey button').forEach(function(b){
+      b.addEventListener('click', function(){
+        offCats[b.dataset.c] = !offCats[b.dataset.c];
+        drawKey(); drawMap();
+      });
+    });
+  }
+
+  document.querySelectorAll('.mapswitch button').forEach(function(b){
+    b.addEventListener('click', function(){
+      current = b.dataset.map;
+      zAdj = 0; panX = 0; panY = 0;
+      document.querySelectorAll('.mapswitch button').forEach(function(o){
+        o.setAttribute('aria-pressed', String(o.dataset.map === current));
+      });
+      drawMap();
+    });
+  });
+
+  /* --- arrastrar el mapa --- */
+  (function(){
+    var down = false, sx = 0, sy = 0, ox = 0, oy = 0, dx = 0, dy = 0, moved = false;
+    pane.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.mk') || e.target.closest('.mapzoom')) return;
+      down = true; moved = false;
+      sx = e.clientX; sy = e.clientY; ox = panX; oy = panY; dx = 0; dy = 0;
+      pane.classList.add('drag');
+      pane.setPointerCapture(e.pointerId);
+    });
+    pane.addEventListener('pointermove', function(e){
+      if(!down) return;
+      dx = e.clientX - sx; dy = e.clientY - sy;
+      if(Math.abs(dx) > 3 || Math.abs(dy) > 3) moved = true;
+      var t = 'translate3d('+dx+'px,'+dy+'px,0)';
+      tw.style.transform = t; mkl.style.transform = t;
+    });
+    function end(e){
+      if(!down) return;
+      down = false;
+      pane.classList.remove('drag');
+      try{ pane.releasePointerCapture(e.pointerId); }catch(_){}
+      if(moved){ panX = ox + dx; panY = oy + dy; drawMap(); }
+    }
+    pane.addEventListener('pointerup', end);
+    pane.addEventListener('pointercancel', end);
+  })();
+
+  document.getElementById('zin').addEventListener('click', function(){
+    if(zAdj < 4){ zAdj++; panX = 0; panY = 0; drawMap(); }
+  });
+  document.getElementById('zout').addEventListener('click', function(){
+    if(zAdj > -3){ zAdj--; panX = 0; panY = 0; drawMap(); }
+  });
+
+  /* --- pantalla completa: clase CSS propia, porque iOS Safari
+         no soporta requestFullscreen sobre un elemento --- */
+  var zfull = document.getElementById('zfull');
+  function setFull(on){
+    full = on;
+    box.classList.toggle('full', on);
+    document.body.classList.toggle('noscroll', on);
+    zfull.textContent = on ? '✕' : '⤢';
+    zfull.setAttribute('aria-label', on ? 'Salir de pantalla completa' : 'Pantalla completa');
+    // doble rAF: el primero deja que el navegador aplique el nuevo layout,
+    // el segundo mide ya con las dimensiones definitivas
+    requestAnimationFrame(function(){ requestAnimationFrame(drawMap); });
+    setTimeout(drawMap, 260);
+  }
+  zfull.addEventListener('click', function(){ setFull(!full); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && full) setFull(false);
+  });
+
+  var rt;
+  window.addEventListener('resize', function(){
+    clearTimeout(rt); rt = setTimeout(drawMap, 180);
+  });
+  window.addEventListener('orientationchange', function(){ setTimeout(drawMap, 320); });
+
+  drawKey();
+  drawMap();
+})();
+</script>
+</body>
+</html>
