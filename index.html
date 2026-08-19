@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tolosa Tonight</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tolosa">
+
+<style>
+:root{
+  --bg:#F6F4F9; --surf:#FFFFFF; --surf2:#EFEBF4; --surf3:#E5DFEE;
+  --txt:#17131F; --dim:#5C5270; --faint:#8C8399;
+  --coral:#DB3F22; --coral-bg:#FDE9E4;
+  --mint:#0E9A69; --mint-bg:#DDF4EA;
+  --amber:#A87400; --amber-bg:#FBEFD5;
+  --rose:#C93560; --rose-bg:#FBE4EB;
+  --violet:#6D4FD6; --violet-bg:#EAE4FB;
+  --shadow:0 1px 2px rgba(23,19,31,.05), 0 8px 22px -12px rgba(23,19,31,.18);
+  --shadow-lg:0 2px 6px rgba(23,19,31,.07), 0 20px 44px -20px rgba(23,19,31,.3);
+  --navbg:rgba(255,255,255,.82);
+  --sys:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI Variable","Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --r:22px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121016; --surf:#1D1A24; --surf2:#282333; --surf3:#332C40;
+    --txt:#F6F3F9; --dim:#A99FBA; --faint:#7A7189;
+    --coral:#FF7A5E; --coral-bg:#33170F;
+    --mint:#3DDCA2; --mint-bg:#0D2B21;
+    --amber:#FFC24B; --amber-bg:#2E240D;
+    --rose:#FF6B90; --rose-bg:#331420;
+    --violet:#A78BFA; --violet-bg:#241C3D;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 22px -12px rgba(0,0,0,.8);
+    --shadow-lg:0 2px 6px rgba(0,0,0,.55), 0 20px 44px -20px rgba(0,0,0,1);
+    --navbg:rgba(29,26,36,.78);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121016; --surf:#1D1A24; --surf2:#282333; --surf3:#332C40;
+  --txt:#F6F3F9; --dim:#A99FBA; --faint:#7A7189;
+  --coral:#FF7A5E; --coral-bg:#33170F;
+  --mint:#3DDCA2; --mint-bg:#0D2B21;
+  --amber:#FFC24B; --amber-bg:#2E240D;
+  --rose:#FF6B90; --rose-bg:#331420;
+  --violet:#A78BFA; --violet-bg:#241C3D;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 22px -12px rgba(0,0,0,.8);
+  --shadow-lg:0 2px 6px rgba(0,0,0,.55), 0 20px 44px -20px rgba(0,0,0,1);
+  --navbg:rgba(29,26,36,.78);
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--txt);font-family:var(--sys);
+  font-size:16px;line-height:1.45;letter-spacing:-.011em;
+  padding-bottom:calc(84px + env(safe-area-inset-bottom));overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.08;text-wrap:balance}
+a{color:var(--coral);text-decoration:none}
+button{font-family:inherit}
+:focus-visible{outline:2.5px solid var(--coral);outline-offset:3px;border-radius:12px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- topbar ---------- */
+.top{
+  position:sticky;top:0;z-index:40;
+  padding:calc(10px + env(safe-area-inset-top)) 20px 10px;
+  background:var(--navbg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.top .mark{font-size:19px;font-weight:800;letter-spacing:-.04em}
+.top .mark i{font-style:normal;color:var(--coral)}
+.clock{
+  font-family:var(--mono);font-size:13px;font-weight:600;color:var(--dim);
+  background:var(--surf2);padding:5px 11px;border-radius:99px;font-variant-numeric:tabular-nums;
+}
+
+main{max-width:640px;margin:0 auto;padding:0 16px}
+section[role="tabpanel"]{display:none;padding:14px 0 20px}
+section[role="tabpanel"].on{display:block}
+.stagger>*{animation:rise .42s cubic-bezier(.22,.9,.3,1) backwards}
+.stagger>*:nth-child(1){animation-delay:.02s} .stagger>*:nth-child(2){animation-delay:.06s}
+.stagger>*:nth-child(3){animation-delay:.1s}  .stagger>*:nth-child(4){animation-delay:.14s}
+.stagger>*:nth-child(5){animation-delay:.18s} .stagger>*:nth-child(6){animation-delay:.22s}
+.stagger>*:nth-child(n+7){animation-delay:.26s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+h2.title{font-size:34px;margin:6px 0 4px}
+.sub{color:var(--dim);font-size:15.5px;margin:0 0 18px;letter-spacing:-.005em}
+.secttl{font-size:13px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:var(--faint);margin:26px 0 10px}
+
+/* ---------- hero de estado ---------- */
+.hero{
+  border-radius:26px;padding:20px;margin-bottom:14px;color:#fff;
+  background:linear-gradient(145deg,#FF7A4D 0%,#E0353F 55%,#B32A6B 100%);
+  box-shadow:var(--shadow-lg);position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;right:-40px;top:-60px;width:200px;height:200px;border-radius:50%;
+  background:rgba(255,255,255,.14);
+}
+.hero .lab{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.hero .big{font-size:52px;font-weight:800;letter-spacing:-.045em;line-height:1;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.hero .msg{font-size:15px;opacity:.95;position:relative;z-index:1;margin-top:8px;line-height:1.35}
+.hero .msg b{font-weight:800}
+
+/* ---------- tarjetas ---------- */
+.card{
+  background:var(--surf);border-radius:var(--r);padding:16px 17px;margin-bottom:11px;
+  box-shadow:var(--shadow);transition:transform .16s cubic-bezier(.22,.9,.3,1);
+}
+.card.tap:active{transform:scale(.985)}
+.card h3{font-size:20px}
+.crow{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.cleft{flex:1;min-width:0}
+.addr{font-size:13.5px;color:var(--faint);margin-top:3px;letter-spacing:-.004em}
+.why{font-size:14.5px;color:var(--dim);margin:10px 0 0;line-height:1.48}
+
+.rate{flex-shrink:0;text-align:right}
+.rate b{display:block;font-size:26px;font-weight:800;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.rate b.hi{color:var(--mint)} .rate b.mid{color:var(--amber)} .rate b.lo{color:var(--rose)}
+.rate span{font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;
+  padding:6px 11px;border-radius:99px;letter-spacing:-.005em;
+}
+.pill.open{background:var(--mint-bg);color:var(--mint)}
+.pill.soon{background:var(--amber-bg);color:var(--amber)}
+.pill.shut{background:var(--rose-bg);color:var(--rose)}
+.pill.neutral{background:var(--surf2);color:var(--dim)}
+.pill.vio{background:var(--violet-bg);color:var(--violet)}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0}
+.pill.open .dot{animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+.card.dim{opacity:.58}
+
+.go{
+  display:inline-flex;align-items:center;gap:6px;margin-top:13px;
+  background:var(--surf2);color:var(--txt);font-size:13.5px;font-weight:700;
+  padding:9px 15px;border-radius:99px;
+}
+.go:active{transform:scale(.96)}
+
+/* ---------- control segmentado ---------- */
+.seg{
+  display:flex;background:var(--surf2);border-radius:99px;padding:4px;gap:4px;margin-bottom:10px;
+}
+.seg button{
+  flex:1;appearance:none;border:0;background:none;cursor:pointer;padding:9px 6px;border-radius:99px;
+  font-size:13.5px;font-weight:700;color:var(--dim);letter-spacing:-.01em;transition:.18s;
+}
+.seg button[aria-pressed="true"]{background:var(--surf);color:var(--txt);box-shadow:var(--shadow)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none;margin:0 -16px;padding-left:16px;padding-right:16px}
+.chips::-webkit-scrollbar{display:none}
+.chips button{
+  flex:0 0 auto;appearance:none;border:0;cursor:pointer;background:var(--surf2);color:var(--dim);
+  padding:9px 16px;border-radius:99px;font-size:13.5px;font-weight:700;letter-spacing:-.01em;transition:.18s;
+}
+.chips button[aria-pressed="true"]{background:var(--txt);color:var(--bg)}
+.count{font-size:13px;color:var(--faint);font-weight:600;margin:0 0 14px}
+
+/* ---------- rail horizontal ---------- */
+.rail{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 4px;padding:2px 16px 14px}
+.rail::-webkit-scrollbar{display:none}
+.rcard{
+  flex:0 0 168px;background:var(--surf);border-radius:20px;padding:15px;box-shadow:var(--shadow);
+}
+.rcard .rn{font-size:30px;font-weight:800;letter-spacing:-.05em;line-height:1}
+.rcard h4{font-size:16px;margin:7px 0 3px;letter-spacing:-.025em}
+.rcard p{margin:0;font-size:12.5px;color:var(--faint)}
+
+/* ---------- timeline ---------- */
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:flex;gap:14px;padding:0 0 20px;position:relative}
+.tl li::before{content:"";position:absolute;left:26px;top:26px;bottom:-4px;width:2px;background:var(--surf3)}
+.tl li:last-child::before{display:none}
+.tl .hh{
+  flex:0 0 54px;height:54px;border-radius:18px;background:var(--surf2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:13px;font-weight:700;color:var(--coral);
+  font-variant-numeric:tabular-nums;z-index:1;
+}
+.tl .body{flex:1;min-width:0;padding-top:3px}
+.tl h4{font-size:18px;margin-bottom:4px}
+.tl p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.48}
+
+/* ---------- avisos ---------- */
+.note{border-radius:20px;padding:16px 17px;margin-bottom:12px}
+.note.rose{background:var(--rose-bg)} .note.rose h3{color:var(--rose)}
+.note.amber{background:var(--amber-bg)} .note.amber h3{color:var(--amber)}
+.note.vio{background:var(--violet-bg)} .note.vio h3{color:var(--violet)}
+.note.mint{background:var(--mint-bg)} .note.mint h3{color:var(--mint)}
+.note h3{font-size:16.5px;margin-bottom:7px}
+.note p{margin:0;font-size:14.5px;line-height:1.5;color:var(--dim)}
+.note p+p{margin-top:8px}
+.fine{font-size:12.5px;color:var(--faint);line-height:1.5;margin:14px 0 0}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:var(--navbg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+  display:grid;grid-template-columns:repeat(4,1fr);gap:4px;
+}
+nav button{
+  appearance:none;border:0;background:none;cursor:pointer;padding:7px 2px 6px;border-radius:16px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--faint);
+  font-size:11px;font-weight:700;letter-spacing:-.01em;transition:.18s;
+}
+nav button svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+nav button[aria-selected="true"]{color:var(--coral);background:var(--coral-bg)}
+nav button:active{transform:scale(.94)}
+
+/* ---------- mapa ---------- */
+.mapwrap{position:relative;border-radius:var(--r);overflow:hidden;background:var(--surf2);margin-bottom:12px;box-shadow:var(--shadow)}
+.tilepane{position:relative;overflow:hidden;touch-action:pan-y;height:66vw;min-height:280px;max-height:440px;cursor:grab}
+.tilepane.drag{cursor:grabbing}
+.tilewrap{position:absolute;left:0;top:0;will-change:transform}
+.tilewrap img{position:absolute;width:256px;height:256px;display:block;-webkit-user-drag:none;user-select:none}
+:root[data-theme="dark"] .tilewrap{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tilewrap{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9)}}
+.mklayer{position:absolute;inset:0;pointer-events:none}
+.mklayer svg.leaders{position:absolute;inset:0;width:100%;height:100%}
+.mk{
+  position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer;
+  font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;
+  border:2.5px solid rgba(255,255,255,.95);box-shadow:0 2px 8px rgba(0,0,0,.4);transition:transform .16s;
+}
+.mk:active{transform:scale(1.15)}
+.mk.lit{transform:scale(1.22);box-shadow:0 4px 14px rgba(0,0,0,.55);z-index:5}
+.mctl{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px;z-index:6}
+.mctl button{
+  appearance:none;width:38px;height:38px;border-radius:14px;cursor:pointer;border:0;
+  background:var(--navbg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  color:var(--txt);font-size:18px;font-weight:700;line-height:1;padding:0;box-shadow:var(--shadow);
+}
+.mctl button:active{transform:scale(.92)}
+.attrib{position:absolute;left:0;bottom:0;z-index:6;background:var(--navbg);font-size:9.5px;padding:3px 8px;border-radius:0 10px 0 0;color:var(--faint)}
+.attrib a{color:var(--faint)}
+.mapwrap.flat .tilepane,.mapwrap.flat #zin,.mapwrap.flat #zout,.mapwrap.flat .attrib{display:none}
+.mapwrap:not(.flat) #mapfallback{display:none}
+.mapwrap.full{position:fixed;inset:0;z-index:300;margin:0;border-radius:0;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);background:var(--bg)}
+.mapwrap.full .tilepane{height:100%;max-height:none;min-height:0}
+.mapwrap.full #mapfallback{height:100%;display:flex;align-items:center;justify-content:center;padding:14px}
+.mapwrap.full .mctl{bottom:calc(14px + env(safe-area-inset-bottom))}
+.mapwrap.full #zfull{background:var(--coral);color:#fff}
+body.noscroll{overflow:hidden}
+body.noscroll nav{display:none}
+.mapwrap svg{display:block;width:100%;height:auto}
+.mp-num{font-family:var(--mono);font-size:11px;font-weight:700;fill:var(--surf2);pointer-events:none}
+.mp-dot circle.pin{stroke:var(--surf2);stroke-width:2}
+.mp-dot circle.hit{fill:transparent}
+.mp-grid{stroke:var(--surf3);stroke-width:1}
+.mlist{list-style:none;margin:0;padding:0}
+.mlist li{
+  display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surf);
+  border-radius:16px;margin-bottom:7px;cursor:pointer;transition:.16s;
+}
+.mlist li:active{transform:scale(.985)}
+.mlist li.lit{background:var(--coral-bg)}
+.mlist .n{
+  flex:0 0 26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;
+}
+.mlist .t{flex:1;min-width:0}
+.mlist .t b{display:block;font-size:15.5px;font-weight:700;letter-spacing:-.02em}
+.mlist .t span{display:block;font-size:12.5px;color:var(--faint)}
+.mlist a{flex-shrink:0;font-size:13px;font-weight:700;color:var(--coral)}
+</style>
+<meta name="description" content="Que hacer esta tarde y noche en Tolosa: estado en vivo de bares y asadores, plan por horas, que ver y mapa.">
+<meta name="theme-color" content="#DB3F22">
+</head>
+<body>
+<div class="top">
+  <div class="mark">Tolosa<i>.</i></div>
+  <div class="clock" id="clock">--:--</div>
+</div>
+
+<main>
+
+<!-- ===== AHORA ===== -->
+<section role="tabpanel" id="p-now" class="on">
+  <div class="stagger">
+    <div class="hero" id="hero">
+      <div class="lab">Ahora mismo</div>
+      <div class="big" id="heroTime">--:--</div>
+      <div class="msg" id="heroMsg">Calculando qué hay abierto…</div>
+    </div>
+
+    <div class="note rose">
+      <h3>Los asadores grandes libran esta noche</h3>
+      <p>Casa Julián, Asador Nicolás, Burruntzi y AMA abren solo a mediodía los miércoles. <b>Esta noche Tolosa es de barra</b>, y la tiene muy buena: diez sitios, seis abiertos hasta medianoche.</p>
+    </div>
+
+    <div class="secttl">Lo mejor abierto ahora</div>
+    <div class="rail" id="rail"></div>
+
+    <div class="secttl">El plan</div>
+    <ul class="tl">
+      <li><div class="hh">18:00</div><div class="body"><h4>Aparcar fuera</h4><p>El casco es peatonal. Dejad el coche junto al frontón Beotibar o al río y entrad andando: Tolosa se cruza en quince minutos.</p></div></li>
+      <li><div class="hh">18:15</div><div class="body"><h4>Plaza Euskal Herria</h4><p>Porticada, con el ayuntamiento y el TOPIC. El corazón del pueblo y la mejor sombra a esta hora.</p></div></li>
+      <li><div class="hh">18:45</div><div class="body"><h4>Santa María y el casco</h4><p>Gótico vasco del XVII con portada barroca, a escala de ciudad grande. Alrededor, San Francisco y el convento de Santa Clara.</p></div></li>
+      <li><div class="hh">19:15</div><div class="body"><h4>Los puentes del Oria</h4><p>Bajad al río, cruzad y volved por la otra orilla. Diez minutos y la mejor foto del día.</p></div></li>
+      <li><div class="hh">19:45</div><div class="body"><h4>Tejas y cigarrillos</h4><p>El dulce que ha hecho famoso al pueblo. Comprad antes de que cierren las confiterías, sobre las 20:00.</p></div></li>
+      <li><div class="hh">20:15</div><div class="body"><h4>Empieza el poteo</h4><p>Plaza Berria y Euskal Herria concentran las barras. Ikatza, 1990 y Orbela están a dos minutos entre sí.</p></div></li>
+      <li><div class="hh">21:30</div><div class="body"><h4>Cenar sin mantel</h4><p>TÄLKA hace parrilla y tiene la mejor nota de las abiertas. Xare y Frontón Tolosa, para sentarse.</p></div></li>
+      <li><div class="hh">23:00</div><div class="body"><h4>La última</h4><p>Seis barras aguantan hasta medianoche. Da de sobra.</p></div></li>
+    </ul>
+
+    <div class="note amber">
+      <h3>Si volvéis otro día, venid a comer</h3>
+      <p><b>Casa Julián</b> (4,6 con 2.755 reseñas) es uno de los templos del chuletón en España y <b>AMA</b> (4,7) es cocina vasca de autor. Los dos a mediodía y con reserva. Tolosa de día es asador; de noche entre semana, barra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMER ===== -->
+<section role="tabpanel" id="p-eat">
+  <h2 class="title">Comer y beber</h2>
+  <p class="sub">Estado en vivo según la hora de tu móvil. Nota y reseñas de Google Maps.</p>
+  <div class="seg" id="segEstado"></div>
+  <div class="chips" id="chipsTipo"></div>
+  <p class="count" id="count"></p>
+  <div id="list" class="stagger"></div>
+  <p class="fine">Notas y horarios tomados de Google Maps el 19 de agosto de 2026. Un festivo o una fiesta local los cambia sin avisar.</p>
+</section>
+
+<!-- ===== VER ===== -->
+<section role="tabpanel" id="p-see">
+  <h2 class="title">Qué ver</h2>
+  <p class="sub">Tolosa fue capital de Gipuzkoa entre 1844 y 1854. Tiene monumentos de ciudad grande en un pueblo de doce mil habitantes.</p>
+  <div class="stagger">
+    <div class="card tap">
+      <h3>Plaza Euskal Herria</h3>
+      <p class="addr">El centro de todo · también Plaza Berdura</p>
+      <p class="why">Plaza porticada con el ayuntamiento, soportales y terrazas. Los sábados acoge uno de los mercados más importantes de Euskadi.</p>
+      <div class="pills"><span class="pill vio"><span class="dot"></span>Siempre abierta</span></div>
+    </div>
+    <div class="card tap">
+      <h3>TOPIC · Museo del Títere</h3>
+      <p class="addr">Plaza Euskal Herria</p>
+      <p class="why">El único museo de títeres de Europa con esta temática. Colección de marionetas de distintas culturas, sala de exposiciones y teatro propio.</p>
+      <div class="pills"><span class="pill neutral">Confirmad horario</span></div>
+      <a class="go" href="https://www.topictolosa.com/" target="_blank" rel="noopener">Web y horarios →</a>
+    </div>
+    <div class="card tap">
+      <h3>Parroquia de Santa María</h3>
+      <p class="addr">Casco histórico</p>
+      <p class="why">Gótico vasco del siglo XVII con portada barroca. Al lado, la iglesia renacentista de San Francisco y el convento barroco de Santa Clara.</p>
+    </div>
+    <div class="card tap">
+      <h3>Los puentes sobre el Oria</h3>
+      <p class="addr">Paseo del río</p>
+      <p class="why">El río parte la villa y los puentes la cosen. A última hora la luz sobre el agua es la mejor foto que os vais a llevar.</p>
+    </div>
+    <div class="card tap">
+      <h3>Tejas y cigarrillos</h3>
+      <p class="addr">Confiterías del casco · cierran sobre las 20:00</p>
+      <p class="why">Obleas finísimas de almendra y barquillos crujientes. Se venden en cajas, aguantan el viaje y son el mejor souvenir comestible de Gipuzkoa.</p>
+    </div>
+    <div class="note vio">
+      <h3>Lo que no toca hoy</h3>
+      <p>Las <b>alubias de Tolosa</b> son plato de invierno: en agosto ni las encontraréis bien ni apetecen. Podéis comprarlas secas para llevar.</p>
+      <p>El <b>Carnaval</b> es el más famoso del País Vasco y llena el pueblo seis días, pero cae en febrero.</p>
+    </div>
+    <div class="card">
+      <h3>Agenda del día</h3>
+      <p class="why">No he podido confirmar si hay algo programado esta noche. El ayuntamiento publica la agenda diaria; turismo atiende en el 943 69 74 13.</p>
+      <a class="go" href="https://agenda.tolosa.eus/es" target="_blank" rel="noopener">Agenda oficial →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAPA ===== -->
+<section role="tabpanel" id="p-map">
+  <h2 class="title">Mapa</h2>
+  <p class="sub">Todo cabe en cuatro calles. Toca un punto para resaltarlo.</p>
+  <div class="chips" id="chipsCat"></div>
+  <div class="mapwrap" id="mapwrap">
+    <div class="tilepane" id="tilepane">
+      <div class="tilewrap" id="tilewrap"></div>
+      <div class="mklayer" id="mklayer"></div>
+    </div>
+    <div id="mapfallback"></div>
+    <div class="mctl">
+      <button type="button" id="zfull" aria-label="Pantalla completa">⤢</button>
+      <button type="button" id="zin" aria-label="Acercar">+</button>
+      <button type="button" id="zout" aria-label="Alejar">−</button>
+    </div>
+    <div class="attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></div>
+  </div>
+  <p class="fine" id="mapnote" style="margin-top:0"></p>
+  <ul class="mlist" id="mlist"></ul>
+  <p class="fine">Preparada el 19 de agosto de 2026 para una tarde-noche en Tolosa. Las posiciones son aproximadas dentro del casco; "Ir" abre la ficha exacta en Google Maps.</p>
+</section>
+
+</main>
+
+<nav role="tablist" aria-label="Secciones">
+  <button role="tab" aria-selected="true" data-t="p-now"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 1.8"/></svg>Ahora</button>
+  <button role="tab" aria-selected="false" data-t="p-eat"><svg viewBox="0 0 24 24"><path d="M5 3v7a2.5 2.5 0 0 0 5 0V3M7.5 3v18M18 3c-1.6 1.4-2.4 3.3-2.4 6.1 0 1.9.8 3.3 2.4 3.3s2.4-1.4 2.4-3.3c0-2.8-.8-4.7-2.4-6.1zM18 12.4V21"/></svg>Comer</button>
+  <button role="tab" aria-selected="false" data-t="p-see"><svg viewBox="0 0 24 24"><path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg>Ver</button>
+  <button role="tab" aria-selected="false" data-t="p-map"><svg viewBox="0 0 24 24"><path d="M9 3.5 3.5 6v14.5L9 18l6 2.5 5.5-2.5V3.5L15 6z"/><path d="M9 3.5V18M15 6v14.5"/></svg>Mapa</button>
+</nav>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function hhmm(m){ var h=Math.floor(m/60)%24, x=m%60; return (h<10?'0':'')+h+':'+(x<10?'0':'')+x; }
+
+  /* Sitios. Nota y reseñas: Google Maps, 19 ago 2026.
+     cierra = minutos desde medianoche (1440 = 00:00 de la noche siguiente) */
+  var EAT = [
+    {n:'TÄLKA',       t:'barra', r:4.5, v:253,  p:'10-20 €', abre:1, cierra:1440, dir:'Larramendi Kalea, 12', d:'Parrilla y barra a la vez, y la mejor nota de las que abren esta noche. El pintxo de bola de carne es el que repite todo el mundo.', la:43.1358, lo:-2.0738},
+    {n:'Asteasuarra', t:'barra', r:4.5, v:190,  p:'10-20 €', abre:1, cierra:1320, dir:'Aroztegieta Kalea, 16', d:'Nota alta y precio contenido. Cierra pronto, así que ponedlo de las primeras paradas.', la:43.1346, lo:-2.0739},
+    {n:'Xare',        t:'mesa',  r:4.4, v:721,  p:'10-20 €', abre:1, cierra:1440, dir:'Lopez-Mendizabal, 1', d:'Vale para pintxo y para sentarse a cenar. Mismo nivel que Donosti a precio más razonable.', la:43.1345, lo:-2.0768},
+    {n:'Frontón Tolosa', t:'mesa', r:4.4, v:1326, p:'10-30 €', abre:1, cierra:1380, dir:'San Frantzisko, 4', d:'Junto al frontón Beotibar. Cocina de siempre y sitio amplio: de los pocos donde cenar sentados hoy.', la:43.1340, lo:-2.0752},
+    {n:'Mandduka',    t:'barra', r:4.4, v:318,  p:'1-10 €',  abre:1, cierra:1230, dir:'Elkano Kalea, 16', d:'Barato y muy bien valorado, pero cierra a las ocho y media: es parada de merienda.', la:43.1352, lo:-2.0742},
+    {n:'Ikatza Taberna', t:'barra', r:4.3, v:539, p:'10-20 €', abre:1, cierra:1440, dir:'Plaza Berria, 6', d:'En plena plaza, pintxos sólidos y platos combinados si venís con hambre de verdad.', la:43.1349, lo:-2.0748},
+    {n:'1990 Gastroteka', t:'barra', r:4.3, v:471, p:'1-40 €', abre:1, cierra:1440, dir:'Plaza Euskal Herria, 5', d:'La barra más cuidada del pueblo, en la plaza principal. Algo más cara, y se nota en el producto.', la:43.1350, lo:-2.0745},
+    {n:'Orbela',      t:'barra', r:4.3, v:1187, p:'10-20 €', abre:1, cierra:1440, dir:'Errementari Kalea, 10', d:'El que más gente ha valorado de las barras de Tolosa. Ambiente local, sin turismo.', la:43.1347, lo:-2.0743},
+    {n:'Izkiña Taberna', t:'barra', r:4.3, v:91, p:'10-20 €', abre:1, cierra:1440, dir:'Alliri Pasealekua, 13', d:'Pequeño y de barrio. Pocas reseñas, así que id con la expectativa justa, pero abre hasta tarde.', la:43.1360, lo:-2.0760},
+    {n:'Eguzki Taberna', t:'barra', r:4.1, v:359, p:'1-10 €', abre:1, cierra:1320, dir:'Casco viejo', d:'El más barato de la lista. Calidad-precio y punto.', la:43.1351, lo:-2.0747},
+    {n:'AMA Tolosa',  t:'asador', r:4.7, v:672, p:'Más de 100 €', abre:0, re:'Abre el viernes a las 13:30', dir:'Martin Jose Iraola, 4', d:'Cocina vasca de autor y la nota más alta del pueblo. Cerrado hasta el viernes.', la:43.1370, lo:-2.0715},
+    {n:'Asador Burruntzi', t:'asador', r:4.7, v:255, p:'50-100 €', abre:0, re:'Abre mañana a las 13:15', dir:'San Frantzisko, 3', d:'Asador de cordero, carne y pescado. Reabre mañana a mediodía.', la:43.1338, lo:-2.0755},
+    {n:'Casa Julián', t:'asador', r:4.6, v:2755, p:'Más de 100 €', abre:0, re:'Abre mañana a las 12:30', dir:'Sta. Klara Kalea, 6', d:'Uno de los templos del chuletón en España. Casi tres mil reseñas y 4,6.', la:43.1355, lo:-2.0755},
+    {n:'Rincón San Esteban', t:'mesa', r:4.6, v:134, p:'10-20 €', abre:0, re:'Abre mañana a las 10:00', dir:'San Esteban Auzoa, 39', d:'Fuera del casco, barato y muy bien valorado.', la:43.1300, lo:-2.0800},
+    {n:'Asador Nicolás', t:'asador', r:4.5, v:590, p:'Más de 100 €', abre:0, re:'Abre mañana a las 13:15', dir:'Zumalakarregi, 7', d:'Chuleta a la brasa en asador moderno. Para muchos, el mejor de la comarca.', la:43.1362, lo:-2.0730}
+  ];
+
+  function ahora(){ var d=new Date(); return d.getHours()*60+d.getMinutes(); }
+  function estado(x){
+    if(!x.abre) return {k:'shut', txt:'Cerrado hoy', sub:x.re};
+    var falta = x.cierra - ahora();
+    if(falta <= 0) return {k:'shut', txt:'Ya ha cerrado', sub:'Cerró a las '+hhmm(x.cierra)};
+    if(falta <= 60) return {k:'soon', txt:'Cierra en '+falta+' min', sub:'A las '+hhmm(x.cierra)};
+    var h=Math.floor(falta/60), m=falta%60;
+    return {k:'open', txt:'Abierto', sub:'Cierra a las '+hhmm(x.cierra)+' · quedan '+(h?h+' h ':'')+(m?m+' min':'')};
+  }
+
+  /* ---------- reloj y hero ---------- */
+  function tick(){
+    var d=new Date(), t=hhmm(d.getHours()*60+d.getMinutes());
+    $('clock').textContent = t;
+    $('heroTime').textContent = t;
+    var abiertos = EAT.filter(function(x){ return estado(x).k==='open'; }).length;
+    var pronto   = EAT.filter(function(x){ return estado(x).k==='soon'; }).length;
+    var msg;
+    if(abiertos === 0){
+      msg = 'Ya no queda nada abierto en Tolosa. Mañana los asadores abren a mediodía.';
+    } else {
+      msg = '<b>'+abiertos+' sitio'+(abiertos===1?'':'s')+' abierto'+(abiertos===1?'':'s')+'</b> ahora mismo';
+      if(pronto) msg += ', y <b>'+pronto+'</b> cierra'+(pronto===1?'':'n')+' en menos de una hora';
+      msg += '.';
+    }
+    $('heroMsg').innerHTML = msg;
+    if(document.querySelector('#p-eat').classList.contains('on')) render();
+    pintaRail();
+  }
+
+  function pintaRail(){
+    var top = EAT.filter(function(x){ return estado(x).k!=='shut'; })
+                 .sort(function(a,b){ return b.r-a.r; }).slice(0,5);
+    $('rail').innerHTML = top.map(function(x){
+      var e = estado(x);
+      return '<div class="rcard"><div class="rn" style="color:var(--'+(x.r>=4.5?'mint':'amber')+')">'
+        + x.r.toFixed(1).replace('.',',') + '</div><h4>'+esc(x.n)+'</h4><p>'
+        + esc(e.k==='soon' ? e.txt : x.p) + '</p></div>';
+    }).join('') || '<div class="rcard"><h4>Nada abierto</h4><p>Es tarde</p></div>';
+  }
+
+  /* ---------- filtros ---------- */
+  var ESTADOS=[['ahora','Abierto ahora'],['todo','Todo']];
+  var TIPOS=[['','Todo'],['barra','Barra y pintxos'],['mesa','Para sentarse'],['asador','Asadores']];
+  var fEst='ahora', fTipo='';
+
+  function segs(){
+    $('segEstado').innerHTML = ESTADOS.map(function(d){
+      return '<button type="button" data-v="'+d[0]+'" aria-pressed="'+(d[0]===fEst)+'">'+d[1]+'</button>';
+    }).join('');
+    $('segEstado').querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){ fEst=b.dataset.v; segs(); render(); });
+    });
+    $('chipsTipo').innerHTML = TIPOS.map(function(d){
+      return '<button type="button" data-v="'+d[0]+'" aria-pressed="'+(d[0]===fTipo)+'">'+d[1]+'</button>';
+    }).join('');
+    $('chipsTipo').querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){ fTipo=b.dataset.v; segs(); render(); });
+    });
+  }
+
+  function render(){
+    var list = EAT.filter(function(x){
+      if(fEst==='ahora' && estado(x).k==='shut') return false;
+      if(fTipo && x.t!==fTipo) return false;
+      return true;
+    }).sort(function(a,b){
+      var ka=estado(a).k==='shut'?1:0, kb=estado(b).k==='shut'?1:0;
+      return ka-kb || b.r-a.r;
+    });
+    $('list').innerHTML = list.map(function(x){
+      var e=estado(x);
+      var cls = x.r>=4.5?'hi':(x.r>=4.2?'mid':'lo');
+      return '<div class="card tap'+(e.k==='shut'?' dim':'')+'">'
+        + '<div class="crow"><div class="cleft"><h3>'+esc(x.n)+'</h3>'
+        + '<p class="addr">'+esc(x.dir)+'</p></div>'
+        + '<div class="rate"><b class="'+cls+'">'+x.r.toFixed(1).replace('.',',')+'</b>'
+        + '<span>'+x.v.toLocaleString('es-ES')+'</span></div></div>'
+        + '<p class="why">'+esc(x.d)+'</p>'
+        + '<div class="pills"><span class="pill '+e.k+'"><span class="dot"></span>'+esc(e.txt)+'</span>'
+        + '<span class="pill neutral">'+esc(x.p)+'</span></div>'
+        + '<p class="addr" style="margin-top:9px">'+esc(e.sub||'')+'</p>'
+        + '<a class="go" href="https://www.google.com/maps/search/?api=1&query='
+        + encodeURIComponent(x.n+' Tolosa')+'" target="_blank" rel="noopener">Cómo llegar →</a></div>';
+    }).join('') || '<div class="card"><p class="why">Nada con ese filtro.</p></div>';
+    $('count').textContent = list.length+' de '+EAT.length+' sitios';
+  }
+
+  /* ---------- navegación ---------- */
+  var tabs=Array.prototype.slice.call(document.querySelectorAll('nav button'));
+  var panels=Array.prototype.slice.call(document.querySelectorAll('section[role="tabpanel"]'));
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      panels.forEach(function(p){ p.classList.toggle('on', p.id===t.dataset.t); });
+      tabs.forEach(function(o){ o.setAttribute('aria-selected', String(o===t)); });
+      window.scrollTo({top:0,behavior:'instant'});
+      if(t.dataset.t==='p-map') requestAnimationFrame(function(){ requestAnimationFrame(drawMap); });
+    });
+  });
+
+  /* ---------- mapa ---------- */
+  var CATS={abierto:{l:'Abierto',c:'var(--mint)'},cerrado:{l:'Cerrado hoy',c:'var(--rose)'},ver:{l:'Ver',c:'var(--violet)'}};
+  var VER=[
+    {n:'Plaza Euskal Herria', dir:'El centro de todo', la:43.1350, lo:-2.0746},
+    {n:'TOPIC · Museo del Títere', dir:'Plaza Euskal Herria', la:43.1351, lo:-2.0744},
+    {n:'Parroquia de Santa María', dir:'Casco histórico', la:43.1347, lo:-2.0750},
+    {n:'Puentes sobre el Oria', dir:'Paseo del río', la:43.1343, lo:-2.0762}
+  ];
+  function items(){
+    return EAT.map(function(x){ return {n:x.n,dir:x.dir,cat:estado(x).k==='shut'?'cerrado':'abierto',la:x.la,lo:x.lo}; })
+      .concat(VER.map(function(v){ return {n:v.n,dir:v.dir,cat:'ver',la:v.la,lo:v.lo}; }));
+  }
+  var W=700,PAD=34,off={},zAdj=0,panX=0,panY=0,tilesOk=null,full=false,hits=0,probe=null;
+  var pane=$('tilepane'), tw=$('tilewrap'), mkl=$('mklayer'), box=$('mapwrap');
+  function lon2px(lo,z){ return (lo+180)/360*256*Math.pow(2,z); }
+  function lat2px(la,z){ var s=Math.sin(la*Math.PI/180); if(s>0.9999)s=0.9999; if(s<-0.9999)s=-0.9999;
+    return (0.5-Math.log((1+s)/(1-s))/(4*Math.PI))*256*Math.pow(2,z); }
+  function fitZoom(P,w,h){ for(var z=19;z>=3;z--){ var xs=P.map(function(q){return lon2px(q.lo,z);}),ys=P.map(function(q){return lat2px(q.la,z);});
+    if(Math.max.apply(null,xs)-Math.min.apply(null,xs)<=w-80 && Math.max.apply(null,ys)-Math.min.apply(null,ys)<=h-80) return z; } return 3; }
+  function spread(n,r){ var m=r*2+4; for(var p=0;p<70;p++){ var mv=false;
+    for(var a=0;a<n.length;a++) for(var b=a+1;b<n.length;b++){ var dx=n[b].x-n[a].x,dy=n[b].y-n[a].y,d=Math.hypot(dx,dy);
+      if(d<m){ if(d<0.01){dx=Math.cos(a*2.4);dy=Math.sin(a*2.4);d=1;} var f=(m-d)/2/d;
+        n[a].x-=dx*f;n[a].y-=dy*f;n[b].x+=dx*f;n[b].y+=dy*f;mv=true; } } if(!mv)break; } }
+
+  function renderTiles(){
+    var all=items(), vis=all.filter(function(i){ return !off[i.cat]; });
+    var w=pane.clientWidth,h=pane.clientHeight;
+    if(!w||!h){ setTimeout(drawMap,120); return; }
+    var z=Math.max(3,Math.min(19,fitZoom(all,w,h)+zAdj));
+    var xs=all.map(function(q){return lon2px(q.lo,z);}), ys=all.map(function(q){return lat2px(q.la,z);});
+    var oX=(Math.max.apply(null,xs)+Math.min.apply(null,xs))/2-w/2-panX;
+    var oY=(Math.max.apply(null,ys)+Math.min.apply(null,ys))/2-h/2-panY;
+    var t0x=Math.floor((oX-256)/256),t1x=Math.floor((oX+w+256)/256);
+    var t0y=Math.floor((oY-256)/256),t1y=Math.floor((oY+h+256)/256);
+    var lim=Math.pow(2,z),html='',n=0;
+    for(var ty=t0y;ty<=t1y;ty++){ if(ty<0||ty>=lim) continue;
+      for(var tx=t0x;tx<=t1x;tx++){ var wr=((tx%lim)+lim)%lim;
+        html+='<img alt="" src="https://tile.openstreetmap.org/'+z+'/'+wr+'/'+ty+'.png" style="left:'+(tx*256-oX)+'px;top:'+(ty*256-oY)+'px">'; n++; } }
+    tw.style.transform='translate3d(0,0,0)'; tw.innerHTML=html;
+    if(tilesOk===null&&n){
+      Array.prototype.forEach.call(tw.querySelectorAll('img'),function(im){
+        if(im.complete){ if(im.naturalWidth>0) hits++; return; }
+        im.addEventListener('load',function(){ hits++; });
+      });
+      if(!probe) probe=setTimeout(function(){ probe=null; if(tilesOk!==null)return; tilesOk=hits>0; if(!tilesOk) drawMap(); },2600);
+    }
+    var nodes=vis.map(function(it){ var x=lon2px(it.lo,z)-oX,y=lat2px(it.la,z)-oY;
+      return {i:all.indexOf(it)+1,cat:it.cat,n:it.n,ax:x,ay:y,x:x,y:y}; });
+    spread(nodes,15);
+    var cas='',cor='';
+    nodes.forEach(function(d){ if(Math.hypot(d.x-d.ax,d.y-d.ay)>15){
+      var s='x1="'+d.ax.toFixed(1)+'" y1="'+d.ay.toFixed(1)+'" x2="'+d.x.toFixed(1)+'" y2="'+d.y.toFixed(1)+'"';
+      cas+='<line '+s+' stroke="rgba(0,0,0,.5)" stroke-width="3.5" stroke-linecap="round"/>';
+      cor+='<line '+s+' stroke="rgba(255,255,255,.85)" stroke-width="1.4"/>'; } });
+    var mh='<svg class="leaders">'+cas+cor+'</svg>';
+    nodes.forEach(function(d){ mh+='<div class="mk" data-i="'+d.i+'" role="button" tabindex="0" aria-label="'+esc(d.n)
+      +'" style="left:'+d.x.toFixed(1)+'px;top:'+d.y.toFixed(1)+'px;background:'+CATS[d.cat].c+'">'+d.i+'</div>'; });
+    mkl.style.transform='translate3d(0,0,0)'; mkl.innerHTML=mh;
+  }
+
+  function drawSchematic(){
+    var all=items(), vis=all.filter(function(i){ return !off[i.cat]; });
+    var las=all.map(function(q){return q.la;}), los=all.map(function(q){return q.lo;});
+    var laMin=Math.min.apply(null,las),laMax=Math.max.apply(null,las);
+    var loMin=Math.min.apply(null,los),loMax=Math.max.apply(null,los);
+    var k=Math.cos((laMin+laMax)/2*Math.PI/180);
+    var sX=(loMax-loMin)*k||1e-6,sY=(laMax-laMin)||1e-6,iw=W-PAD*2;
+    var H=Math.min(Math.round(iw*(sY/sX))+PAD*2,W),ih=H-PAD*2,s=Math.min(iw/sX,ih/sY);
+    var ox=PAD+(iw-sX*s)/2, oy=PAD+(ih-sY*s)/2;
+    function X(lo){return ox+(lo-loMin)*k*s;} function Y(la){return oy+(laMax-la)*s;}
+    var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Esquema de Tolosa"><rect width="'+W+'" height="'+H+'" fill="var(--surf2)"/>';
+    for(var gx=PAD;gx<W-PAD+1;gx+=(W-PAD*2)/6) svg+='<line class="mp-grid" x1="'+gx.toFixed(1)+'" y1="'+PAD+'" x2="'+gx.toFixed(1)+'" y2="'+(H-PAD)+'"/>';
+    for(var gy=PAD;gy<H-PAD+1;gy+=(H-PAD*2)/5) svg+='<line class="mp-grid" x1="'+PAD+'" y1="'+gy.toFixed(1)+'" x2="'+(W-PAD)+'" y2="'+gy.toFixed(1)+'"/>';
+    var R=14, nodes=vis.map(function(it){ return {i:all.indexOf(it)+1,cat:it.cat,n:it.n,ax:X(it.lo),ay:Y(it.la),x:X(it.lo),y:Y(it.la)}; });
+    spread(nodes,R);
+    nodes.forEach(function(d){ d.x=Math.max(R+2,Math.min(W-R-2,d.x)); d.y=Math.max(R+2,Math.min(H-R-2,d.y));
+      if(Math.hypot(d.x-d.ax,d.y-d.ay)>R) svg+='<line x1="'+d.ax.toFixed(1)+'" y1="'+d.ay.toFixed(1)+'" x2="'+d.x.toFixed(1)+'" y2="'+d.y.toFixed(1)+'" stroke="var(--faint)" stroke-width="1.2" opacity=".6"/>'; });
+    nodes.forEach(function(d){ svg+='<g class="mp-dot" data-i="'+d.i+'" tabindex="0" role="button" aria-label="'+esc(d.n)+'">'
+      +'<circle class="pin" cx="'+d.x.toFixed(1)+'" cy="'+d.y.toFixed(1)+'" r="'+R+'" fill="'+CATS[d.cat].c+'"/>'
+      +'<text class="mp-num" x="'+d.x.toFixed(1)+'" y="'+(d.y+4).toFixed(1)+'" text-anchor="middle">'+d.i+'</text>'
+      +'<circle class="hit" cx="'+d.x.toFixed(1)+'" cy="'+d.y.toFixed(1)+'" r="'+(R+6)+'"/></g>'; });
+    $('mapfallback').innerHTML=svg+'</svg>';
+  }
+
+  function drawMap(){
+    var base='Todo el casco cabe en unos 400 metros: se hace andando. ';
+    if(tilesOk===false){ box.classList.add('flat'); drawSchematic();
+      $('mapnote').textContent=base+'Este visor bloquea la cartografía externa, así que veis el esquema a escala.'; }
+    else { box.classList.remove('flat'); renderTiles();
+      $('mapnote').textContent=base+'Arrastrad para moveros, + y − para el zoom, ⤢ para pantalla completa.'; }
+    var all=items();
+    $('mlist').innerHTML=all.map(function(it,ix){
+      if(off[it.cat]) return '';
+      return '<li data-i="'+(ix+1)+'"><span class="n" style="background:'+CATS[it.cat].c+'">'+(ix+1)+'</span>'
+        +'<span class="t"><b>'+esc(it.n)+'</b><span>'+esc(it.dir)+'</span></span>'
+        +'<a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(it.n+' Tolosa')+'" target="_blank" rel="noopener">Ir →</a></li>';
+    }).join('');
+    wire();
+  }
+  function wire(){
+    function lit(i){
+      document.querySelectorAll('#mapwrap .mp-dot, #mapwrap .mk, #mlist li').forEach(function(el){ el.classList.toggle('lit', el.dataset.i===i); });
+      if(!full){ var row=document.querySelector('#mlist li[data-i="'+i+'"]'); if(row) row.scrollIntoView({block:'nearest'}); }
+    }
+    document.querySelectorAll('#mapwrap .mp-dot, #mapwrap .mk').forEach(function(g){
+      g.addEventListener('click',function(e){ e.stopPropagation(); lit(g.dataset.i); });
+      g.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); lit(g.dataset.i);} });
+    });
+    document.querySelectorAll('#mlist li').forEach(function(li){
+      li.addEventListener('click',function(e){ if(e.target.closest('a')) return; lit(li.dataset.i); });
+    });
+  }
+  function cats(){
+    $('chipsCat').innerHTML=Object.keys(CATS).map(function(k){
+      return '<button type="button" data-c="'+k+'" aria-pressed="'+(!off[k])+'">'+CATS[k].l+'</button>';
+    }).join('');
+    $('chipsCat').querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){ off[b.dataset.c]=!off[b.dataset.c]; cats(); drawMap(); });
+    });
+  }
+  (function(){
+    var dn=false,sx=0,sy=0,ox=0,oy=0,dx=0,dy=0,mv=false;
+    pane.addEventListener('pointerdown',function(e){
+      if(e.target.closest('.mk')||e.target.closest('.mctl')) return;
+      dn=true;mv=false;sx=e.clientX;sy=e.clientY;ox=panX;oy=panY;dx=0;dy=0;
+      pane.classList.add('drag'); pane.setPointerCapture(e.pointerId); });
+    pane.addEventListener('pointermove',function(e){ if(!dn)return;
+      dx=e.clientX-sx; dy=e.clientY-sy; if(Math.abs(dx)>3||Math.abs(dy)>3) mv=true;
+      var t='translate3d('+dx+'px,'+dy+'px,0)'; tw.style.transform=t; mkl.style.transform=t; });
+    function end(e){ if(!dn)return; dn=false; pane.classList.remove('drag');
+      try{ pane.releasePointerCapture(e.pointerId); }catch(_){}
+      if(mv){ panX=ox+dx; panY=oy+dy; drawMap(); } }
+    pane.addEventListener('pointerup',end); pane.addEventListener('pointercancel',end);
+  })();
+  $('zin').addEventListener('click',function(){ if(zAdj<4){zAdj++;panX=0;panY=0;drawMap();} });
+  $('zout').addEventListener('click',function(){ if(zAdj>-3){zAdj--;panX=0;panY=0;drawMap();} });
+  var zf=$('zfull');
+  function setFull(on){ full=on; box.classList.toggle('full',on); document.body.classList.toggle('noscroll',on);
+    zf.textContent=on?'✕':'⤢';
+    requestAnimationFrame(function(){ requestAnimationFrame(drawMap); }); setTimeout(drawMap,260); }
+  zf.addEventListener('click',function(){ setFull(!full); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&full) setFull(false); });
+  var rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(drawMap,180); });
+  window.addEventListener('orientationchange',function(){ setTimeout(drawMap,320); });
+
+  segs(); render(); cats(); drawMap(); tick();
+  setInterval(tick, 30000);
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden) tick(); });
+})();
+</script>
+</body>
+</html>
