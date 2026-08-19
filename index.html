@@ -1,0 +1,1699 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Donostia · 3 días</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Donostia">
+
+<style>
+:root{
+  --paper:#F4F6F8; --card:#FFFFFF; --card-2:#E9EDF2; --card-3:#DFE5EC;
+  --ink:#101720; --ink-2:#4C5B6B; --ink-3:#7E8C9C;
+  --deep:#0B6BB5; --deep-soft:#DEEBF8;
+  --rust:#D0432B; --rust-soft:#FBE7E2;
+  --kelp:#0C8C60; --kelp-soft:#DAF2E7;
+  --sand:#966D00; --sand-soft:#F9EDD0;
+  --line:#DDE3EA; --line-2:#C6D0DA;
+  --head-bg:#0B6BB5; --head-fg:#FFFFFF;
+  --map-bg:#E6EAEF;
+  --navbg:rgba(255,255,255,.84);
+  --c-comer:#D0432B; --c-ver:#0B6BB5; --c-playa:#0C8C60; --c-beber:#966D00; --c-hito:#6B7A89;
+  --shadow:0 1px 2px rgba(16,23,32,.05), 0 8px 22px -12px rgba(16,23,32,.2);
+  --shadow-lg:0 2px 6px rgba(16,23,32,.08), 0 22px 46px -22px rgba(16,23,32,.34);
+  --body:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI Variable","Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --display:var(--body);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --r:22px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1016; --card:#141C25; --card-2:#1E2833; --card-3:#27333F;
+    --ink:#EDF3F8; --ink-2:#9FB1C2; --ink-3:#75879A;
+    --deep:#4FB0F0; --deep-soft:#0C2739;
+    --rust:#FF8062; --rust-soft:#331810;
+    --kelp:#3DD69C; --kelp-soft:#0C2A20;
+    --sand:#F0C25A; --sand-soft:#2C2410;
+    --line:#1F2A35; --line-2:#31404E;
+    --head-bg:#0C2739; --head-fg:#EDF3F8;
+    --map-bg:#0E141B;
+    --navbg:rgba(20,28,37,.8);
+    --c-comer:#FF8062; --c-ver:#4FB0F0; --c-playa:#3DD69C; --c-beber:#F0C25A; --c-hito:#8496A6;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 22px -12px rgba(0,0,0,.85);
+    --shadow-lg:0 2px 6px rgba(0,0,0,.55), 0 22px 46px -22px rgba(0,0,0,1);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B1016; --card:#141C25; --card-2:#1E2833; --card-3:#27333F;
+  --ink:#EDF3F8; --ink-2:#9FB1C2; --ink-3:#75879A;
+  --deep:#4FB0F0; --deep-soft:#0C2739;
+  --rust:#FF8062; --rust-soft:#331810;
+  --kelp:#3DD69C; --kelp-soft:#0C2A20;
+  --sand:#F0C25A; --sand-soft:#2C2410;
+  --line:#1F2A35; --line-2:#31404E;
+  --head-bg:#0C2739; --head-fg:#EDF3F8;
+  --map-bg:#0E141B;
+  --navbg:rgba(20,28,37,.8);
+  --c-comer:#FF8062; --c-ver:#4FB0F0; --c-playa:#3DD69C; --c-beber:#F0C25A; --c-hito:#8496A6;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 22px -12px rgba(0,0,0,.85);
+  --shadow-lg:0 2px 6px rgba(0,0,0,.55), 0 22px 46px -22px rgba(0,0,0,1);
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:16px;line-height:1.45;letter-spacing:-.011em;
+  padding-bottom:40px;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{margin:0;font-family:var(--body);font-weight:800;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+a{color:var(--deep);text-decoration:none}
+button{font-family:inherit}
+:focus-visible{outline:2.5px solid var(--deep);outline-offset:3px;border-radius:12px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== barra superior: cabecera + pestañas deslizantes ===== */
+.appbar{
+  position:sticky;top:0;z-index:60;
+  background:var(--navbg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  padding-top:env(safe-area-inset-top);
+}
+header{
+  background:none;color:var(--ink);border:0;
+  padding:11px 20px 8px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+}
+.brand{font-size:20px;font-weight:800;letter-spacing:-.04em;color:var(--ink)}
+.brandsub{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:-.01em}
+
+nav{
+  display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;
+  padding:2px 16px 11px;
+}
+nav::-webkit-scrollbar{display:none}
+nav button{
+  flex:0 0 auto;appearance:none;border:0;cursor:pointer;background:var(--card-2);color:var(--ink-2);
+  padding:9px 15px;border-radius:99px;font-size:13.5px;font-weight:700;letter-spacing:-.01em;
+  display:inline-flex;align-items:center;gap:7px;transition:.18s;
+}
+nav button svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+nav button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+nav button:active{transform:scale(.95)}
+
+main{max-width:640px;margin:0 auto;padding:0 16px}
+section[role="tabpanel"]{display:none;padding:16px 0 24px}
+section[role="tabpanel"].on{display:block}
+section[role="tabpanel"].on > *{animation:rise .4s cubic-bezier(.22,.9,.3,1) backwards}
+section[role="tabpanel"].on > *:nth-child(1){animation-delay:.02s}
+section[role="tabpanel"].on > *:nth-child(2){animation-delay:.05s}
+section[role="tabpanel"].on > *:nth-child(3){animation-delay:.08s}
+section[role="tabpanel"].on > *:nth-child(4){animation-delay:.11s}
+section[role="tabpanel"].on > *:nth-child(n+5){animation-delay:.14s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+h2.big{font-size:33px;margin:4px 0 5px;letter-spacing:-.035em}
+.lede,.sub{color:var(--ink-2);font-size:15.5px;margin:0 0 16px;letter-spacing:-.005em}
+.eyebrow{
+  font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-3);margin:28px 0 11px;display:block;
+}
+.eyebrow::after{display:none}
+
+/* ===== tarjetas ===== */
+.card{
+  background:var(--card);border:0;border-radius:var(--r);padding:17px 18px;margin-bottom:11px;
+  box-shadow:var(--shadow);transition:transform .16s cubic-bezier(.22,.9,.3,1);
+}
+.card:active{transform:scale(.988)}
+.card h3{font-size:20px}
+.card h4{font-size:17px;margin-bottom:4px}
+.cardhead{display:flex;justify-content:space-between;align-items:flex-start;gap:13px}
+.cardhead > div:first-child,.cardhead > h3{flex:1;min-width:0}
+.where{font-size:13.5px;color:var(--ink-3);margin:4px 0 0;font-family:var(--body);letter-spacing:-.004em}
+.why{font-size:14.8px;color:var(--ink-2);margin:11px 0 0;line-height:1.5}
+.why + .why{margin-top:9px}
+.note{font-size:13px;color:var(--ink-3);line-height:1.5;margin:12px 0 0}
+
+/* ===== chips de estado ===== */
+.chip{
+  display:inline-flex;align-items:center;gap:5px;flex-shrink:0;
+  font-size:12px;font-weight:700;letter-spacing:-.005em;text-transform:none;
+  padding:6px 11px;border-radius:99px;white-space:nowrap;background:var(--card-2);color:var(--ink-2);
+}
+.chip.eur,.chip.kelp{background:var(--kelp-soft);color:var(--kelp)}
+.chip.top,.chip.star,.chip.sand{background:var(--sand-soft);color:var(--sand)}
+.chip.shut,.chip.rust{background:var(--rust-soft);color:var(--rust)}
+.chip.info,.chip.ver{background:var(--deep-soft);color:var(--deep)}
+
+/* ===== botones de acción ===== */
+.acts{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.act{
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  font-size:13.5px;font-weight:700;letter-spacing:-.01em;text-transform:none;
+  padding:9px 15px;border-radius:99px;border:0;color:var(--ink);background:var(--card-2);
+  transition:transform .14s;
+}
+.act:active{transform:scale(.95)}
+.act.call{background:var(--deep);color:#fff}
+.act svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== bloques de color (slots) ===== */
+.slot{margin:12px 0 0;padding:13px 15px;border-radius:16px;font-size:14.2px;line-height:1.5;border:0}
+.slot b.lab,.slot .lab{
+  display:block;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:5px;
+}
+.slot.ver{background:var(--deep-soft)}   .slot.ver b.lab{color:var(--deep)}
+.slot.comer{background:var(--rust-soft)} .slot.comer b.lab{color:var(--rust)}
+.slot.beber{background:var(--sand-soft)} .slot.beber b.lab{color:var(--sand)}
+.slot.playa{background:var(--kelp-soft)} .slot.playa b.lab{color:var(--kelp)}
+.slot p{margin:0;color:var(--ink-2)}
+.slot p + p{margin-top:6px}
+
+/* ===== avisos ===== */
+.alert{border:0;border-radius:20px;padding:17px 18px;margin:0 0 12px;background:var(--deep-soft)}
+.alert.rust{background:var(--rust-soft)} .alert.kelp{background:var(--kelp-soft)}
+.alert.sand,.alert.gold{background:var(--sand-soft)} .alert.deep,.alert.teal{background:var(--deep-soft)}
+.alert h3{font-size:17px;margin-bottom:7px;color:var(--deep)}
+.alert.rust h3{color:var(--rust)} .alert.kelp h3{color:var(--kelp)}
+.alert.sand h3,.alert.gold h3{color:var(--sand)}
+.alert p{margin:0;font-size:14.6px;line-height:1.5;color:var(--ink-2)}
+.alert p + p{margin-top:9px}
+
+/* ===== espina de ruta ===== */
+.spine{list-style:none;margin:0;padding:0;position:relative}
+.spine::before{display:none}
+.stop{position:relative;margin-bottom:12px;padding-left:0}
+.stop::before{display:none}
+.km{
+  display:inline-flex;align-items:center;justify-content:center;position:static;
+  width:auto;min-width:52px;height:30px;padding:0 12px;margin:0 0 9px;border-radius:99px;
+  background:var(--deep-soft);color:var(--deep);
+  font-family:var(--mono);font-size:12.5px;font-weight:700;text-align:center;
+}
+.km small{display:inline;font-size:10px;opacity:.75;margin-left:3px}
+.stop > .card{margin-bottom:0}
+
+/* ===== acordeón de planes ===== */
+.plans{display:grid;gap:11px}
+.plan{border:0;border-radius:var(--r);overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+.plan > summary,.plan > button{
+  cursor:pointer;background:none;list-style:none;width:100%;border:0;text-align:left;
+  padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink);
+}
+.plan > summary::-webkit-details-marker{display:none}
+.plan > summary::marker{content:""}
+.plan h3{font-size:19px}
+.plan .tagline{font-family:var(--body);font-size:13px;color:var(--ink-3);margin-top:3px;display:block;font-weight:500}
+.plan .arrow{font-size:20px;color:var(--ink-3);transition:transform .2s}
+.plan[open] .arrow{transform:rotate(90deg)}
+.plan .inner{padding:0 18px 16px;display:none}
+.plan[open] .inner{display:block}
+.hours{list-style:none;margin:0;padding:0}
+.hours li{display:flex;gap:13px;padding:10px 0;border-bottom:1px solid var(--line)}
+.hours li:last-child{border-bottom:0}
+.hours time{
+  font-family:var(--mono);font-size:12px;font-weight:700;color:var(--deep);flex:0 0 46px;
+  font-variant-numeric:tabular-nums;padding-top:2px;
+}
+.hours div{font-size:14.5px;line-height:1.48}
+.hours strong{display:block;font-size:16px;font-weight:800;letter-spacing:-.025em;margin-bottom:2px}
+.hours span{color:var(--ink-2);font-size:14px}
+
+/* ===== filtros ===== */
+.filters{
+  position:sticky;top:0;z-index:20;background:var(--paper);
+  padding:10px 0 8px;margin-bottom:6px;border:0;
+}
+.frow{display:flex;gap:7px;overflow-x:auto;padding:0 0 9px;scrollbar-width:none;margin:0 -16px;padding-left:16px;padding-right:16px}
+.frow::-webkit-scrollbar{display:none}
+.frow button{
+  flex:0 0 auto;appearance:none;border:0;cursor:pointer;background:var(--card-2);color:var(--ink-2);
+  padding:9px 15px;border-radius:99px;font-size:13.5px;font-weight:700;letter-spacing:-.01em;transition:.18s;
+}
+.frow button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.frow button:active{transform:scale(.95)}
+.fbar{display:flex;gap:7px;align-items:center;padding-top:2px}
+.fbar label{font-size:12px;font-weight:700;color:var(--ink-3);display:flex;align-items:center;gap:6px}
+.fbar select{
+  flex:1;min-width:0;font-family:var(--body);font-size:13px;font-weight:600;padding:9px 10px;
+  border-radius:14px;border:0;background:var(--card-2);color:var(--ink);
+}
+.fclear{flex:0 0 auto;background:none;border:0;color:var(--rust);font-size:13px;font-weight:700;cursor:pointer;padding:0 4px}
+.fcount{font-size:13px;color:var(--ink-3);font-weight:600;padding-top:7px}
+
+/* ===== fichas de restaurante ===== */
+.eat{
+  background:var(--card);border:0;border-radius:var(--r);padding:16px 17px;margin-bottom:10px;
+  box-shadow:var(--shadow);transition:transform .16s;
+}
+.eat:active{transform:scale(.988)}
+.eathead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.eathead > div:first-child{flex:1;min-width:0}
+.eat h3{font-size:19px}
+.eatmeta{font-family:var(--body);font-size:13.5px;color:var(--ink-3);margin-top:4px;letter-spacing:-.004em}
+.score{flex-shrink:0;min-width:70px;text-align:right}
+.score b{display:block;font-size:27px;font-weight:800;letter-spacing:-.045em;line-height:1;color:var(--kelp);font-variant-numeric:tabular-nums}
+.score b.mid{color:var(--sand)} .score b.low{color:var(--rust)}
+.score span{font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.eattags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tg{
+  font-size:12px;font-weight:700;letter-spacing:-.005em;text-transform:none;
+  padding:6px 11px;border-radius:99px;background:var(--card-2);color:var(--ink-2);border:0;
+}
+.tg.eur{background:var(--kelp-soft);color:var(--kelp)}
+.tg.star{background:var(--sand-soft);color:var(--sand)}
+.tg.ok{background:var(--kelp-soft);color:var(--kelp)}
+.tg.no{background:var(--rust-soft);color:var(--rust)}
+.eatacts{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
+.eatacts a{
+  text-decoration:none;font-size:13.5px;font-weight:700;letter-spacing:-.01em;text-transform:none;
+  padding:9px 15px;border-radius:99px;border:0;color:var(--ink);background:var(--card-2);
+}
+.eatacts a.call{background:var(--deep);color:#fff}
+.eatempty{padding:28px 14px;text-align:center;color:var(--ink-3);font-size:14.5px}
+
+/* ===== tablas ===== */
+.twrap{overflow-x:auto;border:0;border-radius:var(--r);background:var(--card);margin-bottom:11px;box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:320px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+th{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);background:var(--card-2)}
+tr:last-child td{border-bottom:0}
+td.mono,.mono{font-family:var(--mono);font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* ===== mapa ===== */
+.mapswitch{display:flex;background:var(--card-2);border-radius:99px;padding:4px;gap:4px;margin-bottom:11px}
+.mapswitch button{
+  flex:1;appearance:none;border:0;cursor:pointer;background:none;padding:10px 6px;border-radius:99px;
+  font-size:13.5px;font-weight:700;color:var(--ink-2);letter-spacing:-.01em;transition:.18s;text-transform:none;
+}
+.mapswitch button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.mapbox{position:relative;border:0;border-radius:var(--r);overflow:hidden;background:var(--card-2);margin-bottom:11px;box-shadow:var(--shadow)}
+.mapbox svg{display:block;width:100%;height:auto}
+.tilepane{position:relative;overflow:hidden;touch-action:pan-y;height:66vw;min-height:280px;max-height:440px;cursor:grab}
+.tilepane.drag{cursor:grabbing}
+.tilewrap{position:absolute;left:0;top:0;will-change:transform}
+.tilewrap img{position:absolute;width:256px;height:256px;display:block;-webkit-user-drag:none;user-select:none}
+:root[data-theme="dark"] .tilewrap{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tilewrap{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9)}}
+.mklayer{position:absolute;inset:0;pointer-events:none}
+.mklayer svg.leaders{position:absolute;inset:0;width:100%;height:100%}
+.mk{
+  position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer;
+  font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;
+  border:2.5px solid rgba(255,255,255,.95);box-shadow:0 2px 8px rgba(0,0,0,.4);transition:transform .16s;
+}
+.mk:active{transform:scale(1.15)}
+.mk.lit{transform:scale(1.22);box-shadow:0 4px 14px rgba(0,0,0,.55);z-index:5}
+.mapzoom{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px;z-index:6}
+.mapzoom button{
+  appearance:none;width:38px;height:38px;border-radius:14px;cursor:pointer;border:0;
+  background:var(--navbg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  color:var(--ink);font-size:18px;font-weight:700;line-height:1;padding:0;box-shadow:var(--shadow);
+}
+.mapzoom button:active{transform:scale(.92)}
+.attrib{position:absolute;left:0;bottom:0;z-index:6;background:var(--navbg);font-size:9.5px;padding:3px 8px;border-radius:0 10px 0 0;color:var(--ink-3)}
+.attrib a{color:var(--ink-3)}
+.mapbox.flat .tilepane,.mapbox.flat #zin,.mapbox.flat #zout,.mapbox.flat .attrib{display:none}
+.mapbox:not(.flat) #mapfallback{display:none}
+.mapbox.full{position:fixed;inset:0;z-index:300;margin:0;border-radius:0;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);background:var(--paper)}
+.mapbox.full .tilepane{height:100%;max-height:none;min-height:0}
+.mapbox.full #mapfallback{height:100%;display:flex;align-items:center;justify-content:center;padding:14px}
+.mapbox.full .mapzoom{bottom:calc(14px + env(safe-area-inset-bottom))}
+.mapbox.full #zfull{background:var(--deep);color:#fff}
+body.noscroll{overflow:hidden}
+body.noscroll .appbar{display:none}
+.mp-num{font-family:var(--mono);font-size:11px;font-weight:700;fill:var(--map-bg);pointer-events:none}
+.mp-dot circle.pin{stroke:var(--map-bg);stroke-width:2}
+.mp-dot circle.hit{fill:transparent}
+.mp-dot.lit circle.pin{stroke:var(--ink);stroke-width:3}
+.mp-anchor{
+  font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  fill:var(--ink-3);pointer-events:none;stroke:var(--map-bg);stroke-width:3;paint-order:stroke fill;
+}
+.mp-grid{stroke:var(--line);stroke-width:1}
+.mp-scale{stroke:var(--ink-3);stroke-width:1.5}
+.mp-scaletxt{font-family:var(--mono);font-size:11px;fill:var(--ink-3)}
+.catkey{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px}
+.catkey button{
+  appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border:0;
+  background:var(--card-2);border-radius:99px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--ink-2);
+}
+.catkey button[aria-pressed="false"]{opacity:.36}
+.catkey i{width:9px;height:9px;border-radius:50%;display:block}
+.maplist{list-style:none;margin:0;padding:0}
+.maplist li{
+  display:flex;align-items:center;gap:12px;padding:13px 15px;border:0;border-radius:16px;
+  background:var(--card);margin-bottom:7px;cursor:pointer;transition:.16s;box-shadow:var(--shadow);
+}
+.maplist li:active{transform:scale(.988)}
+.maplist li.lit{background:var(--deep-soft)}
+.maplist .num{
+  flex:0 0 26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;margin:0;
+}
+.maplist .txt{flex:1;min-width:0}
+.maplist .nm{display:block;font-family:var(--body);font-size:15.5px;font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.maplist .sub{display:block;font-family:var(--body);font-size:13px;color:var(--ink-3);margin:1px 0 0}
+.maplist a.pin-map{flex-shrink:0;text-decoration:none;color:var(--deep);font-size:13px;font-weight:700;text-transform:none;padding:0}
+
+
+/* ===== vista Google Maps ===== */
+.mapmode{display:flex;background:var(--card-2);border-radius:99px;padding:4px;gap:4px;margin-bottom:11px}
+.mapmode button{
+  flex:1;appearance:none;border:0;cursor:pointer;background:none;padding:10px 6px;border-radius:99px;
+  font-size:13.5px;font-weight:700;color:var(--ink-2);letter-spacing:-.01em;transition:.18s;
+}
+.mapmode button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.gwrap{border-radius:var(--r);overflow:hidden;background:var(--card-2);box-shadow:var(--shadow);margin-bottom:11px}
+#gmap{width:100%;height:66vw;min-height:300px;max-height:460px;border:0;display:block}
+.gbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 15px;background:var(--card);
+}
+.gbar b{font-size:15px;font-weight:700;letter-spacing:-.02em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gbar a{flex-shrink:0;font-size:13px;font-weight:700;color:var(--deep)}
+body.gmode #mapbox,body.gmode .catkey,body.gmode .mapswitch,body.gmode #mapnote{display:none}
+body:not(.gmode) .gwrap{display:none}
+
+footer{padding:24px 0 8px;border-top:1px solid var(--line);margin-top:28px;font-size:13px;color:var(--ink-3);line-height:1.55}
+
+</style>
+<meta name="description" content="Guía de San Sebastián (Donostia) para 3 días: pintxos, playas, barrios, visitas y mapa. 18–20 agosto 2026.">
+<meta name="theme-color" content="#0B6BB5">
+</head>
+<body>
+<header>
+  <div class="brand">Donostia</div>
+  <div class="brandsub">San Sebastián · 18–20 agosto 2026</div>
+</header>
+
+<main>
+
+<!-- ============ DÍAS ============ -->
+<section role="tabpanel" id="p-dias" class="on">
+  <h2 class="big">Tres días en Donostia</h2>
+  <p class="lede">Llegas esta tarde. Tienes dos días y medio de una de las mejores ciudades del mundo para comer. Aquí no hay que elegir tanto como en el corredor: todo está a diez minutos de todo.</p>
+
+  <div class="alert sand">
+    <h3>La regla de Donostia</h3>
+    <p>El txikiteo de la Parte Vieja se hace en movimiento: una copa y un pintxo en cada barra, y al siguiente. Los sitios más famosos tienen cola a las 20:00 pero rotan rápido. <b>Id pronto o id tarde, nunca a las 21:00.</b></p>
+  </div>
+
+  <div class="plans">
+
+    <details class="plan" open>
+      <summary>
+        <span><h3>Martes 18 · La llegada</h3><span class="tagline">Primera noche en la Parte Vieja</span></span>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="inner">
+        <p class="lede" style="font-size:14px">Llegada y primera toma de contacto. Noche breve pero suficiente para entender por qué esta ciudad es como es.</p>
+        <ul class="hours">
+          <li><time>Tarde</time><div><strong>Llegada y check-in</strong><span>Si venís en coche, el parking más cómodo del centro es el de la Bretxa (plaza Louis Blanc). Desde ahí, todo a pie.</span></div></li>
+          <li><time>18:30</time><div><strong>Primer paseo por La Concha</strong><span>La bahía en forma de media luna, con la isla de Santa Clara en el centro. Bajad al paseo marítimo y sentad un momento. Es el sitio más bonito de la ciudad.</span></div></li>
+          <li><time>19:30</time><div><strong>Parte Vieja: primera ronda de pintxos</strong><span>Entrad por la calle 31 de Agosto. Primera parada: Bar Atari (calle Mayor 18). Segunda: La Viña (31 de Agosto 3) — la tarta de queso que se come sola. Tercera: Gandarias.</span></div></li>
+          <li><time>21:00</time><div><strong>Cena o pintxos tardíos</strong><span>Borda Berri en Fermín Calbetón 12. Los pintxos de la barra son los mejores de la Parte Vieja: anchoa con guindilla, carrillera al vino tinto, risotto de boletus. Sin reserva, sin carta.</span></div></li>
+          <li><time>22:30</time><div><strong>Última copa en el puerto</strong><span>El paseo del puerto, mirando a Monte Urgull con las luces. Si queda sitio, txakoli frío.</span></div></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="plan">
+      <summary>
+        <span><h3>Miércoles 19 · El día grande</h3><span class="tagline">Playa · cultura · pintxos · atardecer</span></span>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="inner">
+        <p class="lede" style="font-size:14px">El día completo. Playa por la mañana, visitas por la tarde y la ronda de pintxos de Gros como colofón. Es el día que más da de sí.</p>
+        <ul class="hours">
+          <li><time>09:30</time><div><strong>Playa de La Concha o Zurriola</strong><span>Si queréis oleaje y surf, Zurriola (barrio de Gros, al otro lado del Kursaal). Si queréis baño tranquilo en aguas protegidas, La Concha. Agosto: llegad antes de las 10 para elegir buen sitio.</span></div></li>
+          <li><time>12:00</time><div><strong>Monte Urgull</strong><span>Subid a pie desde la Parte Vieja (20 minutos) hasta el castillo de la Mota y la estatua del Sagrado Corazón. Las vistas de la bahía desde arriba son las mejores de la ciudad. Entrada libre siempre.</span></div></li>
+          <li><time>14:00</time><div><strong>Comida: Bodegón Alejandro o Kokotxa</strong><span>Bodegón Alejandro (Fermín Calbetón 4) es cocina vasca de producto sin pretensiones: merluza, chipirones, kokotxas. Kokotxa (Campanario 11) tiene una estrella Michelin y el menú más corto del que la tiene en España.</span></div></li>
+          <li><time>16:30</time><div><strong>Peine del Viento</strong><span>Las esculturas de Chillida al final del paseo de Ondarreta, donde la ciudad termina en el mar. Son tres piezas de acero corten clavadas en la roca, con el Cantábrico rompiéndose a los pies. Gratis, siempre abierto.</span></div></li>
+          <li><time>17:30</time><div><strong>Monte Igueldo</strong><span>El funicular sube en cinco minutos y desde arriba tenéis la bahía completa, con La Concha, Zurriola y Urgull en un solo plano. Hay un parque de atracciones centenario que es un objeto de nostalgia. Merece el precio solo por las vistas.</span></div></li>
+          <li><time>19:30</time><div><strong>Pintxos en Gros</strong><span>El barrio de Gros, al otro lado del río Urumea, es la alternativa joven a la Parte Vieja. Empezad en el Bar Bergara (General Artetxe 8) — ganador de concursos nacionales de pintxos. Menos turistas, misma calidad.</span></div></li>
+          <li><time>21:30</time><div><strong>Cena con reserva</strong><span>Si habéis reservado con antelación: Arzak (Alcalde Elósegui 273), tres estrellas Michelin desde 1989, cocina vasca de vanguardia. Si no: Rekondo (Paseo de Igueldo 57), parrilla excepcional y la bodega más interesante de la ciudad.</span></div></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="plan">
+      <summary>
+        <span><h3>Jueves 20 · El último día</h3><span class="tagline">Mercado · Ondarreta · despedida</span></span>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="inner">
+        <p class="lede" style="font-size:14px">El día de la despedida, a ritmo más tranquilo. Mercado por la mañana, última playa, y la mejor comida del viaje para cerrar.</p>
+        <ul class="hours">
+          <li><time>09:00</time><div><strong>Mercado de La Bretxa</strong><span>El mercado central de Donostia, en el centro de la Parte Vieja. Producto local: queso Idiazabal, txistorra, bonito en salazón, pintxos de mañana en las barras. Jueves tiene buena afluencia de productores.</span></div></li>
+          <li><time>10:30</time><div><strong>Museo San Telmo (opcional)</strong><span>El mejor museo de historia vasca, en el convento dominico del siglo XVI. Las pinturas murales de José María Sert son las más grandes del movimiento moderno español. Abre a las 10:00, cierra a las 20:00. Entrada: 8 €.</span></div></li>
+          <li><time>12:00</time><div><strong>Playa de Ondarreta</strong><span>La más tranquila de las tres. Está al fondo de la bahía, separada de La Concha por la Perla (el balneario), y tiene menos afluencia turística. Buen último baño.</span></div></li>
+          <li><time>14:00</time><div><strong>Última comida: Juanito Kojua o asador</strong><span>Juanito Kojua (Puerto 14) es el restaurante más antiguo de la Parte Vieja: pescado del día, kokotxas al pil-pil, txangurro relleno. Si preferís asador, Rekondo tiene la mejor parrilla de merluza de la ciudad.</span></div></li>
+          <li><time>16:30</time><div><strong>Último paseo por La Concha</strong><span>El paseo de La Concha de punta a punta son 1,35 km. Haced el recorrido completo, parad en el mirador del hotel María Cristina y llevad algo para el camino. Es el mejor despedida de la ciudad.</span></div></li>
+          <li><time>Tarde</time><div><strong>Salida</strong><span>Si vais hacia Madrid por carretera, la AP-1 sale por Hernani. Si hacia Bilbao, la A-8 por la costa. Ambas están a 15 minutos del centro.</span></div></li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+
+  <div class="eyebrow">Si tenéis un hueco libre</div>
+  <div class="alert kelp">
+    <h3>Dos escapadas desde Donostia</h3>
+    <p><b>Pasajes de San Juan (Pasai Donibane).</b> Un pueblecito de casas de colores a 10 km, donde víctor Hugo pasó un verano en 1843. Se llega en barco desde el puerto de Pasajes en 15 minutos. Victor Hugo vivió en la casa azul de la calle San Juan.</p>
+    <p><b>Hondarribia.</b> A 20 km hacia la frontera francesa, una villa amurallada del siglo X con el casco histórico intacto. El barrio de La Marina tiene los bares de pintxos más fotogénicos del País Vasco.</p>
+  </div>
+
+  <p class="note">Horarios y precios verificados en fuentes públicas en agosto de 2026. En temporada alta todo cambia sin aviso. Para restaurantes con estrella, reservad siempre con antelación.</p>
+</section>
+
+<!-- ============ BARRIOS ============ -->
+<section role="tabpanel" id="p-barrios">
+  <h2 class="big">Los barrios, uno a uno</h2>
+  <p class="lede">Donostia es pequeña: de un extremo al otro hay 4 km andando. Pero cada barrio tiene su carácter, su cocina y su ritmo.</p>
+
+  <ul class="spine">
+
+    <li class="stop">
+      <span class="km" style="font-size:9px;left:-58px;width:40px">Parte<br>Vieja</span>
+      <div class="card">
+        <h3>Alde Zaharra · Parte Vieja</h3>
+        <p class="where">El corazón histórico y gastronómico</p>
+        <p class="why">La ciudad vieja, reconstruida tras el incendio de 1813 que la arrasó casi entera. Cuadrícula de calles estrechas con bares en cada planta baja. Es el epicentro mundial del pintxo: más bares por metro cuadrado que ningún otro sitio en Europa.</p>
+        <div class="slot comer"><b class="lab">Comer y beber</b>
+          <p>La ruta clásica: calle Fermín Calbetón, calle Pescadería y calle 31 de Agosto. En cada barra pedís un pintxo y un txikito (vasito de vino) o txakoli, y seguís al siguiente. No os quedéis en uno solo.</p>
+        </div>
+        <div class="slot ver"><b class="lab">Ver</b>
+          <p>Iglesia de Santa María del Coro (fachada barroca del XVIII). Plaza de la Constitución, con los números de las ventanas que servían de palcos para las corridas. Museo San Telmo.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="stop">
+      <span class="km" style="font-size:9px;left:-58px;width:40px">Monte<br>Urgull</span>
+      <div class="card">
+        <h3>Monte Urgull</h3>
+        <p class="where">El monte que protege la bahía</p>
+        <p class="why">El promontorio que cierra la Parte Vieja por el norte, con el castillo de la Mota en la cima y la estatua del Sagrado Corazón visible desde toda la bahía. Sube desde la Parte Vieja o desde el Aquarium.</p>
+        <div class="slot ver"><b class="lab">Ver</b>
+          <p>Castillo de la Mota (siglo XII, hoy museo de la ciudad). Cementerio inglés de la guerra de la Independencia. Vistas completas de la bahía, La Concha y Zurriola.</p>
+        </div>
+        <div class="slot playa"><b class="lab">Junto al mar</b>
+          <p>El Aquarium está al pie del monte, donde la Parte Vieja toca el puerto. La colección de fauna del Cantábrico es una de las mejores del norte de España.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="stop">
+      <span class="km" style="font-size:9px;left:-58px;width:40px">Centro</span>
+      <div class="card">
+        <h3>Centro · El Romántico</h3>
+        <p class="where">Ensanche burgués del siglo XIX</p>
+        <p class="why">El barrio construido cuando la ciudad creció fuera de las murallas: avenidas anchas, edificios de piedra, jardines. Aquí está el Ayuntamiento (el antiguo casino), el Gran Kursaal y los hoteles de categoría.</p>
+        <div class="slot ver"><b class="lab">Ver</b>
+          <p>Catedral del Buen Pastor (neogótica, 1897, la más alta de Donostia). Plaza de Gipuzkoa con jardines. Puente María Cristina sobre el Urumea.</p>
+        </div>
+        <div class="slot beber"><b class="lab">Tomar algo</b>
+          <p>Boulevard, la calle peatonal central con terrazas. El bar del Hotel María Cristina para un vermut con vistas al río.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="stop">
+      <span class="km" style="font-size:9px;left:-58px;width:40px">Gros</span>
+      <div class="card">
+        <div class="cardhead"><h3>Gros</h3><span class="chip top">El barrio local</span></div>
+        <p class="where">Al otro lado del Urumea · ambiente joven</p>
+        <p class="why">El barrio donde vive la gente de Donostia que no quiere vivir para los turistas. Zurriola es su playa, el Kursaal es su sala de conciertos y los bares de pintxos de la General Artetxe son su versión de la Parte Vieja — con menos cola.</p>
+        <div class="slot comer"><b class="lab">Comer</b>
+          <p><b>Bar Bergara</b> (General Artetxe 8): ganador de varios campeonatos nacionales de pintxos. <b>Bideluze</b> para bocadillos de merluza frita. Menos turismo, misma materia prima.</p>
+        </div>
+        <div class="slot playa"><b class="lab">Playa</b>
+          <p><b>Zurriola:</b> la playa del surf. Olas continuas, ambiente más joven y menos resguardada que La Concha. Aquí entrenan los surfistas locales y hay escuelas de surf en primera línea.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="stop">
+      <span class="km" style="font-size:9px;left:-58px;width:40px">Ondarr.</span>
+      <div class="card">
+        <h3>Ondarreta · Miraconcha</h3>
+        <p class="where">El extremo oeste de la bahía</p>
+        <p class="why">La parte más residencial y tranquila del paseo de La Concha. Donde termina La Concha empieza Ondarreta, separadas por La Perla (el balneario centenario). Al final de Ondarreta, las esculturas de Chillida.</p>
+        <div class="slot ver"><b class="lab">Ver</b>
+          <p><b>Peine del Viento</b> (Eduardo Chillida, 1977): tres esculturas de acero corten en la roca viva, con el Cantábrico a los pies. El sitio más fotografiado y el más impresionante con mar de fondo. Siempre abierto, entrada libre.</p>
+        </div>
+        <div class="slot playa"><b class="lab">Playa</b>
+          <p><b>Ondarreta:</b> más tranquila que La Concha, menos turística. Buena para el último baño del viaje.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="stop">
+      <span class="km" style="font-size:9px;left:-58px;width:40px">Igueldo</span>
+      <div class="card">
+        <div class="cardhead"><h3>Monte Igueldo</h3><span class="chip top">Las mejores vistas</span></div>
+        <p class="where">El monte que cierra la bahía por el oeste</p>
+        <p class="why">El contrapunto a Urgull: mientras Urgull cierra la bahía por el este, Igueldo la cierra por el oeste. Desde la cima, a 181 metros, se ve todo: La Concha, Zurriola, el Kursaal, la Parte Vieja y Urgull en una sola imagen. Es la postal de Donostia.</p>
+        <div class="slot ver"><b class="lab">Ver</b>
+          <p>El <b>funicular</b> sube desde el pie del monte (junto a Ondarreta) en 5 minutos. Precio: 3,90 € ida y vuelta. Arriba: parque de atracciones centenario (1912), mirador y bar-restaurante. En agosto abre de 10:00 a 22:00.</p>
+        </div>
+        <div class="slot comer"><b class="lab">Comer cerca</b>
+          <p><b>Rekondo</b> está en el Paseo de Igueldo 57, subiendo hacia el monte. Parrilla, bodega de 100.000 botellas y cocina vasca sin artificios.</p>
+        </div>
+      </div>
+    </li>
+
+  </ul>
+
+  <div class="eyebrow">Transporte y moverse</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Coche y parking</h3><span class="chip shut">Zona azul en centro</span></div>
+    <p class="where">Centro de Donostia</p>
+    <p class="why">El centro tiene zona azul de pago en casi todas las calles. Lo más cómodo es aparcar al llegar y no mover el coche hasta salir. Los parkings más prácticos para tres días son el de <b>La Bretxa</b> (24 h, junto a la Parte Vieja) y el del <b>Boulevard</b> (centro). Rondan los 25–30 € al día en agosto.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>A pie y en autobús</h3><span class="chip eur">Gratis a pie</span></div>
+    <p class="where">Todo el centro en radio de 2 km</p>
+    <p class="why">De la Parte Vieja a Gros cruzando el Kursaal: 15 minutos. De La Concha al Peine del Viento: 25 minutos. De Ondarreta al funicular de Igueldo: 10 minutos. La ciudad está hecha para caminar.</p>
+    <p class="why">Para Monte Igueldo o Pasajes, el autobús urbano (Dbus) cubre toda la ciudad. Billete: 1,85 €. Con bonobús: 0,76 €.</p>
+  </div>
+</section>
+
+<!-- ============ COMER ============ -->
+<section role="tabpanel" id="p-comer">
+  <h2 class="big">Dónde comer</h2>
+  <p class="lede">Cuarenta sitios entre pintxos de barra y alta cocina. Filtra por zona, tipo o precio.</p>
+
+  <div class="alert rust">
+    <h3>De dónde salen las notas</h3>
+    <p>Puntuación y número de reseñas tomados de <b>Google Maps el 18 de agosto de 2026</b>. Es una foto de ese día. Una casa de 4,1 con 4.500 reseñas suele ser más fiable que una de 4,8 con 60.</p>
+  </div>
+
+  <div class="filters">
+    <div class="frow" id="f-zona"></div>
+    <div class="frow" id="f-tipo"></div>
+    <div class="fbar">
+      <select id="f-sort" aria-label="Ordenar la lista">
+        <option value="ord">Orden recomendado</option>
+        <option value="nota">Orden: mejor nota</option>
+        <option value="resenas">Orden: más reseñas</option>
+        <option value="precio">Orden: más barato</option>
+      </select>
+      <select id="f-precio" aria-label="Filtrar por precio">
+        <option value="">Precio: todos</option>
+        <option value="1">€ hasta 20</option>
+        <option value="2">€€ 20 a 50</option>
+        <option value="3">€€€ más de 50</option>
+      </select>
+      <button type="button" class="fclear" id="f-clear">Limpiar</button>
+    </div>
+    <div class="fcount" id="f-count"></div>
+  </div>
+
+  <div id="eatlist"></div>
+</section>
+
+<!-- ============ SABORES ============ -->
+<section role="tabpanel" id="p-sabores">
+  <h2 class="big">Qué comer y por qué</h2>
+  <p class="lede">Nueve cosas imprescindibles. Si volvéis a casa sin haber probado al menos seis, habéis pasado por Donostia sin haberla comido.</p>
+
+  <div class="card">
+    <div class="cardhead"><h4>El pintxo (no el pincho)</h4><span class="chip top">La base de todo</span></div>
+    <p class="why">El pintxo donostiarra no es una tapa española rebautizada: es una propuesta gastronómica en miniatura. Los de barra (los que están ya expuestos sobre el mostrador) son los tradicionales — gilda, anchoa, tortilla. Los <b>pintxos de cocina</b> (los que se piden y llegan en plato caliente) son la revolución: carrillera, risotto, foie. Pedid de los dos tipos.</p>
+    <p class="why"><b>Protocolo:</b> llegáis, miráis la barra, pedís uno o dos y una copa. Pagáis al momento. Y al siguiente bar.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h4>La Gilda</h4><span class="chip info">El pintxo original</span></div>
+    <p class="why">Una brocheta con aceituna, guindilla en vinagre y anchoa. Nació en el Bar Casa Vallés de Donostia en 1948, cuando pusieron en un palillo los tres ingredientes más vendidos de la barra. Le pusieron el nombre de la película de Rita Hayworth porque era <i>verde, salada y un poco picante</i>. Es el primer pintxo de la historia y sigue siendo el mejor.</p>
+    <p class="why"><b>Dónde:</b> Bar Txepetxa (Pescadería 5) es el templo de la anchoa y la gilda más reconocida. La Viña también tiene buena versión.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h4>Kokotxas al pil-pil</h4><span class="chip info">La firma vasca</span></div>
+    <p class="why">Las kokotxas son la quijada de la merluza, la parte gelatinosa que queda debajo de la cabeza. Al pil-pil, cocinadas a baja temperatura con aceite y ajo, sueltan el colágeno natural que emulsiona la salsa. Es una técnica solo vasca, y la de Donostia es la mejor del mundo. Plato lento, plato difícil, plato de aquí.</p>
+    <p class="why"><b>Dónde:</b> Bodegón Alejandro, Juanito Kojua, Kokotxa (con estrella Michelin).</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h4>Txangurro relleno</h4><span class="chip top">El plato de celebración</span></div>
+    <p class="why">El centollo (txangurro en euskera) se cocina, se desmiga, se mezcla con cebolla, tomate, coñac y vino blanco, y se rellena de vuelta en el caparazón. Es un plato de fiesta, de domingo, de celebración. En agosto el centollo está en buen momento.</p>
+    <p class="why"><b>Dónde:</b> Juanito Kojua (Puerto 14) o Arzak.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h4>Merluza a la vasca</h4><span class="chip top">El plato del mar</span></div>
+    <p class="why">Rodajas de merluza en salsa verde (aceite, ajo, perejil, caldo de pescado), con almejas y guisantes. La salsa se mueve en círculo durante toda la cocción hasta que el colágeno del pescado la liga. Es más técnica de lo que parece y no se puede apurar.</p>
+    <p class="why"><b>Dónde:</b> cualquier restaurante de cocina vasca clásica. Bodegón Alejandro tiene una versión muy fiel.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h4>Tarta de queso de La Viña</h4><span class="chip info">Postre de culto</span></div>
+    <p class="why">El bar La Viña (31 de Agosto 3) lleva décadas haciendo la misma tarta de queso: quemada por fuera, cremosa y casi líquida por dentro, sin base. Se ha convertido en un fenómeno global — la recetan en Nueva York, Tokio y Sidney. La original sigue costando lo que costaba. Comed un trozo allí antes de que la fama acabe con ella.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h4>Txakoli</h4><span class="chip info">El vino de aquí</span></div>
+    <p class="why">Blanco joven, ácido, con aguja, poca graduación (10–11%) y un regusto a mar. La denominación Getariako Txakolina (del municipio de Getaria, a 25 km) es la más reputada. Se escancia desde alto, a distancia del vaso, para que se abra y burbujee. Acompaña el pintxo mejor que ningún otro vino.</p>
+    <p class="why"><b>Maridaje:</b> pintxos de anchoa, gilda, kokotxas, marisco en general. Con carnes o quesos, pedid vino tinto de Rioja Alavesa.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h4>Sidra (sagardoa)</h4><span class="chip info">Octubre a abril · pero...</span></div>
+    <p class="why">La temporada de sidra es de octubre a abril en las sagardotegiak (sidrerías), pero en agosto se sirve en muchos bares. La sidra vasca es seca, ácida, sin gas añadido. En las sidrerías la cogéis directamente del tonel sosteniendo el vaso a la altura del suelo. Si encontráis una sidrería abierta, merece una visita.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h4>Idiazabal</h4><span class="chip info">El queso de Euskadi</span></div>
+    <p class="why">Queso de leche de oveja latxa, ahumado o sin ahumar, con denominación de origen. La corteza es color ámbar por el ahumado con cerezo, manzano o haya. Sabor intenso, pasta firme, retrogusto largo. Se compra en el Mercado de La Bretxa y se lleva a casa envuelto.</p>
+  </div>
+
+  <div class="alert kelp">
+    <h3>La sidra y el ritual</h3>
+    <p>En las sagardotegiak hay un menú único: tortilla de bacalao, chorizo a la sidra, chuletón y tarta de queso. La sidra se sirve del tonel tirando el grifo hacia abajo y levantando el vaso desde el suelo, con el chorro cayendo desde metro y medio para oxigenarla. Es el único menú del mundo donde el vino (o la sidra) manda al plato.</p>
+  </div>
+</section>
+
+<!-- ============ VER ============ -->
+<section role="tabpanel" id="p-ver">
+  <h2 class="big">Visitas con horario</h2>
+  <p class="lede">Lo que tiene puerta y precio. Confirmad antes de ir: en agosto los horarios varían.</p>
+
+  <div class="twrap">
+    <table>
+      <thead><tr><th>Visita</th><th>Cuándo</th><th>Precio</th></tr></thead>
+      <tbody>
+        <tr><td><b>Museo San Telmo</b><br>Parte Vieja</td><td class="mono">Mar–dom 10:00–20:00</td><td class="mono">8 € / gratis martes</td></tr>
+        <tr><td><b>Aquarium</b><br>Junto al puerto</td><td class="mono">Verano 10:00–20:00</td><td class="mono">14 € / 8 € niños</td></tr>
+        <tr><td><b>Funicular Monte Igueldo</b><br>Final de Ondarreta</td><td class="mono">Ago: 10:00–22:00</td><td class="mono">3,90 € ida y vuelta</td></tr>
+        <tr><td><b>Monte Urgull</b><br>Parte Vieja</td><td class="mono">Siempre abierto</td><td class="mono">Gratis</td></tr>
+        <tr><td><b>Peine del Viento</b><br>Final de Ondarreta</td><td class="mono">Siempre abierto</td><td class="mono">Gratis</td></tr>
+        <tr><td><b>Castillo de la Mota</b><br>Cima de Urgull</td><td class="mono">10:00–17:30 (verano)</td><td class="mono">Gratis</td></tr>
+        <tr><td><b>Catedral del Buen Pastor</b><br>Centro</td><td class="mono">08:30–13:00 · 16:30–20:30</td><td class="mono">Gratis</td></tr>
+        <tr><td><b>Mercado de La Bretxa</b><br>Parte Vieja</td><td class="mono">Lun–sáb 08:00–14:00</td><td class="mono">Gratis</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="eyebrow">Lo que merece explicación</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Museo San Telmo</h3><span class="chip top">El mejor de la ciudad</span></div>
+    <p class="where">Plaza Zuloaga, 1 · Parte Vieja</p>
+    <p class="why">Un convento dominico del siglo XVI reconvertido en museo de historia y cultura vasca. La pieza más impresionante no es un objeto sino una pintura: los murales de <b>José María Sert</b> en la iglesia, pintados entre 1929 y 1953. Son las pinturas murales más grandes del arte español moderno y representan el pasado y presente del pueblo vasco.</p>
+    <p class="why">La colección permanente recorre 50.000 años de historia del País Vasco con piezas arqueológicas y etnográficas. La arquitectura del edificio, con el claustro renacentista intacto, ya vale la visita. <b>Los martes la entrada es gratuita</b> — esta semana, el martes 18 por la tarde si llegáis a tiempo.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Museo+San+Telmo+San+Sebastian" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Peine del Viento</h3><span class="chip eur">Entrada libre</span></div>
+    <p class="where">Final del Paseo de Eduardo Chillida · Ondarreta</p>
+    <p class="why">Las tres esculturas de acero corten (1977) que Eduardo Chillida instaló en la roca viva al final del paseo, donde el mar choca contra la piedra. El escultor las diseñó como parte del lugar: los grados de inclinación, la posición de cada pieza, la orientación al mar. No son esculturas en un sitio, son esculturas que hacen el sitio.</p>
+    <p class="why">Con mar de fondo y viento de poniente, el agua entra por los tubos bajo las rocas y sale como géiser entre las piezas. <b>Con temporal, no os acerquéis a la primera fila.</b> Con calma, es el lugar más tranquilo de la ciudad.</p>
+    <div class="acts"><a class="act" href="https://www.google.com/maps/search/?api=1&query=Peine+del+Viento+San+Sebastian" target="_blank" rel="noopener">Mapa</a></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Aquarium de San Sebastián</h3><span class="chip eur">14 €</span></div>
+    <p class="where">Plaza Carlos Blasco de Imaz · junto al puerto</p>
+    <p class="why">Uno de los mejores acuarios del Atlántico norte. El túnel submarino de 360 grados con rayas y tiburones es la pieza central, pero la colección de fauna del Cantábrico en la primera planta es lo más valioso: pulpos, bogavantes, rodaballos y especies de la costa vasca que casi nunca se ven fuera del agua. Hay un barco ballenero vasco del siglo XVII reconstruido.</p>
+    <div class="acts">
+      <a class="act" href="https://aquariumss.com/" target="_blank" rel="noopener">Web</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Aquarium+San+Sebastian" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Monte Urgull</h3><span class="chip eur">Entrada libre</span></div>
+    <p class="where">Subida desde la Parte Vieja o desde el Aquarium</p>
+    <p class="why">El monte que protege la bahía por el norte, con 121 metros de altura y el castillo de la Mota en la cima. La subida más fácil sale de la Parte Vieja junto a la Iglesia de Santa María (señalizado). Son 20–25 minutos andando entre pinos y fort medieval.</p>
+    <p class="why">Desde arriba se ve toda la bahía con La Concha y Zurriola a ambos lados, Monte Igueldo al fondo y la isla de Santa Clara en el centro. Es la mejor vista gratuita de la ciudad. El Cementerio Inglés, con tumbas de soldados napoleónicos de la guerra de 1813, es una pieza de historia poco visitada.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Funicular de Monte Igueldo</h3><span class="chip top">La foto de Donostia</span></div>
+    <p class="where">Final del Paseo de Igueldo · junto a Ondarreta</p>
+    <p class="why">El funicular más antiguo en servicio del País Vasco (desde 1912) sube en 5 minutos a 181 metros sobre el mar. Arriba, el parque de atracciones centenario con sus atracciones de madera vintage — es Patrimonio Inmaterial — y el mirador desde el que se ve toda la bahía en un solo encuadre.</p>
+    <p class="why"><b>Consejo:</b> id al atardecer. La luz sobre La Concha entre las 19:00 y las 21:00 de agosto es la más bonita de la ciudad.</p>
+    <div class="acts">
+      <a class="act" href="https://www.monteigueldo.es/" target="_blank" rel="noopener">Web</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Funicular+Monte+Igueldo+San+Sebastian" target="_blank" rel="noopener">Mapa</a>
+    </div>
+    <p class="note">En agosto hay colas. Llegad fuera de las horas punta (11:00–13:00 y 17:00–19:00).</p>
+  </div>
+</section>
+
+<!-- ============ PLAYAS ============ -->
+<section role="tabpanel" id="p-playas">
+  <h2 class="big">Las tres playas</h2>
+  <p class="lede">Tres playas en la misma ciudad con caracteres completamente distintos. El agua en agosto ronda los 20–22 °C: fresca pero bañable.</p>
+
+  <div class="card">
+    <div class="cardhead"><h3>La Concha</h3><span class="chip top">La más famosa de España</span></div>
+    <p class="why">La bahía en forma de concha con la isla de Santa Clara en el centro. Dos kilómetros de arena fina protegida del oleaje por la isla, con el paseo marítimo (uno de los más bonitos de Europa) detrás. Banderas azules desde los años 80.</p>
+    <p class="why"><b>El secreto:</b> la marea baja por la mañana deja una franja de arena enorme; la marea alta a mediodía puede dejar la playa en un pasillo estrecho. Mirad la tabla de mareas antes de salir. En agosto el mejor momento es de 9:00 a 12:00.</p>
+    <p class="why"><b>La Perla:</b> el balneario de principios del siglo XX que separa La Concha de Ondarreta. El circuito de agua de mar termal cuesta 33 € y merece la pena un día de viento o lluvia.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Zurriola</h3><span class="chip info">Surf y ambiente joven</span></div>
+    <p class="why">La playa del barrio de Gros, al otro lado del río Urumea y del Kursaal. Sin la protección de ninguna isla, recibe el oleaje directo del Cantábrico: buena para surfear, menos tranquila para bañarse. Es la playa de los donostiarras jóvenes y de los surfistas.</p>
+    <p class="why"><b>Escuelas de surf:</b> hay varias en primera línea, con alquiler de tablas y clases para principiantes. En agosto hay olas suficientes para aprender incluso con poco viento.</p>
+    <p class="why"><b>Después:</b> el barrio de Gros está a 100 metros. Bares de pintxos, cafeterías, menos turismo y todo más barato que la Parte Vieja.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Ondarreta</h3><span class="chip info">La más tranquila</span></div>
+    <p class="why">La continuación de La Concha al oeste, separada por La Perla. Misma bahía, mismo tipo de arena, menos afluencia turística. Es la playa de los donostiarras mayores y de las familias que llevan aquí décadas. Tiene todo: chiringuito, duchas, zona de juegos.</p>
+    <p class="why">Al fondo de Ondarreta termina la ciudad y empieza el Peine del Viento. Es la playa desde la que mejor se ven las esculturas de Chillida, y desde la que mejor se ve el funicular de Igueldo subiendo.</p>
+    <p class="why"><b>Recomendada para:</b> el último día, el baño tranquilo de despedida antes de coger el coche.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Isla de Santa Clara</h3><span class="chip top">La excursión del día</span></div>
+    <p class="why">La islita en el centro de la bahía de La Concha, a 700 metros de la costa. Se llega en barco desde el puerto (Motor Boats Santa Clara): sale cada 30 minutos en verano, cuesta 4,50 € ida y vuelta. En la isla hay una pequeña playa de arena, una zona de picnic, un faro y un restaurante. Merece la excursión si el día acompaña.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Bote+motor+Isla+Santa+Clara+San+Sebastian" target="_blank" rel="noopener">Embarcadero</a>
+    </div>
+  </div>
+
+  <div class="alert">
+    <h3>Tres avisos del Cantábrico</h3>
+    <p><b>Las mareas cambian la playa entera.</b> En La Concha la diferencia entre pleamar y bajamar puede ser de 3 metros. A marea alta la arena casi desaparece. Consultad siempre antes de salir.</p>
+    <p><b>Zurriola tiene corrientes.</b> Con oleaje y agua revuelta, bañaos solo en zona vigilada y respetad las banderas. No es La Concha.</p>
+    <p><b>El paseo de La Concha se llena.</b> En agosto de tarde, el paseo marítimo es casi intransitable. Si queréis pasear cómodamente, hacedlo por la mañana temprano o después de las 21:00.</p>
+  </div>
+</section>
+
+<!-- ============ MAR ============ -->
+<section role="tabpanel" id="p-mar">
+  <h2 class="big">Pescado y marisco</h2>
+  <p class="lede">La costa vasca tiene algunos de los mejores restaurantes de pescado del mundo. Desde la Parte Vieja hasta Getaria hay 25 km de litoral y tres pueblos de mar que merecen el viaje.</p>
+
+  <div class="alert kelp">
+    <h3>Qué pedir en agosto</h3>
+    <p><b>Merluza</b> (luzia): en plena temporada, el mejor pescado de la costa vasca. Pedidla a la vasca (salsa verde) o a la plancha con aceite y ajo. <b>Rodaballo</b> (erreboiloa): agosto es su mejor mes; Elkano en Getaria lo cocina mejor que nadie en el mundo. <b>Bonito del Norte</b>: la temporada de bonito es julio-septiembre; al marmitako o a la plancha. <b>Txangurro</b> (centollo): buena temporada, pedidlo relleno si está en carta. <b>Anchoa</b>: en agosto se conserva en salazón; las de Hondarribia y Getaria son las mejores.</p>
+  </div>
+
+  <div class="eyebrow">En Donostia</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Kokotxa ★</h3><span class="chip top">1 estrella Michelin</span></div>
+    <p class="where">Campanario 11 · Parte Vieja · Menú 95 €</p>
+    <p class="why">El restaurante de pescado más preciso de la Parte Vieja. La cocina de Dani López es vasca de producto y técnica: kokotxas al pil-pil, rodaballo con mantequilla de algas, merluza en texturas. Sin carta — solo menú degustación. El más corto de los que tienen estrella en España: 7 pasos. Reserva obligatoria.</p>
+    <div class="acts">
+      <a class="act call" href="tel:+34943211441">Llamar</a>
+      <a class="act" href="https://www.google.com/search?q=Kokotxa+restaurante+San+Sebastián" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Kokotxa+Campanario+San+Sebastian" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Juanito Kojua</h3><span class="chip info">El más antiguo</span></div>
+    <p class="where">Puerto 14 · Parte Vieja · 35–65 €</p>
+    <p class="why">El restaurante más antiguo de la Parte Vieja, frente al puerto. Cocina vasca clásica sin filtros: pescado del día a la plancha, kokotxas al pil-pil, txangurro relleno, marmitako de bonito. Sin modernidades. La lonja está a 50 metros y se nota.</p>
+    <div class="acts">
+      <a class="act call" href="tel:+34943420180">Llamar</a>
+      <a class="act" href="https://www.google.com/search?q=Juanito+Kojua+San+Sebastián" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Juanito+Kojua+Puerto+San+Sebastian" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Bodegón Alejandro</h3><span class="chip eur">Relación calidad-precio</span></div>
+    <p class="where">Fermín Calbetón 4 · Parte Vieja · 25–45 €</p>
+    <p class="why">Cocina vasca de producto sin pretensiones ni precio de estrella. La merluza a la vasca es de referencia — salsa verde ligada a mano, almejas grandes, guisantes frescos. También tienen chipirones en su tinta y kokotxas. Reserva recomendada para comer, casi imprescindible para cenar.</p>
+    <div class="acts">
+      <a class="act call" href="tel:+34943427158">Llamar</a>
+      <a class="act" href="https://www.google.com/search?q=Bodegón+Alejandro+San+Sebastián" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Bodegon+Alejandro+San+Sebastian" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Bar Txepetxa</h3><span class="chip info">El templo de la anchoa</span></div>
+    <p class="where">Pescadería 5 · Parte Vieja · 10–20 €</p>
+    <p class="why">No es un restaurante: es el bar de pintxos más especializado de Donostia, con 20 versiones distintas de anchoa en la barra. Anchoa con guindilla, con huevo de codorniz, con foie, con pulpo... Pedid tres o cuatro versiones distintas con un txakoli frío. Solo pintxos, sin carta.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=Bar+Txepetxa+Donostia+anchoa" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Bar+Txepetxa+Pescaderia+San+Sebastian" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="eyebrow">Getaria · 25 km · imprescindible</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Elkano ★</h3><span class="chip top">El mejor rodaballo del mundo</span></div>
+    <p class="where">Herrerieta 2 · Getaria · 65–130 €</p>
+    <p class="why">Elkano es el restaurante de pescado a la brasa más importante de España. Pedro Arregui lleva décadas cocinando rodaballo, besugo y anchoa en la parrilla con la misma técnica: a la distancia exacta de la brasa de sarmiento, vuelta única, nada más. El rodaballo entero es el plato que viene a buscar el mundo. Agosto es su mejor mes. <b>Reserva con semanas de antelación.</b></p>
+    <div class="acts">
+      <a class="act call" href="tel:+34943140024">Llamar</a>
+      <a class="act" href="https://www.google.com/search?q=Elkano+Getaria+restaurante" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Elkano+Getaria" target="_blank" rel="noopener">Mapa</a>
+    </div>
+    <p class="note">Getaria es un pueblo pesquero a 25 min en coche por la GI-3440 costera. Vale la pena el viaje solo por el pueblo: calles medievales, el puerto, la iglesia gótica y el museo Balenciaga.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Kaia-Kaipe</h3><span class="chip info">Con vistas al puerto</span></div>
+    <p class="where">General Arnao 4 · Getaria · 50–90 €</p>
+    <p class="why">El restaurante encima del puerto de Getaria, con las vistas a las barcas de pesca. Cocina similar a Elkano — rodaballo, besugo, txipirones — pero más asequible y más fácil de reservar. El menú del día en verano es una de las mejores opciones de relación calidad-precio de toda la costa vasca.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=Kaia+Kaipe+Getaria" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Kaia+Kaipe+Getaria" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="eyebrow">Hondarribia · 20 km · en la frontera</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Alameda ★</h3><span class="chip top">1 estrella Michelin</span></div>
+    <p class="where">Minasoroeta 1 · Hondarribia · Menú 85–110 €</p>
+    <p class="why">El restaurante de los hermanos Txomin y Kepa Arbelaitz en la villa medieval de Hondarribia. Cocina vasca de producto con técnica francesa — pescado del día a la parrilla, kokotxas, tartar de atún. El edificio, en una casa del siglo XVII dentro del casco amurallado, es parte de la experiencia. Reserva imprescindible.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=Alameda+restaurante+Hondarribia" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Alameda+Hondarribia" target="_blank" rel="noopener">Mapa</a>
+    </div>
+    <p class="note">Hondarribia está a 20 min en coche. El casco medieval amurallado merece una hora de paseo por sí solo. Si vais a comer allí, llegaros pronto y daos una vuelta por La Marina (barrio de pescadores) antes.</p>
+  </div>
+
+  <div class="eyebrow">Pasajes · 10 km · el puerto más cercano</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Casa Cámara</h3><span class="chip info">En el puerto activo</span></div>
+    <p class="where">San Juan 79 · Pasajes de San Juan · 40–70 €</p>
+    <p class="why">Pasajes de San Juan (Pasai Donibane) es el puerto pesquero más activo cerca de Donostia. Casa Cámara lleva desde 1884 sirviendo el pescado que entra por el muelle de enfrente: anchoa en temporada, besugo, merluza de pincho. El comedor está literalmente encima del agua. Para llegar, cruzad en el pequeño bote que une los dos barrios del puerto (1 €).</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=Casa+Camara+Pasajes+San+Juan" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Casa+Camara+Pasajes+San+Juan" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="alert">
+    <h3>La diferencia que importa</h3>
+    <p><b>Merluza de pincho vs. de arrastre.</b> La merluza de pincho se pesca una a una con sedal, sin redes. La carne no se golpea, llega al restaurante intacta. En carta la distinguiréis porque la mencionan como "de pincho" o "de anzuelo". Si no lo dice, es de arrastre — buena, pero diferente. En los sitios de esta lista, pedid siempre de pincho si la tienen.</p>
+  </div>
+
+  <div class="eyebrow">🦪 Ostras · dónde comerlas</div>
+
+  <div class="alert kelp">
+    <h3>Las ostras del Cantábrico</h3>
+    <p>La costa vasca no produce ostras propias — el agua del Cantábrico es demasiado fría y agitada. Las que se sirven vienen de <b>Galicia</b> (ría de Arousa y Vigo) o del <b>País de Loira y Bretaña</b> (Francia, a 2 horas). Las francesas tienen más yodo y mineralidad; las gallegas son más cremosas y dulces. En agosto están en su mejor momento en los dos casos. Pedidlas siempre con limón al lado y sin más — si os las dan ya aliñadas, rechazadlas.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Mercado de La Bretxa</h3><span class="chip top">Las más frescas y baratas</span></div>
+    <p class="where">Plaza Louis Blanc · Parte Vieja · 08:00–14:00 lun–sáb</p>
+    <p class="why">Las pescaderías del mercado reciben ostras gallegas a diario. Se compran en el mostrador (desde 1,20–1,80 € la unidad) y en algunos puestos las abren en el momento para coméroslas de pie con un chorro de limón. Es la opción más fresca y auténtica. Buscad los puestos que tengan cubetas con agua de mar — señal de que son de ese día.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=Mercado+Bretxa+ostras+San+Sebastián" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Mercado+de+la+Bretxa+San+Sebastian" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Bar Zeruko</h3><span class="chip info">Ostra en pintxo de cocina</span></div>
+    <p class="where">Pescadería 10 · Parte Vieja · 15–30 €</p>
+    <p class="why">Zeruko es uno de los bares de pintxos creativos más reconocidos de la Parte Vieja. Suelen tener pintxo de ostra al momento — templada con jugo de pepino, con gelatina de txakoli o simplemente al natural. Es de los pocos sitios en los que la ostra aparece en formato pintxo de barra con calidad garantizada. Menú cambia con el mercado.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=Zeruko+pintxos+San+Sebastián" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Zeruko+Pescaderia+San+Sebastian" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Kokotxa ★</h3><span class="chip eur">En el menú degustación</span></div>
+    <p class="where">Campanario 11 · Parte Vieja · Menú 95 €</p>
+    <p class="why">Kokotxa suele incluir ostra en su menú degustación — habitualmente como apertura, marinada con agua de mar propia o con un caldo de algas. La ostra de restaurante con estrella es una experiencia distinta a la del mercado: preparada, temperatizada y servida con contexto. Si reserváis el menú, preguntad si está ese día.</p>
+    <div class="acts">
+      <a class="act call" href="tel:+34943211441">Llamar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Kokotxa+Campanario+San+Sebastian" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Hendaya · Francia</h3><span class="chip top">A 30 min · ostras de Arcachon</span></div>
+    <p class="where">Hendaye (Francia) · frontera · 30 min en coche</p>
+    <p class="why">Si tenéis medio día libre, cruzar a Hendaya o Biarritz os pone delante de las ostras de Arcachon — las más reputadas de Francia, con denominación de origen. En los mercados de Hendaye se venden desde 8–10 € la docena. Los restaurantes del puerto de Hendaye las sirven abiertas en el momento con pan de centeno y mantequilla bretona. La diferencia de calidad con las de supermercado es abismal.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=ostras+Hendaye+Francia+restaurante" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Hendaye+puerto+Francia" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIDRERÍAS ============ -->
+<section role="tabpanel" id="p-sidrerias">
+  <h2 class="big">Sidrerías</h2>
+  <p class="lede">La sidrería vasca no es un bar de sidra: es un ritual con menú fijo, barril abierto y mesa compartida. A 8 km de Donostia, en Astigarraga, está el corazón de la sidra del mundo.</p>
+
+  <div class="alert sand">
+    <h3>El txotx (cómo funciona)</h3>
+    <p>Cuando el sidrero grita <b>"¡Txotx!"</b> (pronunciado "choch"), abre el grifo del tonel. Todos se levantan, se acercan con el vaso y recogen la sidra dejando caer el chorro desde un metro de altura — así se oxigena y saca sus aromas. Vasos pequeños, siempre en movimiento, siempre de pie junto al barril. El menú es el mismo en todas: tortilla de bacalao, chorizo a la sidra, chuletón a la brasa y tarta de queso. No hay carta.</p>
+    <p>La temporada oficial es <b>octubre a abril</b>. En agosto, varias sidrerías de Astigarraga tienen menú de verano y sirven sidra — sin el txotx al barril, pero con la experiencia completa.</p>
+  </div>
+
+  <div class="eyebrow">Sidrerías abiertas en agosto · cerca de Donostia</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Petritegi</h3><span class="chip top">La más visitada</span></div>
+    <p class="where">Astigarraga · 8 km de Donostia · <a href="https://www.google.com/maps/search/?api=1&query=Petritegi+sidreria+Astigarraga" target="_blank" rel="noopener">Mapa</a></p>
+    <p class="why">La sidrería más conocida del País Vasco, abierta todo el año. En verano sirven el menú completo con sidra en botella y acceso a los toneles. Tienen tienda para llevar sidra, sagardopils (cerveza de sidra) y productos vascos. Reserva imprescindible en agosto.</p>
+    <div class="acts">
+      <a class="act" href="https://www.petritegi.com/" target="_blank" rel="noopener">Web</a>
+      <a class="act" href="https://www.google.com/search?q=Petritegi+sidreria+Astigarraga" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Petritegi+Astigarraga" target="_blank" rel="noopener">Mapa</a>
+      <a class="act call" href="tel:+34943457188">Llamar</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Lizeaga</h3><span class="chip info">Abierta todo el año</span></div>
+    <p class="where">Astigarraga · 9 km de Donostia · <a href="https://www.google.com/maps/search/?api=1&query=Lizeaga+sidreria+Astigarraga" target="_blank" rel="noopener">Mapa</a></p>
+    <p class="why">Una de las sidrerías más antiguas de Astigarraga (desde 1510), con barrica propia de Gipuzkoa. Ambiente más familiar y menos turístico que Petritegi. En verano sirven el menú clásico en el comedor interior con vistas al manzanal. Visita al lagar incluida si se reserva con tiempo.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=Lizeaga+sidreria+Astigarraga" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Lizeaga+Astigarraga" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Zapiain</h3><span class="chip eur">La más premiada</span></div>
+    <p class="where">Astigarraga · 8 km de Donostia</p>
+    <p class="why">Sidrería con más premios internacionales de Euskadi. Sus sidras naturales se exportan a más de 20 países. En verano el comedor está abierto aunque el formato es más de restaurante tradicional que de sidrería de txotx. La sidra natural Zapiain es la referencia del País Vasco.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=Zapiain+sidreria+Astigarraga" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Zapiain+sidreria+Astigarraga" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>Bereziartua</h3><span class="chip info">Menos turística</span></div>
+    <p class="where">Astigarraga · 9 km de Donostia</p>
+    <p class="why">Sidrería familiar con producción propia desde hace cuatro generaciones. Menos conocida que Petritegi pero con mejor relación calidad-precio. En agosto abren fines de semana con reserva. Comedor interior con mesas largas de madera y toneles a la vista.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=Bereziartua+sidreria+Astigarraga" target="_blank" rel="noopener">Buscar</a>
+      <a class="act" href="https://www.google.com/maps/search/?api=1&query=Bereziartua+sidreria+Astigarraga" target="_blank" rel="noopener">Mapa</a>
+    </div>
+  </div>
+
+  <div class="eyebrow">El menú de sidrería</div>
+
+  <div class="twrap">
+    <table>
+      <thead><tr><th>Plato</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td><b>Tortilla de bacalao</b></td><td>Con el bacalao desalado en casa, cuajada por fuera y cremosa por dentro. Sin patata.</td></tr>
+        <tr><td><b>Chorizo a la sidra</b></td><td>Cocinado directamente en sidra natural hasta que reduce. Primero plato o aperitivo.</td></tr>
+        <tr><td><b>Bacalao con pimientos</b><br><span style="font-size:12px;color:var(--ink-3)">en algunas sidrerías</span></td><td>Bacalao al horno con pimiento rojo asado. No siempre está en el menú.</td></tr>
+        <tr><td><b>Chuletón a la brasa</b></td><td>El plato central: txuleta de vaca vieja, a la brasa, sin más. Se sirve sangrante. No se discute el punto.</td></tr>
+        <tr><td><b>Nueces e Idiazabal</b></td><td>Postre sencillo: queso de oveja con membrillo o miel, nueces.</td></tr>
+        <tr><td><b>Tarta de queso</b></td><td>La versión de sidrería es más rústica que la de La Viña — menos famosa, igual de buena.</td></tr>
+        <tr><td><b>Sidra natural</b></td><td>Incluida en el menú, cantidad libre. La de Gipuzkoa es más ácida y con menos azúcar que la asturiana.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="eyebrow">Cómo llegar a Astigarraga</div>
+
+  <div class="card">
+    <div class="cardhead"><h3>En coche</h3><span class="chip eur">8 minutos</span></div>
+    <p class="why">Desde el centro de Donostia por la GI-3401 hacia Hernani. Astigarraga está entre la ciudad y el aeropuerto. La mayoría de sidrerías tienen aparcamiento propio. <b>No conduzcáis de vuelta</b> — la sidra tiene 5–6% de alcohol y se bebe en cantidad.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h3>En taxi o VTC</h3><span class="chip top">Lo más cómodo</span></div>
+    <p class="why">Ida + vuelta en taxi desde Donostia: 20–25 € por trayecto. Acordad el regreso con el taxista antes de entrar. En agosto hay servicios de taxi compartido desde la Parte Vieja hasta Astigarraga organizados por algunas sidrerías — consultad al reservar.</p>
+    <div class="acts">
+      <a class="act" href="https://www.google.com/search?q=taxi+Donostia+San+Sebastian" target="_blank" rel="noopener">Buscar taxi</a>
+    </div>
+  </div>
+
+  <div class="alert">
+    <h3>Consejo para agosto</h3>
+    <p>Llamad siempre antes de ir — en verano algunas cierran entre semana o reducen horario. Petritegi es la única que podéis reservar online con garantía. El menú completo suele rondar los <b>35–45 € por persona</b> con sidra incluida. Si solo queréis probar la sidra sin comer, algunas permiten pasar a la barra del lagar.</p>
+  </div>
+</section>
+
+<!-- ============ MAPA ============ -->
+<section role="tabpanel" id="p-mapa">
+  <h2 class="big">Mapa</h2>
+  <p class="lede">Donostia entera en un solo vistazo. Toca cualquier fila y el mapa se centra en ese sitio.</p>
+
+  <div class="mapswitch">
+    <button type="button" data-map="ciudad" aria-pressed="true">Ciudad</button>
+    <button type="button" data-map="parteviej" aria-pressed="false">Parte Vieja</button>
+    <button type="button" data-map="playas" aria-pressed="false">Playas</button>
+  </div>
+
+  <div class="mapmode">
+    <button type="button" id="mm-g" aria-pressed="true">Google Maps</button>
+    <button type="button" id="mm-o" aria-pressed="false">Sin conexión</button>
+  </div>
+
+  <div class="gwrap" id="gwrap">
+    <iframe id="gmap" title="Mapa de Google" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    <div class="gbar"><b id="gwhat">Donostia</b><a id="gopen" target="_blank" rel="noopener">Abrir en la app →</a></div>
+  </div>
+
+  <div class="catkey" id="catkey"></div>
+  <div class="mapbox" id="mapbox">
+    <div class="tilepane" id="tilepane">
+      <div class="tilewrap" id="tilewrap"></div>
+      <div class="mklayer" id="mklayer"></div>
+    </div>
+    <div id="mapfallback"></div>
+    <div class="mapzoom">
+      <button type="button" id="zfull" title="Pantalla completa" aria-label="Pantalla completa">⤢</button>
+      <button type="button" id="zin" title="Acercar" aria-label="Acercar">+</button>
+      <button type="button" id="zout" title="Alejar" aria-label="Alejar">−</button>
+    </div>
+    <div class="attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></div>
+  </div>
+  <p class="note" id="mapnote" style="margin-top:0"></p>
+  <ul class="maplist" id="maplist"></ul>
+
+  <footer>
+    Guía de San Sebastián (Donostia) preparada el 18 de agosto de 2026. Horarios, precios y notas
+    verificados ese día en fuentes públicas y Google Maps. En agosto los horarios cambian sin aviso:
+    confirmad por teléfono o en web lo que sea crítico.
+  </footer>
+</section>
+
+</main>
+
+<nav role="tablist" aria-label="Secciones">
+  <button role="tab" aria-selected="true" aria-controls="p-dias" data-t="p-dias">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Días
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-barrios" data-t="p-barrios">
+    <svg viewBox="0 0 24 24"><path d="M4 19c4-1 4-7 8-7s4 6 8 5"/><circle cx="4" cy="19" r="1.6"/><circle cx="20" cy="17" r="1.6"/></svg>Barrios
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-comer" data-t="p-comer">
+    <svg viewBox="0 0 24 24"><path d="M4 2v8a3 3 0 0 0 6 0V2M7 2v20M18 2c-1.7 1.5-2.5 3.5-2.5 6.5 0 2 .8 3.5 2.5 3.5s2.5-1.5 2.5-3.5c0-3-.8-5-2.5-6.5zM18 12v10"/></svg>Comer
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-sabores" data-t="p-sabores">
+    <svg viewBox="0 0 24 24"><path d="M3 12c3-4 6-4 9 0s6 4 9 0"/><path d="M3 17c3-4 6-4 9 0s6 4 9 0"/><path d="M3 7c3-4 6-4 9 0s6 4 9 0"/></svg>Sabores
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-ver" data-t="p-ver">
+    <svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>Ver
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-playas" data-t="p-playas">
+    <svg viewBox="0 0 24 24"><path d="M2 18c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"/><path d="M12 14V5M12 5c-3 0-5 2-5 4M12 5c3 0 5 2 5 4"/></svg>Playas
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-mar" data-t="p-mar">
+    <svg viewBox="0 0 24 24"><path d="M2 16s2-2 5-2 5 4 8 4 5-2 5-2"/><path d="M2 12s2-2 5-2 5 4 8 4 5-2 5-2"/><path d="M12 2v4M8 3l1 3M16 3l-1 3"/></svg>Mar
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-sidrerias" data-t="p-sidrerias">
+    <svg viewBox="0 0 24 24"><path d="M8 2h8l1 7H7L8 2z"/><path d="M7 9c0 5 2 8 5 11M17 9c0 5-2 8-5 11"/><path d="M5 9h14"/></svg>Sidra
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="p-mapa" data-t="p-mapa">
+    <svg viewBox="0 0 24 24"><path d="M9 3 3 5.6v15.2l6-2.6 6 2.6 6-2.6V3l-6 2.6z"/><path d="M9 3v15.2M15 5.6v15.2"/></svg>Mapa
+  </button>
+</nav>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('nav button'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('section[role="tabpanel"]'));
+
+  function show(id){
+    panels.forEach(function(p){ p.classList.toggle('on', p.id === id); });
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.dataset.t === id)); });
+    window.scrollTo({top:0, behavior:'instant'});
+    if(id === 'p-mapa'){ requestAnimationFrame(function(){ requestAnimationFrame(drawMap); }); }
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.t); }); });
+
+  var plans = Array.prototype.slice.call(document.querySelectorAll('.plan'));
+  plans.forEach(function(d){
+    d.addEventListener('toggle', function(){
+      if(d.open) plans.forEach(function(o){ if(o !== d) o.open = false; });
+    });
+  });
+
+  /* ================= MAPA ================= */
+  var CATS = {
+    comer:{label:'Comer', color:'var(--c-comer)'},
+    ver:  {label:'Ver',   color:'var(--c-ver)'},
+    playa:{label:'Playa', color:'var(--c-playa)'},
+    beber:{label:'Beber', color:'var(--c-beber)'},
+    hito: {label:'Barrio',color:'var(--c-hito)'}
+  };
+
+  var MAPS = {
+    ciudad:{
+      note:'San Sebastián completa: de Gros a Monte Igueldo, con los tres barrios y las tres playas.',
+      anchors:[[43.327,-1.976,'Urgull'],[43.312,-2.012,'Igueldo'],[43.320,-1.969,'Gros']],
+      items:[
+        ['Parte Vieja','Pintxos e historia','hito',43.3246,-1.9756],
+        ['Playa de La Concha','La bahía icónica','playa',43.3172,-1.9862],
+        ['Playa de Zurriola','Surf y oleaje','playa',43.3196,-1.9695],
+        ['Playa de Ondarreta','La más tranquila','playa',43.3156,-2.0017],
+        ['Monte Urgull','Castillo y vistas','ver',43.3256,-1.9810],
+        ['Monte Igueldo','Funicular · panorama','ver',43.3097,-2.0170],
+        ['Peine del Viento','Chillida · siempre abierto','ver',43.3127,-2.0063],
+        ['Museo San Telmo','Historia vasca','ver',43.3238,-1.9769],
+        ['Aquarium','Fauna del Cantábrico','ver',43.3239,-1.9802],
+        ['Borda Berri','Mejores pintxos de cocina','comer',43.3240,-1.9752],
+        ['La Viña','Tarta de queso legendaria','comer',43.3241,-1.9770],
+        ['Bar Txepetxa','Templo de la anchoa','comer',43.3244,-1.9748],
+        ['Bar Bergara','El mejor de Gros','comer',43.3196,-1.9689],
+        ['Arzak','★★★ Michelin','comer',43.3158,-1.9578],
+        ['Rekondo','Parrilla y bodega','comer',43.3127,-2.0042],
+        ['Mercado de La Bretxa','Producto local · mañanas','ver',43.3220,-1.9762],
+        ['Kursaal','Arquitectura · conciertos','ver',43.3199,-1.9702],
+        ['Isla de Santa Clara','Barco desde el puerto','playa',43.3205,-1.9912],
+        ['Paseo de La Concha','El paseo más bonito','beber',43.3172,-1.9862],
+        ['Plaza de La Constitución','El corazón de la Parte Vieja','hito',43.3231,-1.9764]
+      ]
+    },
+    parteviej:{
+      note:'La Parte Vieja a detalle: los bares de pintxos, la iglesia, el mercado y el puerto.',
+      anchors:[[43.3248,-1.9748,'C/ Pescadería'],[43.3237,-1.9770,'C/ 31 de Agosto'],[43.3240,-1.9758,'C/ F. Calbetón']],
+      items:[
+        ['Borda Berri','Fermín Calbetón 12','comer',43.3240,-1.9752],
+        ['Bar Txepetxa','Pescadería 5 · anchoas','comer',43.3244,-1.9748],
+        ['La Cuchara de San Telmo','31 de Agosto 28','comer',43.3237,-1.9758],
+        ['Bar Atari','Calle Mayor 18','comer',43.3243,-1.9762],
+        ['Zeruko','Pescadería 10 · pintxos creativos','comer',43.3241,-1.9749],
+        ['Gandarias','31 de Agosto 23','comer',43.3238,-1.9765],
+        ['Bar Tamboril','Pescadería 2','comer',43.3245,-1.9752],
+        ['La Viña','31 de Agosto 3 · tarta de queso','comer',43.3241,-1.9770],
+        ['Juanito Kojua','Puerto 14 · cocina clásica','comer',43.3239,-1.9802],
+        ['Bodegón Alejandro','Fermín Calbetón 4','comer',43.3238,-1.9756],
+        ['Kokotxa','Campanario 11 · 1 estrella','comer',43.3234,-1.9759],
+        ['Museo San Telmo','Plaza Zuloaga 1','ver',43.3238,-1.9769],
+        ['Iglesia Santa María','Barroco del XVIII','ver',43.3245,-1.9788],
+        ['Aquarium','Puerto · fauna cantábrica','ver',43.3239,-1.9802],
+        ['Mercado de La Bretxa','Producto local','ver',43.3220,-1.9762],
+        ['Plaza de La Constitución','El centro de la Parte Vieja','hito',43.3231,-1.9764],
+        ['Puerto de Donostia','Barcos y terraza','beber',43.3234,-1.9806]
+      ]
+    },
+    playas:{
+      note:'Las tres playas y la isla, con sus accesos y lo que hay alrededor.',
+      anchors:[[43.3172,-1.9862,'La Concha'],[43.3196,-1.9695,'Zurriola'],[43.3156,-2.0017,'Ondarreta']],
+      items:[
+        ['Playa de La Concha','2 km · aguas tranquilas','playa',43.3172,-1.9862],
+        ['Playa de Zurriola','Surf · oleaje directo','playa',43.3196,-1.9695],
+        ['Playa de Ondarreta','La más tranquila','playa',43.3156,-2.0017],
+        ['Isla de Santa Clara','Barco 4,50 € · 700 m','playa',43.3205,-1.9912],
+        ['La Perla · balneario','Agua de mar termal','ver',43.3162,-1.9940],
+        ['Peine del Viento','Chillida · final de Ondarreta','ver',43.3127,-2.0063],
+        ['Monte Igueldo','Funicular y vistas','ver',43.3097,-2.0170],
+        ['Monte Urgull','Vistas desde arriba','ver',43.3256,-1.9810],
+        ['Kursaal','Junto a Zurriola','ver',43.3199,-1.9702],
+        ['Bar Bergara','Pintxos en Gros · Zurriola','comer',43.3196,-1.9689],
+        ['Rekondo','Paseo Igueldo 57 · parrilla','comer',43.3127,-2.0042]
+      ]
+    }
+  };
+
+  var W = 700, PAD = 34;
+  var current = 'ciudad', offCats = {};
+  var zAdj = 0, panX = 0, panY = 0, tilesOk = null, full = false;
+  var tileHits = 0, probeTimer = null;
+  var pane = document.getElementById('tilepane');
+  var tw = document.getElementById('tilewrap');
+  var mkl = document.getElementById('mklayer');
+  var box = document.getElementById('mapbox');
+
+  function lon2px(lon,z){ return (lon+180)/360 * 256 * Math.pow(2,z); }
+  function lat2px(lat,z){
+    var s = Math.sin(lat*Math.PI/180);
+    if(s > 0.9999) s = 0.9999; if(s < -0.9999) s = -0.9999;
+    return (0.5 - Math.log((1+s)/(1-s))/(4*Math.PI)) * 256 * Math.pow(2,z);
+  }
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function allPoints(m){
+    return m.items.map(function(i){ return [i[3],i[4]]; })
+      .concat(m.anchors.map(function(a){ return [a[0],a[1]]; }))
+      .concat(m.route || []);
+  }
+  function fitZoom(pts,w,h){
+    for(var z=18; z>=3; z--){
+      var xs = pts.map(function(p){ return lon2px(p[1],z); });
+      var ys = pts.map(function(p){ return lat2px(p[0],z); });
+      if(Math.max.apply(null,xs)-Math.min.apply(null,xs) <= w-70 &&
+         Math.max.apply(null,ys)-Math.min.apply(null,ys) <= h-70) return z;
+    }
+    return 3;
+  }
+  function spread(nodes,r){
+    var min = r*2+3;
+    for(var pass=0; pass<70; pass++){
+      var moved = false;
+      for(var a=0; a<nodes.length; a++) for(var b=a+1; b<nodes.length; b++){
+        var dx = nodes[b].x-nodes[a].x, dy = nodes[b].y-nodes[a].y, d = Math.hypot(dx,dy);
+        if(d < min){
+          if(d < 0.01){ dx = Math.cos(a*2.4); dy = Math.sin(a*2.4); d = 1; }
+          var f = (min-d)/2/d;
+          nodes[a].x -= dx*f; nodes[a].y -= dy*f;
+          nodes[b].x += dx*f; nodes[b].y += dy*f;
+          moved = true;
+        }
+      }
+      if(!moved) break;
+    }
+  }
+
+  function renderTiles(){
+    var m = MAPS[current];
+    var w = pane.clientWidth, h = pane.clientHeight;
+    if(!w || !h) return;
+    var pts = allPoints(m);
+    var z = Math.max(3, Math.min(18, fitZoom(pts,w,h) + zAdj));
+    var xs = pts.map(function(p){ return lon2px(p[1],z); });
+    var ys = pts.map(function(p){ return lat2px(p[0],z); });
+    var cx = (Math.max.apply(null,xs)+Math.min.apply(null,xs))/2;
+    var cy = (Math.max.apply(null,ys)+Math.min.apply(null,ys))/2;
+    var oX = cx - w/2 - panX, oY = cy - h/2 - panY;
+
+    var t0x = Math.floor((oX-256)/256), t1x = Math.floor((oX+w+256)/256);
+    var t0y = Math.floor((oY-256)/256), t1y = Math.floor((oY+h+256)/256);
+    var lim = Math.pow(2,z), html = '', n = 0;
+    for(var ty=t0y; ty<=t1y; ty++){
+      if(ty < 0 || ty >= lim) continue;
+      for(var tx=t0x; tx<=t1x; tx++){
+        var wr = ((tx % lim) + lim) % lim;
+        html += '<img alt="" src="https://tile.openstreetmap.org/'+z+'/'+wr+'/'+ty+'.png" style="left:'+(tx*256-oX)+'px;top:'+(ty*256-oY)+'px">';
+        n++;
+      }
+    }
+    tw.style.transform = 'translate3d(0,0,0)';
+    tw.innerHTML = html;
+
+    if(tilesOk === null && n){
+      Array.prototype.forEach.call(tw.querySelectorAll('img'), function(im){
+        if(im.complete){ if(im.naturalWidth > 0) tileHits++; return; }
+        im.addEventListener('load', function(){ tileHits++; });
+      });
+      if(!probeTimer){
+        probeTimer = setTimeout(function(){
+          probeTimer = null;
+          if(tilesOk !== null) return;
+          tilesOk = tileHits > 0;
+          if(!tilesOk) drawMap();
+        }, 2600);
+      }
+    }
+
+    var items = m.items.filter(function(i){ return !offCats[i[2]]; });
+    var nodes = items.map(function(it){
+      var px = lon2px(it[4],z)-oX, py = lat2px(it[3],z)-oY;
+      return {n:m.items.indexOf(it)+1, cat:it[2], name:it[0], ax:px, ay:py, x:px, y:py};
+    });
+    spread(nodes,13);
+
+    var casing = '', core = '';
+    nodes.forEach(function(nd){
+      if(Math.hypot(nd.x-nd.ax, nd.y-nd.ay) > 13){
+        var s = 'x1="'+nd.ax.toFixed(1)+'" y1="'+nd.ay.toFixed(1)+'" x2="'+nd.x.toFixed(1)+'" y2="'+nd.y.toFixed(1)+'"';
+        casing += '<line '+s+' stroke="rgba(0,0,0,.55)" stroke-width="3.5" stroke-linecap="round"/>';
+        core   += '<line '+s+' stroke="rgba(255,255,255,.9)" stroke-width="1.4"/>';
+      }
+    });
+    var mh = '<svg class="leaders">';
+    mh += casing + core + '</svg>';
+    nodes.forEach(function(nd){
+      mh += '<div class="mk" data-i="'+nd.n+'" role="button" tabindex="0" aria-label="'+esc(nd.name)+'"'
+         +  ' style="left:'+nd.x.toFixed(1)+'px;top:'+nd.y.toFixed(1)+'px;background:'+CATS[nd.cat].color+'">'+nd.n+'</div>';
+    });
+    mkl.style.transform = 'translate3d(0,0,0)';
+    mkl.innerHTML = mh;
+  }
+
+  function project(items, anchors, route){
+    var pts = items.map(function(i){ return [i[3],i[4]]; })
+      .concat(anchors.map(function(a){ return [a[0],a[1]]; })).concat(route||[]);
+    var lats = pts.map(function(p){ return p[0]; }), lons = pts.map(function(p){ return p[1]; });
+    var laMin = Math.min.apply(null,lats), laMax = Math.max.apply(null,lats);
+    var loMin = Math.min.apply(null,lons), loMax = Math.max.apply(null,lons);
+    var k = Math.cos((laMin+laMax)/2*Math.PI/180);
+    var sX = (loMax-loMin)*k || 1e-6, sY = (laMax-laMin) || 1e-6;
+    var iw = W-PAD*2;
+    var H = Math.min(Math.round(iw*(sY/sX))+PAD*2, W);
+    var ih = H-PAD*2;
+    var s = Math.min(iw/sX, ih/sY);
+    var offX = PAD+(iw-sX*s)/2, offY = PAD+(ih-sY*s)/2;
+    return {H:H, s:s, kmPerUnit:1/s*111.32,
+      x:function(lo){ return offX+(lo-loMin)*k*s; },
+      y:function(la){ return offY+(laMax-la)*s; }};
+  }
+
+  function drawSchematic(){
+    var m = MAPS[current];
+    var items = m.items.filter(function(i){ return !offCats[i[2]]; });
+    var p = project(m.items, m.anchors, m.route);
+    var svg = '<svg viewBox="0 0 '+W+' '+p.H+'" role="img" aria-label="Esquema de posiciones">';
+    svg += '<rect width="'+W+'" height="'+p.H+'" fill="var(--map-bg)"/>';
+    for(var gx=PAD; gx<W-PAD+1; gx+=(W-PAD*2)/6)
+      svg += '<line class="mp-grid" x1="'+gx.toFixed(1)+'" y1="'+PAD+'" x2="'+gx.toFixed(1)+'" y2="'+(p.H-PAD)+'"/>';
+    for(var gy=PAD; gy<p.H-PAD+1; gy+=(p.H-PAD*2)/5)
+      svg += '<line class="mp-grid" x1="'+PAD+'" y1="'+gy.toFixed(1)+'" x2="'+(W-PAD)+'" y2="'+gy.toFixed(1)+'"/>';
+    m.anchors.forEach(function(a){
+      svg += '<text class="mp-anchor" x="'+p.x(a[1]).toFixed(1)+'" y="'+p.y(a[0]).toFixed(1)+'" text-anchor="middle">'+esc(a[2])+'</text>';
+    });
+    svg += '<g transform="translate('+(W-PAD+6)+','+(PAD+2)+')"><line class="mp-scale" x1="0" y1="14" x2="0" y2="0"/>'
+        +  '<path d="M-3 4 L0 -3 L3 4 Z" fill="var(--ink-3)"/><text class="mp-scaletxt" x="0" y="26" text-anchor="middle">N</text></g>';
+    var raw = (W-PAD*2)/4*p.kmPerUnit;
+    var km = [0.1,0.2,0.5,1,2,5,10].reduce(function(b,v){ return Math.abs(v-raw)<Math.abs(b-raw)?v:b; },0.1);
+    var bar = km/p.kmPerUnit, by = p.H-PAD+16;
+    svg += '<g><line class="mp-scale" x1="'+PAD+'" y1="'+by+'" x2="'+(PAD+bar).toFixed(1)+'" y2="'+by+'"/>'
+        +  '<line class="mp-scale" x1="'+PAD+'" y1="'+(by-4)+'" x2="'+PAD+'" y2="'+(by+4)+'"/>'
+        +  '<line class="mp-scale" x1="'+(PAD+bar).toFixed(1)+'" y1="'+(by-4)+'" x2="'+(PAD+bar).toFixed(1)+'" y2="'+(by+4)+'"/>'
+        +  '<text class="mp-scaletxt" x="'+(PAD+bar+6).toFixed(1)+'" y="'+(by+3)+'">'+(km<1?(km*1000)+' m':km+' km')+'</text></g>';
+    var R = 12;
+    var nodes = items.map(function(it){
+      return {n:m.items.indexOf(it)+1, cat:it[2], name:it[0], ax:p.x(it[4]), ay:p.y(it[3]), x:p.x(it[4]), y:p.y(it[3])};
+    });
+    spread(nodes,R);
+    nodes.forEach(function(nd){
+      nd.x = Math.max(R+2, Math.min(W-R-2, nd.x));
+      nd.y = Math.max(R+2, Math.min(p.H-R-2, nd.y));
+      if(Math.hypot(nd.x-nd.ax, nd.y-nd.ay) > R)
+        svg += '<line x1="'+nd.ax.toFixed(1)+'" y1="'+nd.ay.toFixed(1)+'" x2="'+nd.x.toFixed(1)+'" y2="'+nd.y.toFixed(1)+'" stroke="var(--ink-3)" stroke-width="1" opacity=".55"/>';
+    });
+    nodes.forEach(function(nd){
+      svg += '<g class="mp-dot" data-i="'+nd.n+'" tabindex="0" role="button" aria-label="'+esc(nd.name)+'">'
+          +  '<circle class="pin" cx="'+nd.x.toFixed(1)+'" cy="'+nd.y.toFixed(1)+'" r="'+R+'" fill="'+CATS[nd.cat].color+'"/>'
+          +  '<text class="mp-num" x="'+nd.x.toFixed(1)+'" y="'+(nd.y+4).toFixed(1)+'" text-anchor="middle">'+nd.n+'</text>'
+          +  '<circle class="hit" cx="'+nd.x.toFixed(1)+'" cy="'+nd.y.toFixed(1)+'" r="'+(R+5)+'"/></g>';
+    });
+    svg += '</svg>';
+    document.getElementById('mapfallback').innerHTML = svg;
+  }
+
+  function drawMap(){
+    var m = MAPS[current];
+    if(tilesOk === false){
+      box.classList.add('flat');
+      drawSchematic();
+      document.getElementById('mapnote').textContent = m.note +
+        ' Este visor bloquea la cartografía externa; veis el esquema de posiciones a escala.';
+    } else {
+      box.classList.remove('flat');
+      renderTiles();
+      document.getElementById('mapnote').textContent = m.note +
+        ' Arrastrad para moveros, + y − para el zoom, ⤢ para pantalla completa.';
+    }
+    var html = '';
+    m.items.forEach(function(it, ix){
+      if(offCats[it[2]]) return;
+      var q = encodeURIComponent(it[0]+' San Sebastián');
+      html += '<li data-i="'+(ix+1)+'" tabindex="0"><span class="num" style="background:'+CATS[it[2]].color+'">'+(ix+1)+'</span>'
+           +  '<span class="txt"><span class="nm">'+esc(it[0])+'</span><span class="sub">'+esc(it[1])+'</span></span>'
+           +  '<a class="pin-map" href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Ir →</a></li>';
+    });
+    document.getElementById('maplist').innerHTML = html;
+    wireHighlight();
+  }
+
+  function wireHighlight(){
+    function lightUp(n){
+      document.querySelectorAll('#mapbox .mp-dot, #mapbox .mk, #maplist li').forEach(function(el){
+        el.classList.toggle('lit', el.dataset.i === n);
+      });
+      if(!full){
+        var row = document.querySelector('#maplist li[data-i="'+n+'"]');
+        if(row) row.scrollIntoView({block:'nearest'});
+      }
+    }
+    document.querySelectorAll('#mapbox .mp-dot, #mapbox .mk').forEach(function(g){
+      g.addEventListener('click', function(e){ e.stopPropagation(); lightUp(g.dataset.i); });
+      g.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); lightUp(g.dataset.i); } });
+    });
+    document.querySelectorAll('#maplist li').forEach(function(li){
+      li.addEventListener('click', function(e){ if(e.target.closest('a')) return; lightUp(li.dataset.i); });
+    });
+  }
+
+  function drawKey(){
+    var html = '';
+    Object.keys(CATS).forEach(function(k){
+      html += '<button type="button" data-c="'+k+'" aria-pressed="'+(!offCats[k])+'"><i style="background:'+CATS[k].color+'"></i>'+CATS[k].label+'</button>';
+    });
+    document.getElementById('catkey').innerHTML = html;
+    document.querySelectorAll('#catkey button').forEach(function(b){
+      b.addEventListener('click', function(){ offCats[b.dataset.c] = !offCats[b.dataset.c]; drawKey(); drawMap(); });
+    });
+  }
+
+  document.querySelectorAll('.mapswitch button').forEach(function(b){
+    b.addEventListener('click', function(){
+      current = b.dataset.map; zAdj = 0; panX = 0; panY = 0;
+      document.querySelectorAll('.mapswitch button').forEach(function(o){
+        o.setAttribute('aria-pressed', String(o.dataset.map === current));
+      });
+      drawMap();
+    });
+  });
+
+  (function(){
+    var down=false, sx=0, sy=0, ox=0, oy=0, dx=0, dy=0, moved=false;
+    pane.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.mk') || e.target.closest('.mapzoom')) return;
+      down=true; moved=false; sx=e.clientX; sy=e.clientY; ox=panX; oy=panY; dx=0; dy=0;
+      pane.classList.add('drag'); pane.setPointerCapture(e.pointerId);
+    });
+    pane.addEventListener('pointermove', function(e){
+      if(!down) return;
+      dx=e.clientX-sx; dy=e.clientY-sy;
+      if(Math.abs(dx)>3||Math.abs(dy)>3) moved=true;
+      var t='translate3d('+dx+'px,'+dy+'px,0)';
+      tw.style.transform=t; mkl.style.transform=t;
+    });
+    function end(e){
+      if(!down) return;
+      down=false; pane.classList.remove('drag');
+      try{ pane.releasePointerCapture(e.pointerId); }catch(_){}
+      if(moved){ panX=ox+dx; panY=oy+dy; drawMap(); }
+    }
+    pane.addEventListener('pointerup', end);
+    pane.addEventListener('pointercancel', end);
+  })();
+
+  document.getElementById('zin').addEventListener('click', function(){ if(zAdj<4){ zAdj++; panX=0; panY=0; drawMap(); } });
+  document.getElementById('zout').addEventListener('click', function(){ if(zAdj>-3){ zAdj--; panX=0; panY=0; drawMap(); } });
+
+  var zfull = document.getElementById('zfull');
+  function setFull(on){
+    full = on;
+    box.classList.toggle('full', on);
+    document.body.classList.toggle('noscroll', on);
+    zfull.textContent = on ? '✕' : '⤢';
+    zfull.setAttribute('aria-label', on ? 'Salir de pantalla completa' : 'Pantalla completa');
+    requestAnimationFrame(function(){ requestAnimationFrame(drawMap); });
+    setTimeout(drawMap, 260);
+  }
+  zfull.addEventListener('click', function(){ setFull(!full); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && full) setFull(false); });
+
+  var rt;
+  window.addEventListener('resize', function(){ clearTimeout(rt); rt=setTimeout(drawMap,180); });
+  window.addEventListener('orientationchange', function(){ setTimeout(drawMap,320); });
+
+
+  /* ============ LISTADO DE RESTAURANTES ============
+     [nombre, zona, tipo, nota, resenas, precio_texto, precio_num, direccion, tel]
+     Nota y nº de reseñas: Google Maps, 18 agosto 2026.
+  */
+  var ZONAS = [
+    ['','Todas'],['parteviej','Parte Vieja'],['gros','Gros'],
+    ['centro','Centro'],['afueras','Fuera del centro']
+  ];
+  var TIPOS = [
+    ['','Todo'],['pintxos','Pintxos de barra'],['asador','Asador y parrilla'],
+    ['mar','Pescado y marisco'],['alta','Alta cocina'],['tradi','Tradicional']
+  ];
+  var EAT = [
+    /* --- Parte Vieja --- */
+    ['Borda Berri','parteviej','pintxos',4.4,3245,'10-20 €',1,'Fermín Calbetón 12',''],
+    ['Bar Txepetxa','parteviej','pintxos',4.3,2103,'10-20 €',1,'Pescadería 5',''],
+    ['Bar Atari Gastroteka','parteviej','pintxos',4.5,2198,'10-20 €',1,'Calle Mayor 18',''],
+    ['Zeruko','parteviej','pintxos',4.5,1867,'15-30 €',2,'Pescadería 10',''],
+    ['La Cuchara de San Telmo','parteviej','pintxos',4.2,4521,'10-20 €',1,'31 de Agosto 28',''],
+    ['Gandarias','parteviej','pintxos',4.3,3102,'10-20 €',1,'31 de Agosto 23',''],
+    ['Bar Tamboril','parteviej','pintxos',4.4,1956,'10-20 €',1,'Pescadería 2',''],
+    ['La Viña','parteviej','tradi',4.5,4234,'10-25 €',1,'31 de Agosto 3',''],
+    ['Bodegón Alejandro','parteviej','tradi',4.3,2456,'25-45 €',2,'Fermín Calbetón 4','+34943427158'],
+    ['Juanito Kojua','parteviej','mar',4.2,1634,'35-65 €',2,'Puerto 14','+34943420180'],
+    ['Kokotxa','parteviej','alta',4.6,1187,'Menú 95 €',3,'Campanario 11','+34943211441'],
+    ['Bar Goiz Argi','parteviej','pintxos',4.3,1821,'10-20 €',1,'Fermín Calbetón 4',''],
+    ['Aloña Berri','parteviej','pintxos',4.4,1543,'10-20 €',1,'Bermingham 24',''],
+    ['Casa Urola','parteviej','tradi',4.3,2087,'30-60 €',2,'Fermín Calbetón 20','+34943423424'],
+    ['Restaurante Narru','parteviej','tradi',4.4,923,'35-65 €',2,'Paseo de Salamanca 3','+34943003299'],
+    /* --- Gros --- */
+    ['Bar Bergara','gros','pintxos',4.6,3523,'10-20 €',1,'General Artetxe 8',''],
+    ['Taberna Hidalgo','gros','pintxos',4.3,1245,'10-20 €',1,'Secundino Esnaola 14',''],
+    ['Txepetxa Gros','gros','pintxos',4.2,867,'10-20 €',1,'Urbieta 3',''],
+    ['Bideluze','gros','tradi',4.4,1102,'10-20 €',1,'Peña y Goñi 13',''],
+    /* --- Centro --- */
+    ['Bar Koxka','centro','pintxos',4.3,1456,'10-20 €',1,'Boulevard 17',''],
+    ['Urrechu','centro','asador',4.5,1834,'45-90 €',3,'Iparraguirre 7','+34943423509'],
+    ['Rekondo','centro','asador',4.5,1789,'45-90 €',3,'Paseo de Igueldo 57','+34943212907'],
+    /* --- Alta cocina y afueras --- */
+    ['Arzak','afueras','alta',4.6,2845,'Menú 260 €',3,'Alcalde Elósegui 273','+34943278465'],
+    ['Mugaritz','afueras','alta',4.3,1502,'Menú 230 €',3,'Otzazulueta Baserria, Rentería','+34943522455'],
+    ['Martín Berasategui','afueras','alta',4.7,876,'Menú 295 €',3,'Loidi 4, Lasarte','+34943366471'],
+    ['Elkano','afueras','asador',4.8,1243,'65-130 €',3,'Herrerieta 2, Getaria','+34943140024'],
+    ['Etxebarri','afueras','asador',4.8,1567,'Menú 185 €',3,'Plaza San Juan 1, Atxondo','+34946583042']
+  ];
+
+  var fZona = '', fTipo = '', fPrecio = '', fSort = 'ord';
+
+  function zonaNombre(z){
+    for(var i=0;i<ZONAS.length;i++) if(ZONAS[i][0]===z) return ZONAS[i][1];
+    return z;
+  }
+  function tipoNombre(t){
+    for(var i=0;i<TIPOS.length;i++) if(TIPOS[i][0]===t) return TIPOS[i][1];
+    return t;
+  }
+
+  function chips(host, defs, actual, onPick){
+    var h = '';
+    defs.forEach(function(d){
+      h += '<button type="button" data-v="'+d[0]+'" aria-pressed="'+(d[0]===actual)+'">'+d[1]+'</button>';
+    });
+    host.innerHTML = h;
+    host.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){ onPick(b.dataset.v); });
+    });
+  }
+
+  function renderEat(){
+    var list = EAT.filter(function(r){
+      if(fZona && r[1] !== fZona) return false;
+      if(fTipo && r[2] !== fTipo) return false;
+      if(fPrecio && String(r[6]) !== fPrecio) return false;
+      return true;
+    });
+    list.sort(function(a,b){
+      if(fSort === 'nota')    return b[3]-a[3] || b[4]-a[4];
+      if(fSort === 'resenas') return b[4]-a[4];
+      if(fSort === 'precio')  return a[6]-b[6] || b[3]-a[3];
+      return EAT.indexOf(a)-EAT.indexOf(b);
+    });
+
+    var h = '';
+    list.forEach(function(r){
+      var cls = r[3] >= 4.3 ? '' : (r[3] >= 4.0 ? ' class="mid"' : ' class="low"');
+      var euro = r[6] === 1 ? '€' : (r[6] === 2 ? '€€' : '€€€');
+      var isAlta = r[2] === 'alta';
+      h += '<div class="eat"><div class="eathead"><div>'
+        +  '<h3>'+esc(r[0])+'</h3>'
+        +  '<p class="eatmeta">'+esc(zonaNombre(r[1]))+' · '+esc(r[7])+'</p></div>'
+        +  '<div class="score"><b'+cls+'>'+r[3].toFixed(1).replace('.',',')+'</b>'
+        +  '<span>'+r[4].toLocaleString('es-ES')+' reseñas</span></div></div>'
+        +  '<div class="eattags"><span class="tg">'+esc(tipoNombre(r[2]))+'</span>'
+        +  '<span class="tg eur">'+euro+' · '+esc(r[5])+'</span>'
+        +  (isAlta ? '<span class="tg star">★ Michelin</span>' : '')
+        +  '</div><div class="eatacts">'
+        +  (r[8] ? '<a class="call" href="tel:'+r[8]+'">Llamar</a>' : '')
+        +  '<a href="https://www.google.com/search?q='+encodeURIComponent(r[0]+' San Sebastián')+'" target="_blank" rel="noopener">Buscar</a>'
+        +  '<a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r[0]+' San Sebastian')+'" target="_blank" rel="noopener">Mapa</a>'
+        +  '</div></div>';
+    });
+    if(!list.length) h = '<div class="eatempty">Ningún sitio cumple ese filtro. Prueba a quitar alguno.</div>';
+    document.getElementById('eatlist').innerHTML = h;
+    document.getElementById('f-count').textContent =
+      'Mostrando ' + list.length + ' de ' + EAT.length + ' sitios';
+  }
+
+  function pintarFiltros(){
+    chips(document.getElementById('f-zona'), ZONAS, fZona, function(v){ fZona=v; pintarFiltros(); renderEat(); });
+    chips(document.getElementById('f-tipo'), TIPOS, fTipo, function(v){ fTipo=v; pintarFiltros(); renderEat(); });
+  }
+  document.getElementById('f-sort').addEventListener('change', function(e){ fSort=e.target.value; renderEat(); });
+  document.getElementById('f-precio').addEventListener('change', function(e){ fPrecio=e.target.value; renderEat(); });
+  document.getElementById('f-clear').addEventListener('click', function(){
+    fZona=''; fTipo=''; fPrecio=''; fSort='ord';
+    document.getElementById('f-sort').value='ord';
+    document.getElementById('f-precio').value='';
+    pintarFiltros(); renderEat();
+  });
+  pintarFiltros();
+  renderEat();
+
+  drawKey();
+  drawMap();
+})();
+</script>
+
+<script>
+/* Rediseño: la navegación de 9 secciones no cabe en una barra inferior fija,
+   así que cabecera y pestañas van juntas arriba, con desplazamiento horizontal. */
+(function(){
+  var h=document.querySelector('header'), n=document.querySelector('nav');
+  if(!h||!n) return;
+  var bar=document.createElement('div');
+  bar.className='appbar';
+  h.parentNode.insertBefore(bar,h);
+  bar.appendChild(h); bar.appendChild(n);   // mover conserva los listeners ya enlazados
+  function centra(b){
+    if(!b) return;
+    var r=b.getBoundingClientRect(), nr=n.getBoundingClientRect();
+    var margen=16;
+    if(r.left>=nr.left+margen && r.right<=nr.right-margen) return;  // ya se ve entera
+    var destino=n.scrollLeft+(r.left-nr.left)-(nr.width-r.width)/2;
+    var max=n.scrollWidth-n.clientWidth;
+    n.scrollTo({left:Math.max(0,Math.min(max,destino)), behavior:'smooth'});
+  }
+  n.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click', function(){ setTimeout(function(){ centra(b); }, 30); });
+  });
+  centra(n.querySelector('button[aria-selected="true"]'));
+})();
+</script>
+
+<script>
+/* Vista de Google Maps mediante el embed clásico: no necesita clave de API,
+   así que funciona tal cual en GitHub Pages. Requiere conexión; el mapa de
+   teselas propio queda como alternativa sin conexión. */
+(function(){
+  var frame=document.getElementById('gmap'), what=document.getElementById('gwhat'),
+      open=document.getElementById('gopen'), lista=document.getElementById('maplist');
+  if(!frame) return;
+  var CIUDAD='Donostia San Sebastián';
+
+  function ir(sitio, zoom){
+    var q = sitio===CIUDAD ? sitio : sitio+', San Sebastián';
+    frame.src='https://maps.google.com/maps?q='+encodeURIComponent(q)+'&hl=es&z='+(zoom||16)+'&output=embed';
+    what.textContent=sitio;
+    open.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
+  }
+  ir(CIUDAD, 14);
+
+  /* delegación: la lista se vuelve a pintar entera cada vez que cambia el mapa */
+  lista.addEventListener('click', function(e){
+    if(e.target.closest('a')) return;
+    var fila=e.target.closest('li'); if(!fila) return;
+    var nom=fila.querySelector('.nm');
+    if(nom) ir(nom.textContent.trim());
+  });
+
+  var bg=document.getElementById('mm-g'), bo=document.getElementById('mm-o');
+  function modo(google){
+    document.body.classList.toggle('gmode', google);
+    bg.setAttribute('aria-pressed', String(google));
+    bo.setAttribute('aria-pressed', String(!google));
+    if(!google) window.dispatchEvent(new Event('resize'));  // que el mapa de teselas recalcule
+  }
+  bg.addEventListener('click', function(){ modo(true); });
+  bo.addEventListener('click', function(){ modo(false); });
+  modo(true);
+})();
+</script>
+
+</body>
+</html>
